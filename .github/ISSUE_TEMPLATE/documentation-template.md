@@ -1,7 +1,7 @@
 ---
 name: Documentation template
 about: Create a report on missing documentation
-title: ''
+title: "[Documentation]"
 labels: documentation
 assignees: ''
 
