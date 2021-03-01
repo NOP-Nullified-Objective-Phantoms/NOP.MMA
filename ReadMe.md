@@ -1,4 +1,4 @@
-﻿# Oiski's $safeprojectname$
+﻿# Medical Management Application
 
 ## About The Project
 
