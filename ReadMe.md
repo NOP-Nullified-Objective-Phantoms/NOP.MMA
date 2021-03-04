@@ -36,7 +36,26 @@
 **Output**
 > Graphical User interface
 
-See the [Wiki]() for more in depth information about the project.
+## Code Practice
+ - **Structs/Classes**
+   - Form a `struct` if an `interface` category has four or more properties
+   - Form a `class` if the above applies as well as if the object would consist of a larger structure
+   - `Fields` are always private
+   - `Properties` are always public
+ - **Interfaces**
+   - `Interfaces` are suffixed with 'I' and nothing else
+   - `Interfaces` must have their own subfolder, which should never be included in their `namespace`
+ - **Methods**
+   - `Method` parameters are suffixed with an '_'
+ - **Global**
+   - `Scopes` must have explicit enclosure 
+ - **ProjectStructure**
+   - **Layers**
+     - UI - All user integration (_API, GUI etc._)
+     - Gateway - Connection to Business layer, databases, LAMP etc.
+     - Business - All logic and direct behavior related to the core application
+
+See the [Wiki](./WikiPages/Front.md) for more in depth information about the project.
 
 ## Versioning
 The Assignment specifies that versioning should be done according to the following template: [_Major_].[_Minor_].[_Patch_].
