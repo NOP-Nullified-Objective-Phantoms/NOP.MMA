@@ -6,7 +6,7 @@ namespace NOP.MMA.Core.Journals
 {
     public struct Screening
     {
-        DateTime Date { get; set; }
-        ScreeningInfo Result { get; set; }
+        public DateTime Date { get; set; }
+        public ScreeningInfo Result { get; set; }
     }
 }

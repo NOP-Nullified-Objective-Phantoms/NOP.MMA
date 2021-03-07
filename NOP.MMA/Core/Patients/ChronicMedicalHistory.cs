@@ -6,13 +6,13 @@ namespace NOP.MMA.Core.Patients
 {
     public struct ChronicMedicalHistory
     {
-        bool Circulation { get; set; }
-        bool Airways { get; set; }
-        bool Thyroidea { get; set; }
-        bool Diabetes { get; set; }
-        bool Epilepsy { get; set; }
-        bool PsychologicalIllness { get; set; }
-        bool HerpesGenitalis { get; set; }
-        bool RecurrentUTI { get; set; }
+        public bool Circulation { get; set; }
+        public bool Airways { get; set; }
+        public bool Thyroidea { get; set; }
+        public bool Diabetes { get; set; }
+        public bool Epilepsy { get; set; }
+        public bool PsychologicalIllness { get; set; }
+        public bool HerpesGenitalis { get; set; }
+        public bool RecurrentUTI { get; set; }
     }
 }

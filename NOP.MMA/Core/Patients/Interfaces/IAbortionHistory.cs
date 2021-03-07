@@ -4,8 +4,7 @@ using System.Text;
 
 namespace NOP.MMA.Core.Patients
 {
-    public interface IAbortionHistory
+    public interface IAbortionHistory : IHistory<IAbortionHistoryEntry>
     {
-        IReadOnlyList<IAbortionHistoryEntry> AbortionHistory { get; }
     }
 }

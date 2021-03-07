@@ -6,8 +6,8 @@ namespace NOP.MMA.Core.Patients
 {
     public struct AlcoholHistory
     {
-        bool DuringPregnancy { get; set; }
-        int AmountPrWeek { get; set; }
-        bool MultiplePrSession { get; set; }
+        public bool DuringPregnancy { get; set; }
+        public int AmountPrWeek { get; set; }
+        public bool MultiplePrSession { get; set; }
     }
 }
