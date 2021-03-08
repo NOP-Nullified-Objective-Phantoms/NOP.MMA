@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Struct Name="NOP.MMA.Core.Journals.FertilityTreatmentData">
+    <Position X="12" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Core\Journals\FertilityTreatmentData.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.PrenatalRiskAssessment">
+    <Position X="17.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAgCAAAAAAAAIABAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\PrenatalRiskAssessment.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.Screening">
+    <Position X="23.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\Screening.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.TermData">
+    <Position X="15" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAgBAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Core\Journals\TermData.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.WorkEnvironmentEffect">
+    <Position X="20.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAEAAAAAAAAAAAQAAAAAAAAAKAAYAAABAAAAA=</HashCode>
+      <FileName>Core\Journals\WorkEnvironmentEffect.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="NOP.MMA.Core.Journals.IAnamnese">
+    <Position X="3" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAYAIAQBAAAAAAAAIAAAAABEAIAAAQAAAI=</HashCode>
+      <FileName>Core\Journals\Interfaces\IAnamnese.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NOP.MMA.Core.Journals.IInvestigation">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAACAgAIAAAAAgAAAAAiAAAAgAA=</HashCode>
+      <FileName>Core\Journals\Interfaces\IInvestigation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NOP.MMA.Core.Journals.IJournal">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\Interfaces\IJournal.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NOP.MMA.Core.Journals.IResourceAndRiskAssessment">
+    <Position X="8" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAgABAABAAAAAAAAAAAAAAAAAAABABAAA=</HashCode>
+      <FileName>Core\Journals\Interfaces\IResourceAndRiskAssessment.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NOP.MMA.Core.Journals.IPregnancyJournal">
+    <Position X="0.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAQEQAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\Interfaces\IPregnancyJournal.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="NOP.MMA.Core.Journals.JournalDest">
+    <Position X="26.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAACBAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\JournalDest.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NOP.MMA.Core.Journals.MMRVaccinationStatus">
+    <Position X="28.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Core\Journals\MMRVaccinationStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NOP.MMA.Core.Journals.NiveauDist">
+    <Position X="30.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\NiveauDist.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NOP.MMA.Core.Journals.ScreeningInfo">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Core\Journals\ScreeningInfo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NOP.MMA.Core.Journals.WorkEnvironment">
+    <Position X="28.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Core\Journals\WorkEnvironment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -12,6 +12,9 @@ namespace NOP.MMA.Core.Patients
         string Email { get; }
         string PrivatePhone { get; }
         string WorkPhone { get; }
+        /// <summary>
+        /// General practitioner
+        /// </summary>
         string PrivateGP { get; }
         string DoctorsName { get; }
         string DoctorsAddress { get; }
