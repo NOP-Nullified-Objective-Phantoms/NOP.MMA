@@ -12,8 +12,8 @@ namespace NOP.MMA.Core.Journals
         public string BloodPressure { get; set; }
         public string UrinSample { get; set; }
         public bool Edema { get; set; }
-        //  Symfysefun.mål
-        //  Foster-præs.
+        public double UterusSizeInCM { get; set; }
+        public string FosterRepresentation { get; set; }
         public string FetusGender { get; set; }
         public bool FetusActivity { get; set; }
         public string ExaminationLocation { get; set; }
