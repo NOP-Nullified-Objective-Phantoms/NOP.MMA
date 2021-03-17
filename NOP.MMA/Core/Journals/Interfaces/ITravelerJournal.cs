@@ -23,9 +23,24 @@ namespace NOP.MMA.Core.Journals
         JournalData UrineCulture { get; }
         IReadOnlyList<JournalStamp> JournalStamps { get; }
         IReadOnlyList<JournalComment> JournalComments { get; }
+        IReadOnlyList<UltrasoundResult> UltrasoundScans { get; }
         bool AddJournalStamp ( JournalStamp _stamp );
         bool RemoveJournalStamp ( DateTime _stampDate );
         bool AddJournalSComment ( JournalComment _comment );
         bool RemoveJournalComment ( DateTime _commentDate );
+        bool AddUltrasoundScan ( UltrasoundResult _scan );
+        bool RemoveUltrasoundScan ( DateTime _scanDate );
+        DateTime NuchalFoldScan { get; set; }
+        DateTime DoubleTest { get; set; }
+        DateTime TripleTest { get; set; }
+        /// <summary>
+        /// DS = Downsyndrom
+        /// </summary>
+        JournalData OddsForDS { get; }
+        JournalData PlacentaTest { get; }
+        JournalData AmnioticFluidTest { get; }
+        OGTTScreening OralGlukoseToleranceTest { get; }
+        string AdditonalContext { get; set; }
+        BirthplaceInformation BirthplaceInfo { get; }
     }
 }
