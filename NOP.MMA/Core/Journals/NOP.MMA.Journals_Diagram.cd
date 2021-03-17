@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="NOP.MMA.Core.Journals.Screening">
-    <Position X="27.25" Y="0.5" Width="1.5" />
+    <Position X="27.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Core\Journals\Screening.cs</FileName>
@@ -36,14 +36,14 @@
     </TypeIdentifier>
   </Struct>
   <Struct Name="NOP.MMA.Core.Journals.WeightInfo">
-    <Position X="18.25" Y="2.25" Width="2.25" />
+    <Position X="18.25" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAIAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Journals\WeightInfo.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="NOP.MMA.Core.Journals.MenstrualCycleInfo">
-    <Position X="21.25" Y="3.5" Width="2.25" />
+    <Position X="21.25" Y="4" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAIAAgAAA=</HashCode>
       <FileName>Core\Journals\MenstrualCycleInfo.cs</FileName>
@@ -52,15 +52,43 @@
   <Struct Name="NOP.MMA.Core.Journals.JournalStamp">
     <Position X="21.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>CQAAAAAAAAAAAAAAAgCAAAAAACAADAABAAAABAAACAA=</HashCode>
+      <HashCode>CQAAABAAAAAAAAAgAgCAAAAAACAADAABAAAABAAACAA=</HashCode>
       <FileName>Core\Journals\JournalStamp.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="NOP.MMA.Core.Journals.JournalData">
     <Position X="15.25" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAABAAAAAAAAAAE=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAgAAAAAAE=</HashCode>
       <FileName>Core\Journals\JournalData.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.BirthplaceInformation">
+    <Position X="15.25" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AgQAABAAAABAAAAIAAAABQAAAACAACAAABAAEAAACAA=</HashCode>
+      <FileName>Core\Journals\BirthplaceInformation.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.JournalComment">
+    <Position X="18.25" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\JournalComment.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.OGTTScreening">
+    <Position X="30" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAgAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\OGTTScreening.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NOP.MMA.Core.Journals.UltrasoundResult">
+    <Position X="27.25" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAACBgAAQAAAADAABAACAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\UltrasoundResult.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Interface Name="NOP.MMA.Core.Journals.IAnamnese">
@@ -101,43 +129,50 @@
   <Interface Name="NOP.MMA.Core.Journals.ITravelerJournal">
     <Position X="11.75" Y="2.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>gIAACUAAAAAAAAIAAQADoAAAAQAAAAAIAAAAAAAEoAQ=</HashCode>
+      <HashCode>wIiACUAAAAAAAAIAAQADoQDAQQAAEAAIAAAQAAgUoAQ=</HashCode>
       <FileName>Core\Journals\Interfaces\ITravelerJournal.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="NOP.MMA.Core.Journals.JournalDest">
-    <Position X="32.5" Y="2.25" Width="1.5" />
+    <Position X="35.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAAACBAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Journals\JournalDest.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="NOP.MMA.Core.Journals.MMRVaccinationStatus">
-    <Position X="30.25" Y="2.25" Width="2" />
+    <Position X="33" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Core\Journals\MMRVaccinationStatus.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="NOP.MMA.Core.Journals.NiveauDist">
-    <Position X="30.25" Y="0.5" Width="3.25" />
+    <Position X="33" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAADAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Journals\NiveauDist.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="NOP.MMA.Core.Journals.ScreeningInfo">
-    <Position X="34.25" Y="2.25" Width="1.5" />
+    <Position X="37" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Core\Journals\ScreeningInfo.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="NOP.MMA.Core.Journals.WorkEnvironment">
-    <Position X="33.75" Y="0.5" Width="1.5" />
+    <Position X="36.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Core\Journals\WorkEnvironment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NOP.MMA.Core.Journals.ConsultationFormat">
+    <Position X="38.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Journals\ConsultationFormat.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
