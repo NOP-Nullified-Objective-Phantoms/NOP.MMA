@@ -4,10 +4,9 @@ using System.Text;
 
 namespace NOP.MMA.Core.Journals
 {
-    public struct TermData
+    public struct JournalComment
     {
-        MenstrualCycleInfo MenstrualInfo { get; }
-        public DateTime ExpectedBirthDate { get; set; }
+        public DateTime Date { get; set; }
         public string Comment { get; set; }
     }
 }

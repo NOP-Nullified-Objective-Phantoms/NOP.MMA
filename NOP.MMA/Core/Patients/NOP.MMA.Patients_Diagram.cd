@@ -1,91 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Struct Name="NOP.MMA.Core.Patients.AlcoholHistory">
-    <Position X="16.5" Y="0.5" Width="1.75" />
+    <Position X="20.25" Y="2" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAA=</HashCode>
       <FileName>Core\Patients\AlcoholHistory.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="NOP.MMA.Core.Patients.AllergyAssessment">
-    <Position X="19" Y="0.5" Width="1.75" />
+    <Position X="20.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQBAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Patients\AllergyAssessment.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="NOP.MMA.Core.Patients.ChronicMedicalHistory">
-    <Position X="21.5" Y="0.5" Width="2" />
+    <Position X="17.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQQAAAAAAQAAAAAAAAAAAABAAQAAAFAAgAAAAAAAAA=</HashCode>
       <FileName>Core\Patients\ChronicMedicalHistory.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Struct Name="NOP.MMA.Core.Patients.TobaccoHistory">
-    <Position X="24.25" Y="0.5" Width="1.5" />
+    <Position X="22.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQAgAA=</HashCode>
       <FileName>Core\Patients\TobaccoHistory.cs</FileName>
     </TypeIdentifier>
   </Struct>
   <Interface Name="NOP.MMA.Core.Patients.IAbortionHistory">
-    <Position X="5.25" Y="2.25" Width="2" />
+    <Position X="6" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Patients\Interfaces\IAbortionHistory.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="NOP.MMA.Core.Patients.IAbortionHistoryEntry">
-    <Position X="10.75" Y="0.5" Width="1.75" />
+    <Position X="11.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAEAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Core\Patients\Interfaces\IAbortionHistoryEntry.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="NOP.MMA.Core.Patients.IHistory&lt;T&gt;">
-    <Position X="6.75" Y="0.5" Width="1.5" />
+    <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
       <FileName>Core\Patients\Interfaces\IHistory.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="NOP.MMA.Core.Patients.IPatientData">
-    <Position X="0.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EAACAAAAACAAAAAAAIAAAAQAAQhAAAACAAAAAAAEAAA=</HashCode>
-      <FileName>Core\Patients\Interfaces\IPatientData.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="NOP.MMA.Core.Patients.IPatient" Collapsed="true">
-    <Position X="1.5" Y="4" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Core\Patients\Interfaces\IPatient.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="NOP.MMA.Core.Patients.IPatientSocialData">
-    <Position X="2.75" Y="0.5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AACAAAAAJABAgAAAAAAAAAAAAAAAIAAEAAAAAAAACAA=</HashCode>
-      <FileName>Core\Patients\Interfaces\IPatientSocialData.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="NOP.MMA.Core.Patients.IPregnancyHistory">
-    <Position X="7.75" Y="2.25" Width="2.25" />
+    <Position X="8.5" Y="2.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Patients\Interfaces\IPregnancyHistory.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="NOP.MMA.Core.Patients.IPregnancyHistoryEntry">
-    <Position X="13.25" Y="0.5" Width="1.75" />
+    <Position X="14" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAACABBAAAAAAAQAEAAAAACAACAAAAAAACAIAAAA=</HashCode>
       <FileName>Core\Patients\Interfaces\IPregnancyHistoryEntry.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="NOP.MMA.Core.Patients.IPatient">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Patients\Interfaces\IPatient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NOP.MMA.Core.Patients.IPatientData">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAACAAAAAAAIAAAAQAAQhAAAACAAAAAAAEAAA=</HashCode>
+      <FileName>Core\Patients\Interfaces\IPatientData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NOP.MMA.Core.Patients.IPatientSocialData">
+    <Position X="3.5" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAJABAgAAAAAAAAAAAAAAAIAAEAAAAAAAACAA=</HashCode>
+      <FileName>Core\Patients\Interfaces\IPatientSocialData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="NOP.MMA.Core.Patients.MaritalStatus">
-    <Position X="26.5" Y="0.5" Width="1.5" />
+    <Position X="22.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAABBEACAA=</HashCode>
       <FileName>Core\Patients\MaritalStatus.cs</FileName>
