@@ -4,8 +4,14 @@ using System.Text;
 
 namespace NOP.MMA.Core.Patients
 {
+    /// <summary>
+    /// Defines a set of data associated with a medical patient
+    /// </summary>
     public interface IPatientData
     {
+        /// <summary>
+        /// The social security number for the patient
+        /// </summary>
         string SSN { get; }
         string Name { get; }
         string Address { get; }
@@ -13,7 +19,7 @@ namespace NOP.MMA.Core.Patients
         string PrivatePhone { get; }
         string WorkPhone { get; }
         /// <summary>
-        /// General practitioner
+        /// The patients General practitioner
         /// </summary>
         string PrivateGP { get; }
         string DoctorsName { get; }
