@@ -45,5 +45,18 @@ namespace NOP.MMA.Core.Patients
                 WorkPhone = _data.WorkPhone
             };
         }
+
+        /// <summary>
+        /// Create a new <see cref="IPatient"/> <see langword="object"/> based on a formated comma seperated <see langword="string"/> value
+        /// </summary>
+        /// <param name="_data"></param>
+        /// <returns></returns>
+        internal static IPatient CreateFromString ( string _data )
+        {
+            Patient patient = new Patient ();
+            patient.BuildEntity (_data);
+
+            return patient;
+        }
     }
 }
