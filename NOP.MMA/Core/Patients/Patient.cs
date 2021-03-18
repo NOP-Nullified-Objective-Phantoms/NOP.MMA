@@ -10,6 +10,13 @@ namespace NOP.MMA.Core.Patients
     /// </summary>
     internal class Patient : IPatient, IRepositoryEntity<int, string>
     {
+        /// <summary>
+        /// Initialize a new instance of type <see cref="Patient"/> with its <see langword="default"/> values
+        /// </summary>
+        public Patient ()
+        {
+            ID = PatientCounter;
+        }
 
         private int patientCounter = 0;
         /// <summary>
