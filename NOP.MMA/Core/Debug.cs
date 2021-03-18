@@ -26,7 +26,7 @@ namespace NOP.MMA.Core
         /// <summary>
         /// Check whether or not there's a <see cref="FileHandler"/> attached to the debugger
         /// </summary>
-        /// <returns><see langword="True"/> if there's no <see cref="FileHandler"/> attached, otherwise, false</returns>
+        /// <returns><see langword="True"/> if there's no <see cref="FileHandler"/> attached, otherwise, <see langword="false"/></returns>
         private static bool NoHandler ()
         {
             return File == null;
