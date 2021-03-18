@@ -8,4 +8,10 @@
     <Folder Include="Repository\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="NOP.Common">
+      <HintPath>..\DLLs\NOP.Common_0.2.1\NOP.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
