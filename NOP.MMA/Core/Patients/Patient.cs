@@ -8,14 +8,26 @@ namespace NOP.MMA.Core.Patients
     /// <summary>
     /// Represents a medical patient with GA and social details
     /// </summary>
-    internal class Patient : IPatient, IRepositoryEntity<int, string>
+    internal class Patient : IPatient
     {
         /// <summary>
-        /// Initialize a new instance of type <see cref="Patient"/> with its <see langword="default"/> values
+        /// Initialize a new instance of type <see cref="Patient"/> with its <see langword="default"/> values. An ID will be generated if one is not provided
         /// </summary>
-        public Patient ()
+        /// <param name="_id">The ID to assign the new <see cref="IPatient"/> <see langword="object"/></param>
+        public Patient ( int _id = -1 )
         {
-            ID = PatientCounter;
+            if ( _id == -1 )
+            {
+                ID = PatientCounter;
+            }
+            else if ( _id > 0 )
+            {
+                ID = _id;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException ("Invalid ID argument. _id must be higher or equal to 0");
+            }
         }
 
         private int patientCounter = 0;
@@ -50,6 +62,11 @@ namespace NOP.MMA.Core.Patients
         public string OtherInfo { get; set; }
         public int ID { get; private set; }
 
+        /// <summary>
+        /// Restore a previous state based on the passed in <strong>SaveType</strong> value
+        /// </summary>
+        /// <param name="_data">The comma seperated data to build the <see cref="Patient"/> <see langword="object"/> from</param>
+        /// <exception cref="ArgumentException"></exception>
         public void BuildEntity ( string _data )
         {
             string[] data = _data.Split (",");
@@ -75,6 +92,10 @@ namespace NOP.MMA.Core.Patients
                 TranslatorLanguage = data[ 16 ];
                 Nationality = data[ 17 ];
                 OtherInfo = data[ 18 ];
+            }
+            else
+            {
+                throw new ArgumentException ($"One or more fields couldn't be retrived from: {_data}");
             }
         }
 

@@ -12,6 +12,15 @@ namespace NOP.MMA.Core.Patients
         /// <returns></returns>
         public static IPatient CreateEmpty ()
         {
+            return new Patient (0);
+        }
+
+        /// <summary>
+        /// Create a new <see cref="IPatient"/> <see langword="object"/>
+        /// </summary>
+        /// <returns></returns>
+        public static IPatient Create ()
+        {
             return new Patient ();
         }
 
@@ -44,19 +53,6 @@ namespace NOP.MMA.Core.Patients
                 TranslatorLanguage = _socialData.TranslatorLanguage,
                 WorkPhone = _data.WorkPhone
             };
-        }
-
-        /// <summary>
-        /// Create a new <see cref="IPatient"/> <see langword="object"/> based on a formated comma seperated <see langword="string"/> value
-        /// </summary>
-        /// <param name="_data"></param>
-        /// <returns></returns>
-        internal static IPatient CreateFromString ( string _data )
-        {
-            Patient patient = new Patient ();
-            patient.BuildEntity (_data);
-
-            return patient;
         }
     }
 }
