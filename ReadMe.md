@@ -87,3 +87,16 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
 >**Namespace:** _NOP.MMA.Repository_
 
 ### Change Log
+- **[v]()**
+  - Implemented `Patient` Class
+  - Changes to `IPatient` interface
+    - Summaries for `IPatient`, `IPatientData` and `IPatientSocialData`
+  - Imported NOP.Common Library
+    - Added DLLs folder and added it to .gitignore. (_You must import the library locally, in the same folder, yourself as well_)
+  - Implemented `Patient` class
+    - Inherits from IPatient
+    - Default constructor where an ID can be provided. And ID will be generated if one is not provided
+  - Implemented `PatientFactory` class
+    - Ability to create `IPatient` objects without incrementing the counter
+    - Ability to create empty `IPatient` objects
+  - 
