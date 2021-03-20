@@ -87,7 +87,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
 >**Namespace:** _NOP.MMA.Repository_
 
 ### Change Log
-- **[v]()**
+- **[v0.2.0]()**
   - Implemented `Patient` Class
   - Changes to `IPatient` interface
     - Summaries for `IPatient`, `IPatientData` and `IPatientSocialData`
