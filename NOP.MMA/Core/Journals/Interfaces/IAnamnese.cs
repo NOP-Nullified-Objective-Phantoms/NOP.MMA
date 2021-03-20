@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NOP.MMA.Core.Patients;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

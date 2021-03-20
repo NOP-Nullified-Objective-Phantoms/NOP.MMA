@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NOP.MMA.Core.Journals
 {
-    interface IPregnancyJournal : IJournal
+    public interface IPregnancyJournal : IJournal
     {
         IPregnancyHistory Pregnancies { get; }
         IAbortionHistory Abortions { get; }
