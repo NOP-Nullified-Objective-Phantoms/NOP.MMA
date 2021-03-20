@@ -99,4 +99,3 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
   - Implemented `PatientFactory` class
     - Ability to create `IPatient` objects without incrementing the counter
     - Ability to create empty `IPatient` objects
-  - 
