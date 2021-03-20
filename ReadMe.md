@@ -87,3 +87,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
 >**Namespace:** _NOP.MMA.Repository_
 
 ### Change Log
+- **[v0.1.0]()**
+  - Implemented `Debug` class
+  - Added WiKiFront
+  - Added `Debug` class to WiKi
