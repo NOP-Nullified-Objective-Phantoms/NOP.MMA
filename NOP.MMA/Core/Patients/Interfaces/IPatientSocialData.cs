@@ -4,9 +4,15 @@ using System.Text;
 
 namespace NOP.MMA.Core.Patients
 {
+    /// <summary>
+    /// Defines a set of social data for a medical patient
+    /// </summary>
     public interface IPatientSocialData
     {
-        bool MaritalStatus { get; set; }
+        MaritalStatus CivilStatus { get; set; }
+        /// <summary>
+        /// Whether the patient lives with someone or not
+        /// </summary>
         bool Cohibitable { get; set; }
         string ChildFathersName { get; set; }
         string ChildFathersSSN { get; set; }

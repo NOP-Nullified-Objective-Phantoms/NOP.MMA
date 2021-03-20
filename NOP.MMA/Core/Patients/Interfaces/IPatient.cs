@@ -1,10 +1,15 @@
-﻿using System;
+﻿using NOP.Common.Repository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NOP.MMA.Core.Patients
 {
-    public interface IPatient : IPatientData, IPatientSocialData
+
+    /// <summary>
+    /// Defines a medical patient with associated data
+    /// </summary>
+    public interface IPatient : IPatientData, IPatientSocialData, IRepositoryEntity<int, string>
     {
     }
 }
