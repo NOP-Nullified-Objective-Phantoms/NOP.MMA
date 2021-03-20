@@ -91,7 +91,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
   - Implemented `Debug` class
   - Added WiKiFront
   - Added `Debug` class to WiKi
-- **[v0.2.0]()**
+- **[v0.2.0](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.2.0)**
   - Implemented `Patient` Class
   - Changes to `IPatient` interface
     - Summaries for `IPatient`, `IPatientData` and `IPatientSocialData`
