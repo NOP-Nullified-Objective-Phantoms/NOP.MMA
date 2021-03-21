@@ -4,6 +4,9 @@ using System.Text;
 
 namespace NOP.MMA.Core.Patients
 {
+    /// <summary>
+    /// Information about a patients medical history regarding chronic health issues
+    /// </summary>
     public struct ChronicMedicalHistory
     {
         public bool Circulation { get; set; }

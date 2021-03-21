@@ -30,7 +30,7 @@ namespace NOP.MMA.Core.Patients
             }
         }
 
-        private int patientCounter = 0;
+        private static int patientCounter = 0;
         /// <summary>
         /// Increments the patient counter and returns it. (<i><strong>Use this to set the ID of new <see cref="Patient"/> objects</strong></i>)
         /// </summary>
