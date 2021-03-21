@@ -4,6 +4,9 @@ using System.Text;
 
 namespace NOP.MMA.Core.Journals
 {
+    /// <summary>
+    /// Information about the assessement of prenatal risk
+    /// </summary>
     public struct PrenatalRiskAssessment
     {
         public string FamiliyHistory { get; set; }
