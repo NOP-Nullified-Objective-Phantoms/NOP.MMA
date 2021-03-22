@@ -7,33 +7,10 @@ namespace NOP.MMA.Core.Patients
     /// <summary>
     /// A history record of an abortion
     /// </summary>
-    public class AbortionHistoryEntry : IAbortionHistory
+    public class AbortionHistoryEntry : IAbortionHistoryEntry
     {
-        public IAbortionHistoryEntry this[ int _index ]
-        {
-            get
-            {
-                return history[ _index ];
-            }
-        }
-
-        private List<IAbortionHistoryEntry> history = null;
-        public IReadOnlyList<IAbortionHistoryEntry> History
-        {
-            get
-            {
-                return history;
-            }
-        }
-
-        public void AddHistory ( IAbortionHistoryEntry _entry )
-        {
-            history.Add (_entry);
-        }
-
-        public void RemoveHistory ( IAbortionHistoryEntry _entry )
-        {
-            history.Remove (_entry);
-        }
+        public int Year { get; set; }
+        public string PlannedAbortionGA { get; set; }
+        public string UnplannedAbortionGA { get; set; }
     }
 }

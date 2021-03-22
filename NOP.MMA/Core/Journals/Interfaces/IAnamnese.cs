@@ -29,7 +29,7 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// The allergy assessements report
         /// </summary>
-        AllergyAssessment Allergies { get; set; }
+        AllergyAssessement Allergies { get; set; }
         /// <summary>
         /// The data about a <see cref="IPatient"/>s chronic health issues
         /// </summary>

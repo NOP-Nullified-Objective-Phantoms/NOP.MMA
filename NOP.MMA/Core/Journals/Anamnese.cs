@@ -16,7 +16,7 @@ namespace NOP.MMA.Core.Journals
             FertilityInfo = new FertilityTreatmentData ();
             RiskAssessment = new PrenatalRiskAssessment ();
             WorkEnvironment = new WorkEnvironmentEffect ();
-            Allergies = new AllergyAssessment ();
+            Allergies = new AllergyAssessement ();
             ChronicMedicalData = new ChronicMedicalHistory ();
             TobaccoInfo = new TobaccoHistory ();
             AlcoholInfo = new AlcoholHistory ();
@@ -26,7 +26,7 @@ namespace NOP.MMA.Core.Journals
         public FertilityTreatmentData FertilityInfo { get; }
         public PrenatalRiskAssessment RiskAssessment { get; }
         public WorkEnvironmentEffect WorkEnvironment { get; }
-        public AllergyAssessment Allergies { get; }
+        public AllergyAssessement Allergies { get; }
         public ChronicMedicalHistory ChronicMedicalData { get; }
         public string Medicin { get; set; }
         public MMRVaccinationStatus MMRVaccinated { get; set; }

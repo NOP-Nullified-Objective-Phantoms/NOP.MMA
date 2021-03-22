@@ -6,9 +6,16 @@ namespace NOP.MMA.Core.Patients
 {
     public struct TobaccoHistory
     {
-        public bool Smoker { get; set; }
-        public int AmountPrDay { get; set; }
-        public DateTime QuitDate { get; set; }
-        public bool RequestedRehab { get; set; }
+        public TobaccoHistory ( bool _smoker, int _amountPrDay, DateTime _quitDate, bool _requestedRehab )
+        {
+            Smoker = _smoker;
+            AmountPrDay = _amountPrDay;
+            QuitDate = _quitDate;
+            RequestedRehab = _requestedRehab;
+        }
+        public bool Smoker { get; }
+        public int AmountPrDay { get; }
+        public DateTime QuitDate { get; }
+        public bool RequestedRehab { get; }
     }
 }
