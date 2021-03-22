@@ -21,7 +21,7 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// The medical history associated of the <see cref="IPatient"/>, which is associated with the journal
         /// </summary>
-        IAnamnese Anamnsese { get; }
+        IAnamnese Anamnese { get; }
         /// <summary>
         /// The <see cref="IPatient"/>s desease report
         /// </summary>

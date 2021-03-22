@@ -12,27 +12,27 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// The result of a HepB <see cref="Screening"/>
         /// </summary>
-        Screening HepB { get; }
+        Screening HepB { get; set; }
         /// <summary>
         /// The result of a HIV <see cref="Screening"/>
         /// </summary>
-        Screening HIV { get; }
+        Screening HIV { get; set; }
         /// <summary>
         /// The result of a Syphilis <see cref="Screening"/>
         /// </summary>
-        Screening Syphilis { get; }
+        Screening Syphilis { get; set; }
         /// <summary>
         /// The result of a Clamydia <see cref="Screening"/>
         /// </summary>
-        Screening Clamydia { get; }
+        Screening Clamydia { get; set; }
         /// <summary>
         /// The result of a Gonore <see cref="Screening"/>
         /// </summary>
-        Screening Gonore { get; }
+        Screening Gonore { get; set; }
         /// <summary>
         /// The result of a Hemoglobinopathy <see cref="Screening"/>
         /// </summary>
-        Screening Hemoglobinopathy { get; }
+        Screening Hemoglobinopathy { get; set; }
         DateTime DVataminReadingDate { get; set; }
         string DVataminReadingResult { get; set; }
     }

@@ -14,7 +14,7 @@ namespace NOP.MMA.Core.Journals
         /// The distrubution of propositions
         /// </summary>
         NiveauDist NiveauDistrubution { get; set; }
-        bool NeedObstetricAssessment { get; set; }
+        bool NeedObstetricAssessement { get; set; }
         string ObstetricAssessmentNote { get; set; }
         bool NeedSocialAndHealthAdministration { get; set; }
         string SocialAndHealthAdministrationNote { get; set; }

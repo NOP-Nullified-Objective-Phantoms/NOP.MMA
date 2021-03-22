@@ -13,15 +13,15 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// The expected date of birth
         /// </summary>
-        TermData TermInfo { get; }
+        TermData TermInfo { get; set; }
         /// <summary>
         /// The information about fertility treatment
         /// </summary>
-        FertilityTreatmentData FertilityInfo { get; }
+        FertilityTreatmentData FertilityInfo { get; set; }
         /// <summary>
         /// The prenatal risk assessement
         /// </summary>
-        PrenatalRiskAssessment RiskAssessment { get; }
+        PrenatalRiskAssessment RiskAssessment { get; set; }
         /// <summary>
         /// The information about the <see cref="IPatient"/>s work environment
         /// </summary>
@@ -29,11 +29,11 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// The allergy assessements report
         /// </summary>
-        AllergyAssessment Allergies { get; }
+        AllergyAssessment Allergies { get; set; }
         /// <summary>
         /// The data about a <see cref="IPatient"/>s chronic health issues
         /// </summary>
-        ChronicMedicalHistory ChronicMedicalData { get; }
+        ChronicMedicalHistory ChronicMedicalData { get; set; }
         /// <summary>
         /// The <see cref="IPatient"/>s disposed medicine
         /// </summary>
@@ -49,11 +49,11 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// Data on a <see cref="IPatient"/> tobacco habits
         /// </summary>
-        TobaccoHistory TobaccoInfo { get; }
+        TobaccoHistory TobaccoInfo { get; set; }
         /// <summary>
         /// Data on a <see cref="IPatient"/> alcohol habits
         /// </summary>
-        AlcoholHistory AlcoholInfo { get; }
+        AlcoholHistory AlcoholInfo { get; set; }
         /// <summary>
         /// Whether or not other drugs where consumed during pregnancy
         /// </summary>
