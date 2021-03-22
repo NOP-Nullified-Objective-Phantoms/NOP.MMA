@@ -6,6 +6,7 @@ namespace NOP.MMA.Core.Journals
 {
     public enum WorkEnvironment
     {
+        NotSet,
         Ergonomic,
         Biological,
         Chemical,

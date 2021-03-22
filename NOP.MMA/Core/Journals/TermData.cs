@@ -9,8 +9,14 @@ namespace NOP.MMA.Core.Journals
     /// </summary>
     public struct TermData
     {
-        MenstrualCycleInfo MenstrualInfo { get; }
-        public DateTime ExpectedBirthDate { get; set; }
-        public string Comment { get; set; }
+        public TermData ( MenstrualCycleInfo _mentrualInfo, DateTime _expectedBirthDate, string _comment )
+        {
+            MenstrualInfo = _mentrualInfo;
+            ExpectedBirthDate = _expectedBirthDate;
+            Comment = _comment;
+        }
+        public MenstrualCycleInfo MenstrualInfo { get; }
+        public DateTime ExpectedBirthDate { get; }
+        public string Comment { get; }
     }
 }
