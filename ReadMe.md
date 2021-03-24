@@ -103,3 +103,53 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
   - Implemented `PatientFactory` class
     - Ability to create `IPatient` objects without incrementing the counter
     - Ability to create empty `IPatient` objects
+- **[v]()**
+  - Revision to `Patient`
+    - Fixed patient counter
+    - Summary for `AllergyAssessement` struct
+    - Summary for `ChronicMedicalHistory` struct
+  - Added documentation for various interfaces related to journals
+  - Added documentation for various structs related to journals
+  - Revision to history data
+    - Added indexer property
+    - Ability to add/remove history entries from interface layer
+  - Revision to journal related data objects
+    - Added `Anamnese` class
+    - Added `Investigation` class
+    - Added `Journal` class
+    - Added `RRAssessement` class
+    - Added `AbortionHistory` class
+    - Added `PregnancyHistory` class
+    - Added `PregnancyHistoryEntry` class
+    - Added `AbortionHistoryEntry` class
+  - Revision to journal related interfaces
+    - Opened struct properties in `IAnamnese` interface
+    - Opened struct properties in `IInvestigation` interface
+    - Corrected a spelling mistake in `IPregnancyJournal` interface
+    - Corrected a spelling mistake in `IResourcesAndRiskAssessement` interface
+  - Revision to journal related structs
+    - Closed `FertilityTreatmentData` properties and added constrcutor instead
+    - Closed `MenstrualCycle` properties and added constrcutor instead
+    - Closed `PrenatakRiskAssessement` properties and added constrcutor instead
+    - Closed `MenstrualCycle` properties and added constrcutor instead
+    - Closed `Screening` properties and added constrcutor instead
+    - Closed `TermData` properties and added constrcutor instead
+    - Changed `WorkEnvironmentEffect` to a class instead og a struct, and added constructor
+    - Added a NotSet flag for `WorkEnvironment` enum
+    - Corrected spelling mistake in `RRAssessement`
+  - Revision to patient releated structs
+    - Fixed wrong interface implementation for `AbortionHistoryEntry`
+    - Closed `AlcoholHistory` properties and added constructor instead
+    - Closed `AllergyAssessement` properties and added constructor instead
+    - Closed `ChronicMedicalHistory` properties and added constructor instead
+    - Closed `TobaccoHistory` properties and added constructor instead
+  - Implemented Journal
+    - `Journal` class as a base
+    - `PregnancyJournal` class, which inherits from `Journal`
+  - Implemented `JournalFactory` class
+    - Revision to `Patient` and `PatientFactory`
+  - Revision to journal related classes
+    - Changed `Journal` constrcutor to take in a nullable int.
+    - Added Seperator constants to `PregnancyJournal` class
+  - Implemented `PregnancyJournalRepo` class
+    - Added `JournalRepo` class, as a base for Journal Repositories
