@@ -14,15 +14,15 @@ namespace NOP.MMA.Core.Journals
         /// Initialize a new instance of type <see cref="Journal"/> with its <see langword="default"/> values. An ID will be generated if one is not provided
         /// </summary>
         /// <param name="_id">The ID to assign the new <see cref="IJournal"/> <see langword="object"/></param>
-        public Journal ( int _id = -1 )
+        public Journal ( int? _id = null )
         {
-            if ( _id == -1 )
+            if ( _id == null )
             {
                 ID = JournalCounter;
             }
-            else if ( _id > 0 )
+            else if ( _id >= 0 )
             {
-                ID = _id;
+                ID = _id.Value;
             }
             else
             {
@@ -41,6 +41,19 @@ namespace NOP.MMA.Core.Journals
                 return journalCounter++;
             }
         }
+
+        /// <summary>
+        /// The seperator used to seperate objects in the data stream
+        /// </summary>
+        protected const string OBJECTSEPERATOR = "{??}";
+        /// <summary>
+        /// The comma identifier used to replace commas in the data stream
+        /// </summary>
+        protected const string COMMAIDENTIFIER = "{!!}";
+        /// <summary>
+        /// The seperator used to seperate collection items in the data stream
+        /// </summary>
+        protected const string COLITEMSEPERATOR = "{!?}";
 
         public IPatient PatientData { get; set; }
         public JournalDest JournalDestination { get; set; }

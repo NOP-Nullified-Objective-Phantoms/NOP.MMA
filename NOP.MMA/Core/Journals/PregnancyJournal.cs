@@ -16,7 +16,7 @@ namespace NOP.MMA.Core.Journals
         /// Initialize a new instance of type <see cref="PregnancyJournal"/> with its <see langword="default"/> values
         /// </summary>
         /// <param name="_id"></param>
-        public PregnancyJournal ( int _id = -1 ) : base (_id)
+        public PregnancyJournal ( int? _id = null ) : base (_id)
         {
             Pregnancies = new PregnancyHistory ();
             Abortions = new AbortionHistory ();
@@ -25,18 +25,6 @@ namespace NOP.MMA.Core.Journals
             ResAndRiskAssessement = new RRAssessement ();
         }
 
-        /// <summary>
-        /// The seperator used to seperate objects in the data stream
-        /// </summary>
-        protected const string OBJECTSEPERATOR = "{??}";
-        /// <summary>
-        /// The comma identifier used to replace commas in the data stream
-        /// </summary>
-        protected const string COMMAIDENTIFIER = "{!!}";
-        /// <summary>
-        /// The seperator used to seperate collection items in the data stream
-        /// </summary>
-        protected const string COLITEMSEPERATOR = "{!?}";
         public IPregnancyHistory Pregnancies { get; }
         public IAbortionHistory Abortions { get; }
         public IAnamnese Anamnese { get; }
