@@ -14,15 +14,15 @@ namespace NOP.MMA.Core.Patients
         /// Initialize a new instance of type <see cref="Patient"/> with its <see langword="default"/> values. An ID will be generated if one is not provided
         /// </summary>
         /// <param name="_id">The ID to assign the new <see cref="IPatient"/> <see langword="object"/></param>
-        public Patient ( int _id = -1 )
+        public Patient ( int? _id = null )
         {
-            if ( _id == -1 )
+            if ( _id == null )
             {
                 ID = PatientCounter;
             }
-            else if ( _id > 0 )
+            else if ( _id >= 0 )
             {
-                ID = _id;
+                ID = _id.Value;
             }
             else
             {

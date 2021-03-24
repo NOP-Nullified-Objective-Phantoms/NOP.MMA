@@ -7,9 +7,9 @@ namespace NOP.MMA.Core.Patients
     public static class PatientFactory
     {
         /// <summary>
-        /// Creates a new empty <see cref="IPatient"/> <see langword="object"/>
+        /// Creates a new empty <see cref="IPatient"/> <see langword="object"/> that does not increment the ID counter
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A new instance of type <see cref="IPatient"/> where the ID is set to zero.</returns>
         public static IPatient CreateEmpty ()
         {
             return new Patient (0);
@@ -18,7 +18,7 @@ namespace NOP.MMA.Core.Patients
         /// <summary>
         /// Create a new <see cref="IPatient"/> <see langword="object"/>
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A new empty <see cref="IPatient"/> <see langword="object"/> that increments the ID counter</returns>
         public static IPatient Create ()
         {
             return new Patient ();
@@ -29,7 +29,7 @@ namespace NOP.MMA.Core.Patients
         /// </summary>
         /// <param name="_data">The container that represents the patients private data</param>
         /// <param name="_socialData">The container that represents the patiens social data</param>
-        /// <returns></returns>
+        /// <returns>A new populated <see cref="IPatient"/> <see langword="object"/> that increments the ID counter</returns>
         public static IPatient Create ( IPatientData _data, IPatientSocialData _socialData )
         {
             return new Patient ()
