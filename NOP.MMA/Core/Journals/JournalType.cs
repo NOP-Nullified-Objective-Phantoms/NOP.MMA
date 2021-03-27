@@ -5,12 +5,11 @@ using System.Text;
 namespace NOP.MMA.Core.Journals
 {
     /// <summary>
-    /// Defines a flag to represent the result of a screening
+    /// Defines a set of possible types for journals
     /// </summary>
-    public enum ScreeningInfo
+    public enum JournalType
     {
-        Positive,
-        Negativ,
-        OptOut
+        PregnancyJournal,
+        TravelerJournal
     }
 }

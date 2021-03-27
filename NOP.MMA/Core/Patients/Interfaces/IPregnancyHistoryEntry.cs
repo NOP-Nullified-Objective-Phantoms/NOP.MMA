@@ -4,6 +4,9 @@ using System.Text;
 
 namespace NOP.MMA.Core.Patients
 {
+    /// <summary>
+    /// A history record of a pregnancy
+    /// </summary>
     public interface IPregnancyHistoryEntry
     {
         int Year { get; set; }
