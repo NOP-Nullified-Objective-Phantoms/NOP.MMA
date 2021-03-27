@@ -103,7 +103,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
   - Implemented `PatientFactory` class
     - Ability to create `IPatient` objects without incrementing the counter
     - Ability to create empty `IPatient` objects
-- **[v]()**
+- **[v0.3.0]()**
   - Revision to `Patient`
     - Fixed patient counter
     - Summary for `AllergyAssessement` struct
