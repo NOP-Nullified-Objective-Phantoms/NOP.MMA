@@ -9,7 +9,7 @@ using System.Text;
 
 namespace NOP.MMA.Repository
 {
-    public class PregnancyJournalRepo : JournalRepo, IRepository<IPregnancyJournal, string>
+    public class PregnancyJournalRepo : JournalRepo<IPregnancyJournal>
     {
         /// <summary>
         /// Initialize a new instance of type <see cref="PregnancyJournalRepo"/> with its <see langword="default"/> values
@@ -33,7 +33,7 @@ namespace NOP.MMA.Repository
             }
         }
 
-        public IEnumerable<IPregnancyJournal> GetEnumerable ()
+        public override IEnumerable<IPregnancyJournal> GetEnumerable ()
         {
             List<IPregnancyJournal> pJournals = new List<IPregnancyJournal> ();
 
@@ -53,7 +53,7 @@ namespace NOP.MMA.Repository
             return pJournals;
         }
 
-        public IPregnancyJournal GetDataByIdentifier<IDType> ( IDType _id )
+        public override IPregnancyJournal GetDataByIdentifier<IDType> ( IDType _id )
         {
             SetStorage ($"{FileID}{_id}");
 
@@ -63,7 +63,7 @@ namespace NOP.MMA.Repository
             return journal as IPregnancyJournal;
         }
 
-        public bool InsertData<IDType> ( IRepositoryEntity<IDType, string> _data )
+        public override bool InsertData<IDType> ( IRepositoryEntity<IDType, string> _data )
         {
             SetStorage ($"{FileID}{_data.ID}");
             Storage.WriteLine (_data.SaveEntity ());
@@ -73,7 +73,7 @@ namespace NOP.MMA.Repository
             return File.Exists (filePath);
         }
 
-        public bool DeleteData<IDType> ( IRepositoryEntity<IDType, string> _entity )
+        public override bool DeleteData<IDType> ( IRepositoryEntity<IDType, string> _entity )
         {
             if ( GetDataByIdentifier (_entity.ID) != null )
             {
@@ -86,7 +86,7 @@ namespace NOP.MMA.Repository
             return false;
         }
 
-        public bool UpdateData<IDType> ( IRepositoryEntity<IDType, string> _data )
+        public override bool UpdateData<IDType> ( IRepositoryEntity<IDType, string> _data )
         {
             if ( GetDataByIdentifier (_data.ID) != null )
             {
