@@ -239,7 +239,7 @@ namespace NOP.MMA.Core.Journals
                 foreach ( string ultraData in ultraStream )
                 {
                     string[] ultraDataStream = ultraData.Split (",");
-                    if ( ultraDataStream.Length == 8 && double.TryParse (ultraDataStream[ 0 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _amnioticFluidAmount) && DateTime.TryParse (ultraDataStream[ 1 ], out DateTime _ultraResultDate) && double.TryParse (ultraDataStream[ 6 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _usWeight) && double.TryParse (ultraDataStream[ 7 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _weightDifference) )
+                    if ( ultraDataStream.Length == 9 && double.TryParse (ultraDataStream[ 0 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _amnioticFluidAmount) && DateTime.TryParse (ultraDataStream[ 1 ], out DateTime _ultraResultDate) && double.TryParse (ultraDataStream[ 7 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _usWeight) && double.TryParse (ultraDataStream[ 8 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _weightDifference) )
                     {
                         UltrasoundResult ultraSoundScan = new UltrasoundResult ()
                         {
@@ -247,8 +247,9 @@ namespace NOP.MMA.Core.Journals
                             Date = _ultraResultDate,
                             ExaminationLocation = ultraDataStream[ 2 ].Replace (COMMAIDENTIFIER, ","),
                             Flow = ultraDataStream[ 3 ].Replace (COMMAIDENTIFIER, ","),
-                            GestationAge = ultraDataStream[ 4 ].Replace (COMMAIDENTIFIER, ","),
-                            Initials = ultraDataStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
+                            FosterRepresentation = ultraDataStream[4].Replace(COMMAIDENTIFIER, ","),
+                            GestationAge = ultraDataStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
+                            Initials = ultraDataStream[ 6 ].Replace (COMMAIDENTIFIER, ","),
                             USWeight = _usWeight,
                             WeightDifference = _weightDifference
                         };
@@ -427,7 +428,7 @@ namespace NOP.MMA.Core.Journals
             string ultraData = string.Empty;
             for ( int i = 0; i < journalComments.Count; i++ )
             {
-                ultraData += $"{ultraSoundScans[ i ].AmnioticFluidAmount.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].Date.ToString ()},{ultraSoundScans[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].Flow.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].GestationAge.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].Initials.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].USWeight.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].WeightDifference.ToString (new CultureInfo ("en-US"))}";
+                ultraData += $"{ultraSoundScans[ i ].AmnioticFluidAmount.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].Date.ToString ()},{ultraSoundScans[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].Flow.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].FosterRepresentation.Replace(",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].GestationAge.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].Initials.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].USWeight.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].WeightDifference.ToString (new CultureInfo ("en-US"))}";
 
                 if ( i != journalComments.Count - 1 )
                 {

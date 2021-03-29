@@ -19,7 +19,7 @@ namespace NOP.MMA.Core.Journals
         /// The difference in weight in percentage (%) based on the optimal estimated weight of the child
         /// </summary>
         public double WeightDifference { get; set; }
-        string FosterRepresentation { get; set; }
+        public string FosterRepresentation { get; set; }
         public double AmnioticFluidAmount { get; set; }
         public string Flow { get; set; }
         public string ExaminationLocation { get; set; }
