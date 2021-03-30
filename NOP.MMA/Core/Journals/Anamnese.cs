@@ -22,17 +22,17 @@ namespace NOP.MMA.Core.Journals
             AlcoholInfo = new AlcoholHistory ();
         }
 
-        public TermData TermInfo { get; }
-        public FertilityTreatmentData FertilityInfo { get; }
-        public PrenatalRiskAssessment RiskAssessment { get; }
-        public WorkEnvironmentEffect WorkEnvironment { get; }
-        public AllergyAssessement Allergies { get; }
-        public ChronicMedicalHistory ChronicMedicalData { get; }
+        public TermData TermInfo { get; set; }
+        public FertilityTreatmentData FertilityInfo { get; set; }
+        public PrenatalRiskAssessment RiskAssessment { get; set; }
+        public WorkEnvironmentEffect WorkEnvironment { get; set; }
+        public AllergyAssessement Allergies { get; set; }
+        public ChronicMedicalHistory ChronicMedicalData { get; set; }
         public string Medicin { get; set; }
         public MMRVaccinationStatus MMRVaccinated { get; set; }
         public string PastAdmittance { get; set; }
-        public TobaccoHistory TobaccoInfo { get; }
-        public AlcoholHistory AlcoholInfo { get; }
+        public TobaccoHistory TobaccoInfo { get; set; }
+        public AlcoholHistory AlcoholInfo { get; set; }
         public bool OtherDrugs { get; set; }
         public string OtherDrugsComment { get; set; }
         public string DietAndActivity { get; set; }

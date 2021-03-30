@@ -22,12 +22,12 @@ namespace NOP.MMA.Core.Journals
             Hemoglobinopathy = new Screening ();
         }
 
-        public Screening HepB { get; }
-        public Screening HIV { get; }
-        public Screening Syphilis { get; }
-        public Screening Clamydia { get; }
-        public Screening Gonore { get; }
-        public Screening Hemoglobinopathy { get; }
+        public Screening HepB { get; set; }
+        public Screening HIV { get; set; }
+        public Screening Syphilis { get; set; }
+        public Screening Clamydia { get; set; }
+        public Screening Gonore { get; set; }
+        public Screening Hemoglobinopathy { get; set; }
         public DateTime DVataminReadingDate { get; set; }
         public string DVataminReadingResult { get; set; }
     }
