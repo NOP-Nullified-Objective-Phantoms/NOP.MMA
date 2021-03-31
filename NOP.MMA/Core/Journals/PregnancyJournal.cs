@@ -43,6 +43,7 @@ namespace NOP.MMA.Core.Journals
                 if ( int.TryParse (coreJournalData[ 0 ].Replace ("JournalData", string.Empty), out int _id) && int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) && int.TryParse (coreJournalData[ 2 ], out int _journalDest) )
                 {
                     ID = _id;
+                    JournalDestination = (JournalDest)_journalDest;
                     PatientData = PatientRepo.Link.GetDataByIdentifier (_patientID);
                 }
                 #endregion
@@ -196,6 +197,7 @@ namespace NOP.MMA.Core.Journals
                             Anamnese.WorkEnvironment.LeaveNotification = _leaveNotification;
                             Anamnese.WorkEnvironment.NatureAndPeriod = environmentStream[ 2 ].Replace (COMMAIDENTIFIER, ",");
                             Anamnese.WorkEnvironment.PartialLeaveNotification = _partialLeaveNotification;
+                            Anamnese.WorkEnvironment.ReferedToOMClinic = _referedToOMClinic;
 
                             #region WorkEnvironment flag build [Line 5]
                             string[] environmentflags = environmentStream[ 5 ].Split (COLITEMSEPERATOR);
@@ -294,6 +296,7 @@ namespace NOP.MMA.Core.Journals
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "<Pending>")]
         public override string SaveEntity ()
         {
             string journalString = $"JournalID{ID},PatientID{PatientData.ID},{( int ) JournalDestination}{Environment.NewLine}";

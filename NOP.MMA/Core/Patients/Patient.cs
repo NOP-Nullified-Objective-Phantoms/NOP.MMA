@@ -69,34 +69,37 @@ namespace NOP.MMA.Core.Patients
         /// <exception cref="ArgumentException"></exception>
         public void BuildEntity ( string _data )
         {
-            string[] data = _data.Split (",");
+            if ( _data != null )
+            {
+                string[] data = _data.Split (",");
 
-            if ( data.Length == 19 && int.TryParse (data[ 0 ].Replace ("PatientID", string.Empty), out int _id) && int.TryParse (data[ 11 ], out int _civilStatus) && bool.TryParse (data[ 12 ], out bool _cohibitable) && bool.TryParse (data[ 15 ], out bool _needTranslator) )
-            {
-                ID = _id;
-                SSN = data[ 1 ];
-                Name = data[ 2 ];
-                Address = data[ 3 ];
-                Email = data[ 4 ];
-                PrivatePhone = data[ 5 ];
-                WorkPhone = data[ 6 ];
-                PrivateGP = data[ 7 ];
-                DoctorsName = data[ 8 ];
-                DoctorsAddress = data[ 9 ];
-                DoctorsPhone = data[ 10 ];
-                CivilStatus = ( MaritalStatus ) _civilStatus;
-                Cohibitable = _cohibitable;
-                ChildFathersName = data[ 13 ];
-                ChildFathersSSN = data[ 14 ];
-                NeedTranslator = _needTranslator;
-                TranslatorLanguage = data[ 16 ];
-                Nationality = data[ 17 ];
-                OtherInfo = data[ 18 ];
+                if ( data.Length == 19 && int.TryParse (data[ 0 ].Replace ("PatientID", string.Empty), out int _id) && int.TryParse (data[ 11 ], out int _civilStatus) && bool.TryParse (data[ 12 ], out bool _cohibitable) && bool.TryParse (data[ 15 ], out bool _needTranslator) )
+                {
+                    ID = _id;
+                    SSN = data[ 1 ];
+                    Name = data[ 2 ];
+                    Address = data[ 3 ];
+                    Email = data[ 4 ];
+                    PrivatePhone = data[ 5 ];
+                    WorkPhone = data[ 6 ];
+                    PrivateGP = data[ 7 ];
+                    DoctorsName = data[ 8 ];
+                    DoctorsAddress = data[ 9 ];
+                    DoctorsPhone = data[ 10 ];
+                    CivilStatus = ( MaritalStatus ) _civilStatus;
+                    Cohibitable = _cohibitable;
+                    ChildFathersName = data[ 13 ];
+                    ChildFathersSSN = data[ 14 ];
+                    NeedTranslator = _needTranslator;
+                    TranslatorLanguage = data[ 16 ];
+                    Nationality = data[ 17 ];
+                    OtherInfo = data[ 18 ];
+
+                    return;
+                }
             }
-            else
-            {
-                throw new ArgumentException ($"One or more fields couldn't be retrived from: {_data}");
-            }
+
+            throw new ArgumentException ($"One or more fields couldn't be retrived from: {( _data ?? "Null" )}");
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "<Pending>")]
