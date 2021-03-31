@@ -1,11 +1,13 @@
 ﻿using NOP.Common.Files;
+using NOP.Common.Repository;
 using NOP.MMA.Core.Journals;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
 namespace NOP.MMA.Repository
 {
-    public abstract class JournalRepo
+    public abstract class JournalRepo<T> : IRepository<T, string>
     {
         /// <summary>
         /// Initialize a <see cref="JournalRepo"/> <see langword="base"/>
@@ -38,6 +40,16 @@ namespace NOP.MMA.Repository
         /// </summary>
         protected FileHandler Storage { get; private set; }
         protected DirectoryInfo JournalDirectory { get; private set; }
+
+        public abstract bool DeleteData<IDType> ( IRepositoryEntity<IDType, string> _entity );
+
+        public abstract T GetDataByIdentifier<IDType> ( IDType _id );
+
+        public abstract IEnumerable<T> GetEnumerable ();
+
+        public abstract bool InsertData<IDType> ( IRepositoryEntity<IDType, string> _data );
+
+        public abstract bool UpdateData<IDType> ( IRepositoryEntity<IDType, string> _data );
 
         /// <summary>
         /// Change the target of <see cref="Storage"/> based on the provided <paramref name="_id"/>

@@ -17,7 +17,7 @@ namespace NOP.MMA.Core.Journals
             return _type switch
             {
                 JournalType.PregnancyJournal => new PregnancyJournal (0),
-                JournalType.TravelerJournal => null,
+                JournalType.TravelerJournal => new TravelerJournal (0),
                 _ => null,
             };
         }
@@ -31,8 +31,8 @@ namespace NOP.MMA.Core.Journals
         {
             return _type switch
             {
-                JournalType.PregnancyJournal => null,
-                JournalType.TravelerJournal => null,
+                JournalType.PregnancyJournal => new PregnancyJournal (),
+                JournalType.TravelerJournal => new TravelerJournal (),
                 _ => null,
             };
         }
@@ -51,7 +51,10 @@ namespace NOP.MMA.Core.Journals
                 {
                     PatientData = _patient
                 },
-                JournalType.TravelerJournal => null,
+                JournalType.TravelerJournal => new TravelerJournal ()
+                {
+                    PatientData = _patient
+                },
                 _ => null,
             };
         }
