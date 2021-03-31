@@ -31,7 +31,7 @@ namespace NOP.MMA.Core.Journals
         {
             return _type switch
             {
-                JournalType.PregnancyJournal => null,
+                JournalType.PregnancyJournal => new PregnancyJournal(),
                 JournalType.TravelerJournal => null,
                 _ => null,
             };

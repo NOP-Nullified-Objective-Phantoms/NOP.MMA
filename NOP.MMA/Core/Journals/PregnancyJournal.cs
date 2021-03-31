@@ -13,9 +13,9 @@ namespace NOP.MMA.Core.Journals
     internal class PregnancyJournal : Journal, IPregnancyJournal
     {
         /// <summary>
-        /// Initialize a new instance of type <see cref="PregnancyJournal"/> with its <see langword="default"/> values
+        /// Initialize a new instance of type <see cref="PregnancyJournal"/> with its <see langword="default"/> values. An ID will be generated if one is not provided
         /// </summary>
-        /// <param name="_id"></param>
+        /// <param name="_id">The ID to assign the new <see cref="IJournal"/> <see langword="object"/></param>
         public PregnancyJournal ( int? _id = null ) : base (_id)
         {
             Pregnancies = new PregnancyHistory ();

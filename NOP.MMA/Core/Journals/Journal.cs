@@ -38,7 +38,7 @@ namespace NOP.MMA.Core.Journals
         {
             get
             {
-                return journalCounter++;
+                return ++journalCounter;
             }
         }
 

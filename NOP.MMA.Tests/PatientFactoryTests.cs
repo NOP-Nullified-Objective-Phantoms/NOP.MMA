@@ -45,7 +45,7 @@ namespace NOP.MMA.Core.Patients
         public void CanCreateFromData ()
         {
             //  Arrange
-            int expectedID = 1;
+            int expectedID = currentIDIndex;
             IPatient patient;
             IPatientData pData;
             IPatientSocialData pSocialData;
