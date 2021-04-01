@@ -99,7 +99,7 @@ namespace NOP.MMA.Core.Patients
                 }
             }
 
-            throw new ArgumentException ($"One or more fields couldn't be retrived from: {( _data ?? "Null" )}");
+            throw new ArgumentException ($"One or more fields couldn't be retrived from: { ( _data ?? "Null" )}");
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "<Pending>")]

@@ -38,10 +38,11 @@ namespace NOP.MMA.Core.Patients
             patient = PatientFactory.Create ();
             notNull = patient != null;
             correctID = patient.ID == expectedID;
-            currentIDIndex++;   //  Incrementing the ID index in case another patient is created after this test
 
             //  Assert
             Assert.True (( notNull && correctID ), $"Is Null: {!notNull} {{Value: {!notNull} | Expected: {false}}}<|> Correct ID: {correctID} {{Value: {( ( notNull ) ? ( patient.ID.ToString () ) : ( "NaN" ) )} | Expected: {expectedID}}}");
+
+            currentIDIndex++;   //  Incrementing the ID index in case another patient is created after this test
         }
 
         [Fact]
@@ -57,10 +58,11 @@ namespace NOP.MMA.Core.Patients
             patient = PatientFactory.Create (PatientHelper.GetPatientData (), PatientHelper.GetSocialData ());
             notNull = patient != null;
             correctID = patient.ID == expectedID;
-            currentIDIndex++;   //  Incrementing the ID index in case another patient is created after this test
 
             //  Assert
             Assert.True (( notNull && correctID ), $"Is Null: {!notNull} {{Value: {!notNull} | Expected: {false}}}<|> Correct ID: {correctID} {{Value: {( ( notNull ) ? ( patient.ID.ToString () ) : ( "NaN" ) )} | Expected: {expectedID}}}");
+
+            currentIDIndex++;   //  Incrementing the ID index in case another patient is created after this test
         }
     }
 }

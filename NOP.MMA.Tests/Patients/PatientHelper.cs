@@ -39,16 +39,21 @@ namespace NOP.MMA.Core.Patients
             };
         }
 
-        public static void ManualStorageInsertion (IPatient _patient, string _path)
+        public static IPatient GetNewPatient ()
         {
-            FileHandler file = new FileHandler (_path);
-            file.Write (_patient.SaveEntity ());
+            return PatientFactory.Create (GetPatientData (), GetSocialData ());
         }
 
-        public static bool CheckIDFromStorage (int _expectedID, string _path)
+        public static void ManualStorageInsertion ( IPatient _patient, string _path, bool _append = false)
         {
             FileHandler file = new FileHandler (_path);
-            if (int.TryParse (file.FindLine ($"PatientID{_expectedID}").Split (",")[ 0 ]?.Replace ("PatientID", string.Empty), out int _id) )
+            file.WriteLine (_patient.SaveEntity (), _append);
+        }
+
+        public static bool CheckIDFromStorage ( int _expectedID, string _path )
+        {
+            FileHandler file = new FileHandler (_path);
+            if ( int.TryParse (file.FindLine ($"PatientID{_expectedID}")?.Split (",")[ 0 ]?.Replace ("PatientID", string.Empty), out int _id) )
             {
                 return ( _id == _expectedID );
             }
@@ -56,7 +61,7 @@ namespace NOP.MMA.Core.Patients
             return false;
         }
 
-        public static bool CheckValueFromStorage (string _expectedValue, string _path )
+        public static bool CheckValueFromStorage ( string _expectedValue, string _path )
         {
             FileHandler file = new FileHandler (_path);
             return file.FindLine (_expectedValue) != null;

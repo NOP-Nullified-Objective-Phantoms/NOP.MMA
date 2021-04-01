@@ -1,5 +1,6 @@
 ﻿using NOP.Common.Files;
 using NOP.Common.Repository;
+using NOP.MMA.Core;
 using NOP.MMA.Core.Patients;
 using System;
 using System.Collections.Generic;
@@ -19,19 +20,54 @@ namespace NOP.MMA.Repository
         /// </summary>
         private PatientRepo ()
         {
-            Storage = new FileHandler (StoragePath);
+            if ( !Directory.Exists (StoragePath) )
+            {
+                Directory.CreateDirectory (StoragePath);
+            }
+
+            try
+            {
+                Storage = new FileHandler ($"{StoragePath}\\{FileName}");
+            }
+            catch ( Exception _e )
+            {
+                Debug.LogError (_e);
+            }
+        }
+
+        /// <summary>
+        /// The fully qualified path to the storage file
+        /// </summary>
+        public virtual string FullPath
+        {
+            get
+            {
+                return $"{StoragePath}\\{FileName}";
+            }
         }
 
         /// <summary>
         /// The fully qualified path to the folder, where the storage file is located
         /// </summary>
-        protected virtual string StoragePath
+        public virtual string StoragePath
         {
             get
             {
-                return $"{Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location)}\\Storage\\Patients.csv";
+                return $"{Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location)}\\Storage";
             }
         }
+
+        /// <summary>
+        /// The name of the file containing the <see cref="IPatient"/> <see langword="objects"/>
+        /// </summary>
+        public virtual string FileName
+        {
+            get
+            {
+                return "Patients.csv";
+            }
+        }
+
         /// <summary>
         /// The handler that allows for manipulation of the storage file
         /// </summary>
@@ -68,9 +104,22 @@ namespace NOP.MMA.Repository
         public IPatient GetDataByIdentifier<IDType> ( IDType _id )
         {
             string data = Storage.FindLine ($"PatientID{_id}");
+            IPatient patient = null;
+            if ( data != null )
+            {
+                patient = PatientFactory.CreateEmpty ();
+                try
+                {
+                    patient.BuildEntity (data);
+                }
+                catch ( Exception _e )
+                {
+                    Debug.LogError (_e);
 
-            IPatient patient = PatientFactory.CreateEmpty ();
-            patient.BuildEntity (data);
+                    throw;
+                }
+
+            }
 
             return patient;
         }
@@ -80,9 +129,22 @@ namespace NOP.MMA.Repository
             List<IPatient> patients = new List<IPatient> ();
             foreach ( string dataStream in Storage.ReadLines () )   //  Read all lines in storage file, and build a patient from it
             {
-                IPatient patient = PatientFactory.CreateEmpty ();
-                patient.BuildEntity (dataStream);
-                patients.Add (patient);
+                if ( dataStream != string.Empty )
+                {
+                    IPatient patient = PatientFactory.CreateEmpty ();
+                    try
+                    {
+
+                        patient.BuildEntity (dataStream);
+                    }
+                    catch ( Exception _e )
+                    {
+                        Debug.LogError (_e);
+                        throw;
+                    }
+
+                    patients.Add (patient);
+                }
             }
 
             return patients;
