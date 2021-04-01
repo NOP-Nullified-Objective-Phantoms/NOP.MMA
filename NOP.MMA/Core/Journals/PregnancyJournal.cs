@@ -8,7 +8,7 @@ using System.Text;
 namespace NOP.MMA.Core.Journals
 {
     /// <summary>
-    /// Reepresents a <see cref="Journal"/> extended to include information about an <see cref="IPatient"/>s pregnancy history
+    /// Represents a <see cref="Journal"/> extended to include information about an <see cref="IPatient"/>s pregnancy history
     /// </summary>
     internal class PregnancyJournal : Journal, IPregnancyJournal
     {
@@ -45,6 +45,7 @@ namespace NOP.MMA.Core.Journals
                     ID = _id;
                     JournalDestination = (JournalDest)_journalDest;
                     PatientData = PatientRepo.Link.GetDataByIdentifier (_patientID);
+                    JournalDestination = ( JournalDest ) _journalDest;
                 }
                 #endregion
 
@@ -296,7 +297,7 @@ namespace NOP.MMA.Core.Journals
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "<Pending>")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "Better readability")]
         public override string SaveEntity ()
         {
             string journalString = $"JournalID{ID},PatientID{PatientData.ID},{( int ) JournalDestination}{Environment.NewLine}";

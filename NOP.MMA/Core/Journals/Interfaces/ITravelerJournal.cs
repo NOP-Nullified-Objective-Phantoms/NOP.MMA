@@ -1,34 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NOP.MMA.Core.Patients;
 
 namespace NOP.MMA.Core.Journals
 {
+    /// <summary>
+    /// Represents an <see cref="IJournal"/> extended to include information about an <see cref="IPatient"/>s progression through a pregnancy
+    /// </summary>
     public interface ITravelerJournal : IJournal
     {
-        MenstrualCycleInfo MenstrualInfo { get; }
+        MenstrualCycleInfo MenstrualInfo { get; set; }
         DateTime NaegelsRule { get; set; }
         DateTime UltrasoundTermin { get; set; }
-        WeightInfo WeightInfo { get; }
+        WeightInfo WeightInfo { get; set; }
         bool MothersRhesusFactor { get; set; }
         bool ChildsRhesusFactor { get; set; }
-        Screening HepB { get; }
+        Screening HepB { get; set; }
         bool BloodTypeDetermined { get; set; }
         bool AntibodyByRhesusNegative { get; set; }
         bool IrregularAntibody { get; set; }
         /// <summary>
         /// If <see langword="null"/> the Anti-D Immunoglobulin is not given
         /// </summary>
-        JournalData AntiDImmunoglobulinGiven { get; }
-        JournalData UrineCulture { get; }
+        JournalData AntiDImmunoglobulinGiven { get; set; }
+        JournalData UrineCulture { get; set; }
         IReadOnlyList<JournalStamp> JournalStamps { get; }
         IReadOnlyList<JournalComment> JournalComments { get; }
-        IReadOnlyList<UltrasoundResult> UltrasoundScans { get; }
+        IReadOnlyList<UltrasoundResult> UltraSoundScans { get; }
         bool AddJournalStamp ( JournalStamp _stamp );
         bool RemoveJournalStamp ( DateTime _stampDate );
         bool AddJournalSComment ( JournalComment _comment );
         bool RemoveJournalComment ( DateTime _commentDate );
-        bool AddUltrasoundScan ( UltrasoundResult _scan );
+        bool AddUltraSoundScan ( UltrasoundResult _scan );
         bool RemoveUltrasoundScan ( DateTime _scanDate );
         DateTime NuchalFoldScan { get; set; }
         DateTime DoubleTest { get; set; }
@@ -36,11 +40,11 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// DS = Downsyndrom
         /// </summary>
-        JournalData OddsForDS { get; }
-        JournalData PlacentaTest { get; }
-        JournalData AmnioticFluidTest { get; }
-        OGTTScreening OralGlukoseToleranceTest { get; }
+        JournalData OddsForDS { get; set; }
+        JournalData PlacentaTest { get; set; }
+        JournalData AmnioticFluidTest { get; set; }
+        OGTTScreening OralGlukoseToleranceTest { get; set; }
         string AdditonalContext { get; set; }
-        BirthplaceInformation BirthplaceInfo { get; }
+        BirthplaceInformation BirthplaceInfo { get; set; }
     }
 }

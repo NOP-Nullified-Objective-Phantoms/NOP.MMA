@@ -1,5 +1,4 @@
-﻿using NOP.Common.Files;
-using NOP.Common.Repository;
+﻿using NOP.Common.Repository;
 using NOP.MMA.Core.Journals;
 using System;
 using System.Collections.Generic;
@@ -9,33 +8,33 @@ using System.Text;
 
 namespace NOP.MMA.Repository
 {
-    public class PregnancyJournalRepo : JournalRepo<IPregnancyJournal>
+    public class TravelerJournalRepo : JournalRepo<ITravelerJournal>
     {
         /// <summary>
-        /// Initialize a new instance of type <see cref="PregnancyJournalRepo"/> with its <see langword="default"/> values
+        /// Initialize a new instance of type <see cref="TravelerJournalRepo"/> with its <see langword="default"/> values
         /// </summary>
-        protected PregnancyJournalRepo ()
+        protected TravelerJournalRepo ()
         {
-            FileID = "P";
+            FileID = "T";
         }
 
-        private static PregnancyJournalRepo link = null;
-        public static PregnancyJournalRepo Link
+        private static TravelerJournalRepo link = null;
+        public static TravelerJournalRepo Link
         {
             get
             {
                 if ( link == null )
                 {
-                    link = new PregnancyJournalRepo ();
+                    link = new TravelerJournalRepo ();
                 }
 
                 return link;
             }
         }
 
-        public override IEnumerable<IPregnancyJournal> GetEnumerable ()
+        public override IEnumerable<ITravelerJournal> GetEnumerable ()
         {
-            List<IPregnancyJournal> pJournals = new List<IPregnancyJournal> ();
+            List<ITravelerJournal> tJournals = new List<ITravelerJournal> ();
 
             foreach ( FileInfo journalFile in JournalDirectory.GetFiles () )
             {
@@ -43,24 +42,24 @@ namespace NOP.MMA.Repository
                 {
                     SetStorage (journalFile.Name);
 
-                    IPregnancyJournal journal = JournalFactory.CreateEmpty (JournalType.PregnancyJournal) as IPregnancyJournal;
+                    ITravelerJournal journal = JournalFactory.CreateEmpty (JournalType.TravelerJournal) as ITravelerJournal;
                     journal.BuildEntity (Storage.ReadAll ());
 
-                    pJournals.Add (journal);
+                    tJournals.Add (journal);
                 }
             }
 
-            return pJournals;
+            return tJournals;
         }
 
-        public override IPregnancyJournal GetDataByIdentifier<IDType> ( IDType _id )
+        public override ITravelerJournal GetDataByIdentifier<IDType> ( IDType _id )
         {
             SetStorage ($"{FileID}{_id}");
 
-            IJournal journal = JournalFactory.CreateEmpty (JournalType.PregnancyJournal);
+            IJournal journal = JournalFactory.CreateEmpty (JournalType.TravelerJournal);
             journal.BuildEntity (Storage.ReadAll ());
 
-            return journal as IPregnancyJournal;
+            return journal as ITravelerJournal;
         }
 
         public override bool InsertData<IDType> ( IRepositoryEntity<IDType, string> _data )
