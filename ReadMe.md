@@ -153,6 +153,17 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Added Seperator constants to `PregnancyJournal` class
   - Implemented `PregnancyJournalRepo` class
     - Added `JournalRepo` class, as a base for Journal Repositories
+- [v0.4.0](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.4.0)
+  - Added constructor to `Journal` Releated structs
+  - Fixed various mistakes in `PregnancyJournal` releated objects
+  - Added `TravelerJournal` Class
+  - Fixed missing property in build and save for `UltrasoundResult` in `TravelerJournal`
+  - Changed how the `JournalRepo` base class behaves regarding `IRepository` implementation
+    - `JournalRepo` now implements the `IRepository` interface
+    - `PregnancyJournalRepo` now overrides the `JournalRepo` base `IRepository` methods
+  - Implemented `TravelerJournalRepo`
+    - Extended `JournalFactory` to include `TravelerJournal` class
+    - Finalized `TravelerJournal` specific objects
 - **[v]()**
   - Created Unit Test Project
     - Created Tests for `PatientFactory` (All Passed)

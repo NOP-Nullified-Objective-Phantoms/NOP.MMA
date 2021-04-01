@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NOP.MMA.Core.Patients;
 
 namespace NOP.MMA.Core.Journals
 {
+    /// <summary>
+    /// Represents a stamp of general information for an <see cref="IPatient"/>
+    /// </summary>
     public struct JournalStamp
     {
         public DateTime Date { get; set; }
