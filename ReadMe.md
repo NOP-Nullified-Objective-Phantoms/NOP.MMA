@@ -156,7 +156,8 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
 - **[v]()**
   - Created Unit Test Project
     - Created Tests for `PatientFactory` (All Passed)
-    - Added tests for `PregnancyJournal` (All Passed)
+    - Added Tests for `PregnancyJournal` (All Passed)
+    - Added Tests for `PatientRepo` (All Passed)
   - Implemented Helpers
     - Added `PatientData` Class
     - Added `PatientSocialData` class
