@@ -39,8 +39,13 @@ namespace NOP.MMA.Core
         {
             if ( NoHandler () || ( LastLogged.AddHours (1) ) < DateTime.Now )
             {
+                if ( !Directory.Exists (LogPath) )
+                {
+                    Directory.CreateDirectory (LogPath);
+                }
+
                 DateTime date = DateTime.Now;
-                File = new FileHandler ($"{LogPath}\\MMA_{date.ToShortDateString ()}_{date.ToShortTimeString ()}_Log.txt");
+                File = new FileHandler ($"{LogPath}\\MMA_{date.ToShortDateString ().Replace ("/", string.Empty)}_{date.ToShortTimeString ()}_Log.txt");
             }
         }
 

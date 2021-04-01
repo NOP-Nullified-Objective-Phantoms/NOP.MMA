@@ -13,9 +13,9 @@ namespace NOP.MMA.Core.Journals
     internal class PregnancyJournal : Journal, IPregnancyJournal
     {
         /// <summary>
-        /// Initialize a new instance of type <see cref="PregnancyJournal"/> with its <see langword="default"/> values
+        /// Initialize a new instance of type <see cref="PregnancyJournal"/> with its <see langword="default"/> values. An ID will be generated if one is not provided
         /// </summary>
-        /// <param name="_id"></param>
+        /// <param name="_id">The ID to assign the new <see cref="IJournal"/> <see langword="object"/></param>
         public PregnancyJournal ( int? _id = null ) : base (_id)
         {
             Pregnancies = new PregnancyHistory ();
@@ -43,6 +43,7 @@ namespace NOP.MMA.Core.Journals
                 if ( int.TryParse (coreJournalData[ 0 ].Replace ("JournalData", string.Empty), out int _id) && int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) && int.TryParse (coreJournalData[ 2 ], out int _journalDest) )
                 {
                     ID = _id;
+                    JournalDestination = (JournalDest)_journalDest;
                     PatientData = PatientRepo.Link.GetDataByIdentifier (_patientID);
                     JournalDestination = ( JournalDest ) _journalDest;
                 }

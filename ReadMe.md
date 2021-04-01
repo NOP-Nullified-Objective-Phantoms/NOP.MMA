@@ -164,3 +164,28 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
   - Implemented `TravelerJournalRepo`
     - Extended `JournalFactory` to include `TravelerJournal` class
     - Finalized `TravelerJournal` specific objects
+- **[v]()**
+  - Created Unit Test Project
+    - Created Tests for `PatientFactory` (All Passed)
+    - Added Tests for `PregnancyJournal` (All Passed)
+    - Added Tests for `PatientRepo` (All Passed)
+  - Implemented Helpers
+    - Added `PatientData` Class
+    - Added `PatientSocialData` class
+    - Added `PatientHelper` class
+      - Added ability to create new patients from the `PatientHelper`
+    - Added `AssertHelper` class
+  - Revision
+    - Fixed `Anamnese` not being opened
+    - Fixed `Investigation` not being opened
+    - Fixed `Patient` Default ID being 0, instead of the correct ID of 1
+    - Fixed `PatientFactory` ID Index not being assigned as intended
+    - Fixed an issue where the `Debug` class couldn't find a path to its associated file
+    - Fixed a crash when a `Patient` got passed a null factor when building
+    - Fixed several missing properties assignments upon build in `PregnancyJournal`
+    - Fixed ID's not developing as expected in `PatientFactoryTests`
+    - Fixed `PatientRepo` not being able to form a fully qualified path to its associated file
+    - Fixed attempts to build patients from an empty string in `PatientRepo`
+    - Fixed wrong log file name in `Debug` class 
+    - Added `FileName` property to the `PatientRepo` and changed `StoragePath` property to only point to the storage folder instead of the storage file
+    - Implemented log file debugging in `PatientRepo`
