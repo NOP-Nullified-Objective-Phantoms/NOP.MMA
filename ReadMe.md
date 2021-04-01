@@ -164,7 +164,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
   - Implemented `TravelerJournalRepo`
     - Extended `JournalFactory` to include `TravelerJournal` class
     - Finalized `TravelerJournal` specific objects
-- **[v]()**
+- **[v0.5.0](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.5.0)**
   - Created Unit Test Project
     - Created Tests for `PatientFactory` (All Passed)
     - Added Tests for `PregnancyJournal` (All Passed)
