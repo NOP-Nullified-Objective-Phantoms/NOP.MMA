@@ -153,7 +153,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Added Seperator constants to `PregnancyJournal` class
   - Implemented `PregnancyJournalRepo` class
     - Added `JournalRepo` class, as a base for Journal Repositories
-- [v0.4.0]()
+- [v0.4.0](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.4.0)
   - Added constructor to `Journal` Releated structs
   - Fixed various mistakes in `PregnancyJournal` releated objects
   - Added `TravelerJournal` Class
