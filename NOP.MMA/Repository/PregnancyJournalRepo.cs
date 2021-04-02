@@ -1,5 +1,6 @@
 ﻿using NOP.Common.Files;
 using NOP.Common.Repository;
+using NOP.MMA.Core;
 using NOP.MMA.Core.Journals;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,11 @@ namespace NOP.MMA.Repository
         protected PregnancyJournalRepo ()
         {
             FileID = "P";
+
+            if ( !Directory.Exists (StoragePath) )
+            {
+                Directory.CreateDirectory (StoragePath);
+            }
         }
 
         private static PregnancyJournalRepo link = null;
@@ -44,7 +50,14 @@ namespace NOP.MMA.Repository
                     SetStorage (journalFile.Name);
 
                     IPregnancyJournal journal = JournalFactory.CreateEmpty (JournalType.PregnancyJournal) as IPregnancyJournal;
-                    journal.BuildEntity (Storage.ReadAll ());
+                    try
+                    {
+                        journal.BuildEntity (Storage.ReadAll ());
+                    }
+                    catch ( Exception _e )
+                    {
+                        Debug.LogWarning (_e.ToString ());
+                    }
 
                     pJournals.Add (journal);
                 }
@@ -58,7 +71,14 @@ namespace NOP.MMA.Repository
             SetStorage ($"{FileID}{_id}");
 
             IJournal journal = JournalFactory.CreateEmpty (JournalType.PregnancyJournal);
-            journal.BuildEntity (Storage.ReadAll ());
+            try
+            {
+                journal.BuildEntity (Storage.ReadAll ());
+            }
+            catch ( Exception _e )
+            {
+                Debug.LogWarning (_e.ToString ());
+            }
 
             return journal as IPregnancyJournal;
         }
@@ -77,7 +97,7 @@ namespace NOP.MMA.Repository
         {
             if ( GetDataByIdentifier (_entity.ID) != null )
             {
-                FileInfo file = JournalDirectory.GetFiles ().ToList ().Find (item => item.Name == $"{FileID}{_entity.ID}");
+                FileInfo file = JournalDirectory.GetFiles ().ToList ().Find (item => item.Name == $"{FileID}{_entity.ID}.csv");
                 file.Delete ();
 
                 return file.Exists;
@@ -92,9 +112,11 @@ namespace NOP.MMA.Repository
             {
                 SetStorage ($"{FileID}{_data.ID}");
 
-                Storage.WriteLine (_data.SaveEntity ());
-
-                return true;
+                if ( UpdatePatientData (( ( IPregnancyJournal ) _data ).PatientData) )
+                {
+                    Storage.WriteLine (_data.SaveEntity ());
+                    return true;
+                }
             }
 
             return false;

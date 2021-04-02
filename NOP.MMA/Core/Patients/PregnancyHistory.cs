@@ -18,7 +18,13 @@ namespace NOP.MMA.Core.Patients
         }
 
         private readonly List<IPregnancyHistoryEntry> history = null;
-        public IReadOnlyList<IPregnancyHistoryEntry> History { get; }
+        public IReadOnlyList<IPregnancyHistoryEntry> History
+        {
+            get
+            {
+                return history;
+            }
+        }
         public IPregnancyHistoryEntry this[ int _index ]
         {
             get
