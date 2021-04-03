@@ -1,4 +1,5 @@
 ﻿using NOP.Common.Repository;
+using NOP.MMA.Core;
 using NOP.MMA.Core.Journals;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,16 @@ namespace NOP.MMA.Repository
                     SetStorage (journalFile.Name);
 
                     ITravelerJournal journal = JournalFactory.CreateEmpty (JournalType.TravelerJournal) as ITravelerJournal;
-                    journal.BuildEntity (Storage.ReadAll ());
+                    try
+                    {
+                        journal.BuildEntity (Storage.ReadAll ());
+                    }
+                    catch ( Exception _e)
+                    {
+
+                        Debug.LogWarning (_e.ToString ());
+                    }
+                    
 
                     tJournals.Add (journal);
                 }
@@ -57,7 +67,14 @@ namespace NOP.MMA.Repository
             SetStorage ($"{FileID}{_id}");
 
             IJournal journal = JournalFactory.CreateEmpty (JournalType.TravelerJournal);
-            journal.BuildEntity (Storage.ReadAll ());
+            try
+            {
+                journal.BuildEntity (Storage.ReadAll ());
+            }
+            catch ( Exception _e )
+            {
+                Debug.LogWarning (_e.ToString ());
+            }
 
             return journal as ITravelerJournal;
         }
@@ -76,7 +93,7 @@ namespace NOP.MMA.Repository
         {
             if ( GetDataByIdentifier (_entity.ID) != null )
             {
-                FileInfo file = JournalDirectory.GetFiles ().ToList ().Find (item => item.Name == $"{FileID}{_entity.ID}");
+                FileInfo file = JournalDirectory.GetFiles ().ToList ().Find (item => item.Name == $"{FileID}{_entity.ID}.csv");
                 file.Delete ();
 
                 return file.Exists;
@@ -91,9 +108,11 @@ namespace NOP.MMA.Repository
             {
                 SetStorage ($"{FileID}{_data.ID}");
 
-                Storage.WriteLine (_data.SaveEntity ());
-
-                return true;
+                if ( UpdatePatientData (( ( ITravelerJournal ) _data ).PatientData) )
+                {
+                    Storage.WriteLine (_data.SaveEntity ());
+                    return true;
+                }
             }
 
             return false;

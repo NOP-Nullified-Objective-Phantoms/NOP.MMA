@@ -9,14 +9,14 @@ using Xunit;
 
 namespace NOP.MMA.Repository
 {
-    public class PregnancyJournalRepoTests
+    public class TravelerJournalRepoTests
     {
         private static int currentIDIndex;
-        private IPregnancyJournal journal;
+        private ITravelerJournal journal;
         private IPatient patient;
 
         [Fact]
-        public void A_CanInsertPregnancyJournal ()
+        public void A_CanInsertTravelerJournal ()
         {
             //  Arrange
             Initiate ();
@@ -26,8 +26,8 @@ namespace NOP.MMA.Repository
 
             //  Act
             expectedID = currentIDIndex;
-            didInsert = PregnancyJournalRepo.Link.InsertData (journal);
-            ensuredInsertion = JournalHelper.CheckIDFromStorage (expectedID, PregnancyJournalRepo.Link.FilePath);
+            didInsert = TravelerJournalRepo.Link.InsertData (journal);
+            ensuredInsertion = JournalHelper.CheckIDFromStorage (expectedID, TravelerJournalRepo.Link.FilePath);
             CleanUp ();
 
             //  Assert
@@ -40,14 +40,14 @@ namespace NOP.MMA.Repository
             //  Arrange
             Initiate ();
             int expectedID;
-            IPregnancyJournal retrievedJournal;
+            ITravelerJournal retrievedJournal;
             bool notNull;
             bool correctID;
-            JournalHelper.ManualStorageInsertion (journal, JournalType.PregnancyJournal, PregnancyJournalRepo.Link.StoragePath);  //  Ensuring that an entry exists in storage
+            JournalHelper.ManualStorageInsertion (journal, JournalType.TravelerJournal, TravelerJournalRepo.Link.StoragePath);  //  Ensuring that an entry exists in storage
 
             //  Act
             expectedID = journal.ID;
-            retrievedJournal = PregnancyJournalRepo.Link.GetDataByIdentifier (journal.ID);
+            retrievedJournal = TravelerJournalRepo.Link.GetDataByIdentifier (journal.ID);
             notNull = ( retrievedJournal != null );
             correctID = ( retrievedJournal?.ID == expectedID );
             CleanUp ();
@@ -57,19 +57,19 @@ namespace NOP.MMA.Repository
         }
 
         [Fact]
-        public void CanUpdatePregnancyJournal ()
+        public void CanUpdateTravelerJournal ()
         {
             //  Arrange
             Initiate ();
             bool updated;
             bool validated;
             string orignalValue = journal.PatientData.ChildFathersName;
-            JournalHelper.ManualStorageInsertion (journal, JournalType.PregnancyJournal, PregnancyJournalRepo.Link.StoragePath);
+            JournalHelper.ManualStorageInsertion (journal, JournalType.TravelerJournal, TravelerJournalRepo.Link.StoragePath);
             PatientHelper.ManualStorageInsertion (patient, PatientRepo.Link.FullPath);
 
             //  Act
             journal.PatientData.ChildFathersName = "MyChangedChildFathersName";
-            updated = PregnancyJournalRepo.Link.UpdateData (journal);
+            updated = TravelerJournalRepo.Link.UpdateData (journal);
             validated = PatientHelper.CheckValueFromStorage (journal.PatientData.ChildFathersName, PatientRepo.Link.FullPath);
             journal.PatientData.ChildFathersName = orignalValue;
             CleanUp ();
@@ -79,18 +79,18 @@ namespace NOP.MMA.Repository
         }
 
         [Fact]
-        public void CanDeletePregnancyJournal ()
+        public void CanDeleteTravelerJournal ()
         {
             //  Arrange
             Initiate ();
             int expectedID = currentIDIndex;
             bool didDelete;
             bool wasNull;
-            JournalHelper.ManualStorageInsertion (journal, JournalType.PregnancyJournal, PregnancyJournalRepo.Link.StoragePath);
+            JournalHelper.ManualStorageInsertion (journal, JournalType.TravelerJournal, TravelerJournalRepo.Link.StoragePath);
 
             //  Act
-            didDelete = PregnancyJournalRepo.Link.DeleteData (journal);
-            wasNull = !JournalHelper.CheckIDFromStorage (expectedID, PregnancyJournalRepo.Link.FilePath);
+            didDelete = TravelerJournalRepo.Link.DeleteData (journal);
+            wasNull = !JournalHelper.CheckIDFromStorage (expectedID, TravelerJournalRepo.Link.FilePath);
             CleanUp ();
 
             //  Assert
@@ -106,12 +106,12 @@ namespace NOP.MMA.Repository
             bool notNull;
             bool notEmpty;
             bool correctAmount;
-            JournalHelper.ManualStorageInsertion (JournalFactory.Create (JournalType.PregnancyJournal), JournalType.PregnancyJournal, PregnancyJournalRepo.Link.StoragePath);
-            JournalHelper.ManualStorageInsertion (JournalFactory.Create (JournalType.PregnancyJournal), JournalType.PregnancyJournal, PregnancyJournalRepo.Link.StoragePath, true);
-            JournalHelper.ManualStorageInsertion (JournalFactory.Create (JournalType.PregnancyJournal), JournalType.PregnancyJournal, PregnancyJournalRepo.Link.StoragePath, true);
+            JournalHelper.ManualStorageInsertion (JournalFactory.Create (JournalType.TravelerJournal), JournalType.TravelerJournal, TravelerJournalRepo.Link.StoragePath);
+            JournalHelper.ManualStorageInsertion (JournalFactory.Create (JournalType.TravelerJournal), JournalType.TravelerJournal, TravelerJournalRepo.Link.StoragePath, true);
+            JournalHelper.ManualStorageInsertion (JournalFactory.Create (JournalType.TravelerJournal), JournalType.TravelerJournal, TravelerJournalRepo.Link.StoragePath, true);
 
             //  Act
-            List<IPregnancyJournal> pJournal = PregnancyJournalRepo.Link.GetEnumerable ().ToList ();
+            List<ITravelerJournal> pJournal = TravelerJournalRepo.Link.GetEnumerable ().ToList ();
             notNull = journal != null;
             notEmpty = pJournal?.Count != 0;
             correctAmount = pJournal?.Count == 3;
@@ -123,21 +123,21 @@ namespace NOP.MMA.Repository
 
         private void Initiate ()
         {
-            if ( !Directory.Exists (PregnancyJournalRepo.Link.StoragePath) )
+            if ( !Directory.Exists (TravelerJournalRepo.Link.StoragePath) )
             {
-                Directory.CreateDirectory (PregnancyJournalRepo.Link.StoragePath);
+                Directory.CreateDirectory (TravelerJournalRepo.Link.StoragePath);
             }
 
             patient = PatientHelper.GetNewPatient ();
-            journal = JournalFactory.CreateWithPatient (JournalType.PregnancyJournal, patient) as IPregnancyJournal;
+            journal = JournalFactory.CreateWithPatient (JournalType.TravelerJournal, patient) as ITravelerJournal;
             currentIDIndex++;
         }
 
         private void CleanUp ()
         {
-            if ( Directory.Exists (PregnancyJournalRepo.Link.StoragePath.Replace ("\\Journals", string.Empty)) )
+            if ( Directory.Exists (TravelerJournalRepo.Link.StoragePath.Replace ("\\Journals", string.Empty)) )
             {
-                Directory.Delete (PregnancyJournalRepo.Link.StoragePath.Replace ("\\Journals", string.Empty), true);
+                Directory.Delete (TravelerJournalRepo.Link.StoragePath.Replace ("\\Journals", string.Empty), true);
             }
         }
     }

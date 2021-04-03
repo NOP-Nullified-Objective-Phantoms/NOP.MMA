@@ -64,7 +64,7 @@ namespace NOP.MMA.Repository
             correctID = ( retrievedPatient?.ID == expectedID );
 
             //  Assert
-            Assert.True (notNull && correctID, $"{AssertHelper.ValidatorMessage ("Is Null:", !notNull, !notNull, false)} <|> {AssertHelper.ValidatorMessage ("Correct ID:", correctID, ( ( !notNull ) ? ( retrievedPatient.ID.ToString () ) : ( "NaN" ) ), expectedID)}");
+            Assert.True (notNull && correctID, $"{AssertHelper.ValidatorMessage ("Is Null:", !notNull, !notNull, false)} <|> {AssertHelper.ValidatorMessage ("Correct ID:", correctID, ( ( notNull ) ? ( retrievedPatient.ID.ToString () ) : ( "NaN" ) ), expectedID)}");
         }
 
         [Fact]

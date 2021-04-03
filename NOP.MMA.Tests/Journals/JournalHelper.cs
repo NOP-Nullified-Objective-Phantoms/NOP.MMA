@@ -7,9 +7,9 @@ namespace NOP.MMA.Core.Journals
 {
     internal static class JournalHelper
     {
-        public static void ManualStorageInsertion ( IJournal _journal, string _path, bool _append = false )
+        public static void ManualStorageInsertion ( IJournal _journal, JournalType _type, string _path, bool _append = false )
         {
-            FileHandler file = new FileHandler ($"{_path}\\P{_journal.ID}.csv");
+            FileHandler file = new FileHandler ($"{_path}\\{( ( _type == JournalType.PregnancyJournal ) ? ( "P" ) : ( "T" ) )}{_journal.ID}.csv");
             file.WriteLine (_journal.SaveEntity (), _append);
         }
 
