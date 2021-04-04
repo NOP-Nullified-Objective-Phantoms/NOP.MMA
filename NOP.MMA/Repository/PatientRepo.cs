@@ -115,7 +115,6 @@ namespace NOP.MMA.Repository
                 catch ( Exception _e )
                 {
                     Debug.LogError (_e);
-
                     throw;
                 }
 
@@ -139,8 +138,7 @@ namespace NOP.MMA.Repository
                     }
                     catch ( Exception _e )
                     {
-                        Debug.LogError (_e);
-                        throw;
+                        Debug.LogWarning (_e.ToString ());
                     }
 
                     patients.Add (patient);
@@ -170,7 +168,14 @@ namespace NOP.MMA.Repository
                 int lNumber = Storage.GetLineNumber (line);
                 Storage.InsertLine (_data.SaveEntity (), lNumber);
 
-                return GetDataByIdentifier (_data.ID) != null;
+                try
+                {
+                    return GetDataByIdentifier (_data.ID) != null;
+                }
+                catch ( Exception _e )
+                {
+                    Debug.LogError (_e);
+                }
             }
 
             return false;

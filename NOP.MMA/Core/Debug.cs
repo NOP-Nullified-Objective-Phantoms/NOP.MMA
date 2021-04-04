@@ -19,9 +19,18 @@ namespace NOP.MMA.Core
         /// </summary>
         public static string LogPath { get; } = $"{Path.GetDirectoryName (Assembly.GetExecutingAssembly ().Location)}\\Logs";
         /// <summary>
-        /// The date and time of the last time an entry was logged
+        /// The date and time of the last time an <see cref="FileHandler"/> was created for the <see cref="Debug"/> instance
         /// </summary>
-        public static DateTime LastLogged { get; private set; }
+        public static DateTime LastHandlerCreated { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>A formated <see cref="DateTime"/> as a short time string</returns>
+        private static string LogStamp ()
+        {
+            return $"-|>{DateTime.Now.ToShortTimeString ()}<|-";
+        }
 
         /// <summary>
         /// Check whether or not there's a <see cref="FileHandler"/> attached to the debugger
@@ -37,7 +46,7 @@ namespace NOP.MMA.Core
         /// </summary>
         private static void CreateHandler ()
         {
-            if ( NoHandler () || ( LastLogged.AddHours (1) ) < DateTime.Now )
+            if ( NoHandler () || ( LastHandlerCreated.AddHours (1) ) < DateTime.Now )
             {
                 if ( !Directory.Exists (LogPath) )
                 {
@@ -46,6 +55,7 @@ namespace NOP.MMA.Core
 
                 DateTime date = DateTime.Now;
                 File = new FileHandler ($"{LogPath}\\MMA_{date.ToShortDateString ().Replace ("/", string.Empty)}_{date.ToShortTimeString ()}_Log.txt");
+                LastHandlerCreated = date;
             }
         }
 
@@ -57,7 +67,7 @@ namespace NOP.MMA.Core
         {
             CreateHandler ();
 
-            File.WriteLine (_message);
+            File.WriteLine ($"{LogStamp ()} {_message}", true);
         }
 
         /// <summary>
@@ -68,7 +78,7 @@ namespace NOP.MMA.Core
         {
             CreateHandler ();
 
-            File.WriteLine ($"[ERROR]: {_error.Message}{Environment.NewLine}{_error.StackTrace}");
+            File.WriteLine ($"[ERROR]: {LogStamp ()} {_error.Message}{Environment.NewLine}{_error.StackTrace}", true);
         }
 
         /// <summary>
@@ -80,7 +90,7 @@ namespace NOP.MMA.Core
         public static void LogError ( string _message, Exception _error, bool _includeExceptionMessage = false )
         {
             CreateHandler ();
-            File.WriteLine ($"[ERROR]: {_message}{Environment.NewLine}{( ( _includeExceptionMessage ) ? ( _error.ToString () ) : ( _error.StackTrace ) )}");
+            File.WriteLine ($"[ERROR]: {LogStamp ()} {_message}{Environment.NewLine}{( ( _includeExceptionMessage ) ? ( _error.ToString () ) : ( _error.StackTrace ) )}", true);
         }
 
         /// <summary>
@@ -90,7 +100,7 @@ namespace NOP.MMA.Core
         public static void LogWarning ( string _message )
         {
             CreateHandler ();
-            File.WriteLine ($"[WARNING]: {_message}");
+            File.WriteLine ($"[WARNING]: {LogStamp ()} {_message}", true);
         }
     }
 }

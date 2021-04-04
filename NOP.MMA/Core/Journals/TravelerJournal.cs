@@ -103,16 +103,28 @@ namespace NOP.MMA.Core.Journals
         {
             string[] data = _data.Split (Environment.NewLine);
 
-            if ( data.Length == 19 )
+            if ( data.Length - 1 == 19 )
             {
                 #region Core Journal data [Line 0]
                 string[] coreJournalData = data[ 0 ].Split (",");
 
-                if ( int.TryParse (coreJournalData[ 0 ].Replace ("JournalData", string.Empty), out int _id) && int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) && int.TryParse (coreJournalData[ 2 ], out int _journalDest) )
+                if ( int.TryParse (coreJournalData[ 0 ].Replace ("JournalID", string.Empty), out int _id) && int.TryParse (coreJournalData[ 2 ], out int _journalDest) )
                 {
-                    ID = _id;
+                    if ( int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) )
+                    {
+                        ID = _id;
+                    }
+                    else
+                    {
+                        Debug.LogWarning ($"Invalid Journal ({ID}) build from storage; No Patient Attached!");
+                    }
+
                     PatientData = PatientRepo.Link.GetDataByIdentifier (_patientID);
                     JournalDestination = ( JournalDest ) _journalDest;
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 0 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -121,6 +133,10 @@ namespace NOP.MMA.Core.Journals
                 if ( mensStream.Length == 3 && DateTime.TryParse (mensStream[ 0 ], out DateTime _date) && bool.TryParse (data[ 2 ], out bool _isCalculationSafe) )
                 {
                     MenstrualInfo = new MenstrualCycleInfo (_date, mensStream[ 1 ].Replace (COMMAIDENTIFIER, ","), _isCalculationSafe);
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 1 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -131,6 +147,10 @@ namespace NOP.MMA.Core.Journals
                     NaegelsRule = _naegelsRule;
                     UltrasoundTermin = _ultraSoundTermin;
                 }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 2 ] ?? "Null" )}");
+                }
                 #endregion
 
                 #region WeightInfo [Line 3]
@@ -138,6 +158,10 @@ namespace NOP.MMA.Core.Journals
                 if ( weightStream.Length == 3 && double.TryParse (weightStream[ 0 ], out double _weightbeforePregnancy) && double.TryParse (weightStream[ 1 ], out double _height) && double.TryParse (weightStream[ 2 ], out double _bmi) )
                 {
                     WeightInfo = new WeightInfo (_weightbeforePregnancy, _height, _bmi);
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 3 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -148,6 +172,10 @@ namespace NOP.MMA.Core.Journals
                     MothersRhesusFactor = _mothersRhesusFactor;
                     ChildsRhesusFactor = _childsRhesusFactor;
                 }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 4 ] ?? "Null" )}");
+                }
                 #endregion
 
                 #region HepB [Line 5]
@@ -155,6 +183,10 @@ namespace NOP.MMA.Core.Journals
                 if ( hepBStream.Length == 2 && DateTime.TryParse (hepBStream[ 0 ], out DateTime _hepBDate) && int.TryParse (hepBStream[ 1 ], out int _result) )
                 {
                     HepB = new Screening (_hepBDate, ( ScreeningInfo ) _result);
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 5 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -166,6 +198,10 @@ namespace NOP.MMA.Core.Journals
                     AntibodyByRhesusNegative = _antibodyRhesusNegative;
                     IrregularAntibody = _irregularAntibody;
                 }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 6 ] ?? "Null" )}");
+                }
                 #endregion
 
                 #region AntiDImmunoglobulinGiven [Line 7]
@@ -173,6 +209,10 @@ namespace NOP.MMA.Core.Journals
                 if ( antiDStream.Length == 3 && DateTime.TryParse (antiDStream[ 0 ], out DateTime _antiDDate) )
                 {
                     AntiDImmunoglobulinGiven = new JournalData (_antiDDate, antiDStream[ 1 ].Replace (COMMAIDENTIFIER, ","), antiDStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 7 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -182,6 +222,10 @@ namespace NOP.MMA.Core.Journals
                 if ( urinCultureStream.Length == 2 && DateTime.TryParse (urinCultureStream[ 0 ], out DateTime _urinCulturedate) )
                 {
                     UrineCulture = new JournalData (_urinCulturedate, urinCultureStream[ 1 ].Replace (COMMAIDENTIFIER, ","), urinCultureStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 8 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -206,12 +250,14 @@ namespace NOP.MMA.Core.Journals
                             UrinSample = stampDataStream[ 9 ].Replace (COMMAIDENTIFIER, ","),
                             UterusSizeInCM = _uterusSizeInCM,
                             Weight = _weight
-
                         };
 
                         AddJournalStamp (stamp);
                     }
-
+                    else
+                    {
+                        throw new Exception ($"One or more fields couldn't be retrived from: { ( stampData ?? "Null" )}");
+                    }
                 }
                 #endregion
 
@@ -230,7 +276,10 @@ namespace NOP.MMA.Core.Journals
 
                         AddJournalSComment (comment);
                     }
-
+                    else
+                    {
+                        throw new Exception ($"One or more fields couldn't be retrived from: { ( commentData ?? "Null" )}");
+                    }
                 }
                 #endregion
 
@@ -247,7 +296,7 @@ namespace NOP.MMA.Core.Journals
                             Date = _ultraResultDate,
                             ExaminationLocation = ultraDataStream[ 2 ].Replace (COMMAIDENTIFIER, ","),
                             Flow = ultraDataStream[ 3 ].Replace (COMMAIDENTIFIER, ","),
-                            FosterRepresentation = ultraDataStream[4].Replace(COMMAIDENTIFIER, ","),
+                            FosterRepresentation = ultraDataStream[ 4 ].Replace (COMMAIDENTIFIER, ","),
                             GestationAge = ultraDataStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
                             Initials = ultraDataStream[ 6 ].Replace (COMMAIDENTIFIER, ","),
                             USWeight = _usWeight,
@@ -255,6 +304,10 @@ namespace NOP.MMA.Core.Journals
                         };
 
                         AddUltraSoundScan (ultraSoundScan);
+                    }
+                    else
+                    {
+                        throw new Exception ($"One or more fields couldn't be retrived from: { ( ultraData ?? "Null" )}");
                     }
 
                 }
@@ -268,6 +321,10 @@ namespace NOP.MMA.Core.Journals
                     DoubleTest = _doubleTest;
                     TripleTest = _tripleTest;
                 }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 12 ] ?? "Null" )}");
+                }
                 #endregion
 
                 #region OddsForDS [Line 13]
@@ -275,6 +332,10 @@ namespace NOP.MMA.Core.Journals
                 if ( oddsForDSStream.Length == 3 && DateTime.TryParse (oddsForDSStream[ 0 ], out DateTime _oddsForDSDate) )
                 {
                     OddsForDS = new JournalData (_oddsForDSDate, oddsForDSStream[ 1 ].Replace (COMMAIDENTIFIER, ","), oddsForDSStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 13 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -284,6 +345,10 @@ namespace NOP.MMA.Core.Journals
                 {
                     OddsForDS = new JournalData (_placentaTestSDate, placentaTestStream[ 1 ].Replace (COMMAIDENTIFIER, ","), placentaTestStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                 }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 14 ] ?? "Null" )}");
+                }
                 #endregion
 
                 #region AmnioticFluidTest [Line 15]
@@ -292,6 +357,10 @@ namespace NOP.MMA.Core.Journals
                 {
                     OddsForDS = new JournalData (_amnioticFluidTestSDate, amnioticFluidTestStream[ 1 ].Replace (COMMAIDENTIFIER, ","), amnioticFluidTestStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                 }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 15 ] ?? "Null" )}");
+                }
                 #endregion
 
                 #region OralGlukoseToleranceTest [Line 16]
@@ -299,28 +368,44 @@ namespace NOP.MMA.Core.Journals
                 if ( oralGTTStream.Length == 3 )
                 {
                     #region Glycosuria [Line 0]
-                    string[] glycosuriaStream = data[ 0 ].Split (",");
+                    string[] glycosuriaStream = oralGTTStream[ 0 ].Split (",");
                     if ( glycosuriaStream.Length == 3 && DateTime.TryParse (glycosuriaStream[ 0 ], out DateTime _glycosuriaStreamDate) )
                     {
                         OddsForDS = new JournalData (_glycosuriaStreamDate, glycosuriaStream[ 1 ].Replace (COMMAIDENTIFIER, ","), glycosuriaStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                     }
+                    else
+                    {
+                        throw new Exception ($"One or more fields couldn't be retrived from: { ( oralGTTStream[ 0 ] ?? "Null" )}");
+                    }
                     #endregion
 
                     #region Week18_20 [Line 1]
-                    string[] week18_20Stream = data[ 1 ].Split (",");
+                    string[] week18_20Stream = oralGTTStream[ 1 ].Split (",");
                     if ( week18_20Stream.Length == 3 && DateTime.TryParse (week18_20Stream[ 0 ], out DateTime _week18_20StreamDate) )
                     {
                         OddsForDS = new JournalData (_week18_20StreamDate, week18_20Stream[ 1 ].Replace (COMMAIDENTIFIER, ","), week18_20Stream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                     }
+                    else
+                    {
+                        throw new Exception ($"One or more fields couldn't be retrived from: { ( oralGTTStream[ 1 ] ?? "Null" )}");
+                    }
                     #endregion
 
                     #region Week28_30 [Line 2]
-                    string[] week28_30Stream = data[ 2 ].Split (",");
+                    string[] week28_30Stream = oralGTTStream[ 2 ].Split (",");
                     if ( week28_30Stream.Length == 3 && DateTime.TryParse (week28_30Stream[ 0 ], out DateTime _Week28_30Date) )
                     {
                         OddsForDS = new JournalData (_Week28_30Date, week28_30Stream[ 1 ].Replace (COMMAIDENTIFIER, ","), week28_30Stream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                     }
+                    else
+                    {
+                        throw new Exception ($"One or more fields couldn't be retrived from: { ( oralGTTStream[ 2 ] ?? "Null" )}");
+                    }
                     #endregion
+                }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 16 ] ?? "Null" )}");
                 }
                 #endregion
 
@@ -342,13 +427,21 @@ namespace NOP.MMA.Core.Journals
                         MidwifeCenterHouseNumber = birthPlaceInfoStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
                         MidwifeCenterName = birthPlaceInfoStream[ 6 ].Replace (COMMAIDENTIFIER, ","),
                         MidwifeCenterPhone = birthPlaceInfoStream[ 7 ].Replace (COMMAIDENTIFIER, ","),
-                        MidwifeCenterPostalCode = birthPlaceInfoStream[8].Replace (COMMAIDENTIFIER, ","),
-                        MidwifeCenterStreet = birthPlaceInfoStream[9].Replace(COMMAIDENTIFIER, ","),
-                        MidwifeConsultationWish = birthPlaceInfoStream[10].Replace (COMMAIDENTIFIER, ","),
-                        PrimaryExpectedBirthplace = birthPlaceInfoStream[11].Replace(COMMAIDENTIFIER, ",")
+                        MidwifeCenterPostalCode = birthPlaceInfoStream[ 8 ].Replace (COMMAIDENTIFIER, ","),
+                        MidwifeCenterStreet = birthPlaceInfoStream[ 9 ].Replace (COMMAIDENTIFIER, ","),
+                        MidwifeConsultationWish = birthPlaceInfoStream[ 10 ].Replace (COMMAIDENTIFIER, ","),
+                        PrimaryExpectedBirthplace = birthPlaceInfoStream[ 11 ].Replace (COMMAIDENTIFIER, ",")
                     };
                 }
+                else
+                {
+                    throw new Exception ($"One or more fields couldn't be retrived from: { ( data[ 18 ] ?? "Null" )}");
+                }
                 #endregion
+            }
+            else
+            {
+                throw new Exception ($"One or more fields couldn't be retrived from: { ( _data ?? "Null" )}");
             }
         }
 
@@ -370,10 +463,10 @@ namespace NOP.MMA.Core.Journals
         [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "Better Readability")]
         public override string SaveEntity ()
         {
-            string journalString = $"JournalID{ID},PatientID{PatientData.ID},{( int ) JournalDestination}{Environment.NewLine}";
+            string journalString = $"JournalID{ID},PatientID{( ( PatientData != null ) ? ( PatientData.ID.ToString () ) : ( "Null" ) )},{( int ) JournalDestination}{Environment.NewLine}";
 
             #region MenstrualInfo [Line 1]
-            journalString += $"{MenstrualInfo.IsCalculationSafe.ToString ()},{MenstrualInfo.LastMentruationalDay.ToString ()},{MenstrualInfo.MenstruationalCycle.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{MenstrualInfo.IsCalculationSafe.ToString ()},{MenstrualInfo.LastMentruationalDay.ToString ()},{( ( MenstrualInfo.MenstruationalCycle != null ) ? ( MenstrualInfo.MenstruationalCycle.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{Environment.NewLine}";
             #endregion
 
             journalString += $"{NaegelsRule.ToString ()},{UltrasoundTermin.ToString ()}{Environment.NewLine}";
@@ -391,18 +484,18 @@ namespace NOP.MMA.Core.Journals
             journalString += $"{BloodTypeDetermined.ToString ()},{AntibodyByRhesusNegative.ToString ()},{IrregularAntibody.ToString ()}{Environment.NewLine}";
 
             #region AntiDImmunoglobulinGiven [Line 7]
-            journalString += $"{AntiDImmunoglobulinGiven.Date.ToString ()},{AntiDImmunoglobulinGiven.Initials.Replace (",", COMMAIDENTIFIER)},{AntiDImmunoglobulinGiven.Value.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{AntiDImmunoglobulinGiven.Date.ToString ()},{( ( AntiDImmunoglobulinGiven.Initials != null ) ? ( AntiDImmunoglobulinGiven.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( AntiDImmunoglobulinGiven.Value != null ) ? ( AntiDImmunoglobulinGiven.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{Environment.NewLine}";
             #endregion
 
             #region UrinCulture [Line 8]
-            journalString += $"{UrineCulture.Date.ToString ()},{UrineCulture.Initials.Replace (",", COMMAIDENTIFIER)},{UrineCulture.Value.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{UrineCulture.Date.ToString ()},{( ( UrineCulture.Initials != null ) ? ( UrineCulture.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( UrineCulture.Value != null ) ? ( UrineCulture.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{Environment.NewLine}";
             #endregion
 
             #region journalStamps [Line 9]
             string stampsData = string.Empty;
             for ( int i = 0; i < journalStamps.Count; i++ )
             {
-                stampsData += $"{journalStamps[ i ].BloodPressure.Replace (",", COMMAIDENTIFIER)},{journalStamps[ i ].Date.ToString ()},{journalStamps[ i ].Edema.ToString ()},{journalStamps[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER)},{journalStamps[ i ].FetusActivity.ToString ()},{journalStamps[ i ].FetusGender.Replace (",", COMMAIDENTIFIER)},{journalStamps[ i ].FosterRepresentation.Replace (",", COMMAIDENTIFIER)},{journalStamps[ i ].GestationAge.Replace (",", COMMAIDENTIFIER)},{journalStamps[ i ].Initials.Replace (",", COMMAIDENTIFIER)},{journalStamps[ i ].UrinSample.Replace (",", COMMAIDENTIFIER)},{journalStamps[ i ].UterusSizeInCM.ToString (new CultureInfo ("en-US"))},{journalStamps[ i ].Weight.ToString (new CultureInfo ("en-US"))}";
+                stampsData += $"{( ( journalStamps[ i ].BloodPressure != null ) ? ( journalStamps[ i ].BloodPressure.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{journalStamps[ i ].Date.ToString ()},{journalStamps[ i ].Edema.ToString ()},{( ( journalStamps[ i ].ExaminationLocation != null ) ? ( journalStamps[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{journalStamps[ i ].FetusActivity.ToString ()},{( ( journalStamps[ i ].FetusGender != null ) ? ( journalStamps[ i ].FetusGender.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( journalStamps[ i ].FosterRepresentation != null ) ? ( journalStamps[ i ].FosterRepresentation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( journalStamps[ i ].GestationAge != null ) ? ( journalStamps[ i ].GestationAge.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( journalStamps[ i ].Initials != null ) ? ( journalStamps[ i ].Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( journalStamps[ i ].UrinSample != null ) ? ( journalStamps[ i ].UrinSample.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{journalStamps[ i ].UterusSizeInCM.ToString (new CultureInfo ("en-US"))},{journalStamps[ i ].Weight.ToString (new CultureInfo ("en-US"))}";
 
                 if ( i != journalStamps.Count - 1 )
                 {
@@ -415,7 +508,7 @@ namespace NOP.MMA.Core.Journals
             string commentsData = string.Empty;
             for ( int i = 0; i < journalComments.Count; i++ )
             {
-                commentsData += $"{journalComments[ i ].Comment.Replace (",", COMMAIDENTIFIER)},{journalComments[ i ].Date.ToString ()}";
+                commentsData += $"{( ( journalComments[ i ].Comment != null ) ? ( journalComments[ i ].Comment.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{journalComments[ i ].Date.ToString ()}";
 
                 if ( i != journalComments.Count - 1 )
                 {
@@ -428,7 +521,7 @@ namespace NOP.MMA.Core.Journals
             string ultraData = string.Empty;
             for ( int i = 0; i < journalComments.Count; i++ )
             {
-                ultraData += $"{ultraSoundScans[ i ].AmnioticFluidAmount.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].Date.ToString ()},{ultraSoundScans[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].Flow.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].FosterRepresentation.Replace(",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].GestationAge.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].Initials.Replace (",", COMMAIDENTIFIER)},{ultraSoundScans[ i ].USWeight.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].WeightDifference.ToString (new CultureInfo ("en-US"))}";
+                ultraData += $"{ultraSoundScans[ i ].AmnioticFluidAmount.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].Date.ToString ()},{( ( ultraSoundScans[ i ].ExaminationLocation != null ) ? ( ultraSoundScans[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].Flow != null ) ? ( ultraSoundScans[ i ].Flow.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].FosterRepresentation != null ) ? ( ultraSoundScans[ i ].FosterRepresentation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].GestationAge != null ) ? ( ultraSoundScans[ i ].GestationAge.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].Initials != null ) ? ( ultraSoundScans[ i ].Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{ultraSoundScans[ i ].USWeight.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].WeightDifference.ToString (new CultureInfo ("en-US"))}";
 
                 if ( i != journalComments.Count - 1 )
                 {
@@ -442,30 +535,30 @@ namespace NOP.MMA.Core.Journals
             journalString += $"{NuchalFoldScan.ToString ()},{DoubleTest.ToString ()},{TripleTest.ToString ()}{Environment.NewLine}";
 
             #region OddsForDS [Line 13]
-            journalString += $"{OddsForDS.Date.ToString ()},{OddsForDS.Initials.Replace (",", COMMAIDENTIFIER)},{OddsForDS.Value.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{OddsForDS.Date.ToString ()},{( ( OddsForDS.Initials != null ) ? ( OddsForDS.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( OddsForDS.Value != null ) ? ( OddsForDS.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{Environment.NewLine}";
             #endregion 
 
             #region PlacentaTest [Line 14]
-            journalString += $"{PlacentaTest.Date.ToString ()},{PlacentaTest.Initials.Replace (",", COMMAIDENTIFIER)},{PlacentaTest.Value.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{PlacentaTest.Date.ToString ()},{( ( PlacentaTest.Initials != null ) ? ( PlacentaTest.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( PlacentaTest.Value != null ) ? ( PlacentaTest.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{Environment.NewLine}";
             #endregion 
 
             #region AmnioticFluidTest [Line 15]
-            journalString += $"{AmnioticFluidTest.Date.ToString ()},{AmnioticFluidTest.Initials.Replace (",", COMMAIDENTIFIER)},{AmnioticFluidTest.Value.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{AmnioticFluidTest.Date.ToString ()},{( ( AmnioticFluidTest.Initials != null ) ? ( AmnioticFluidTest.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( AmnioticFluidTest.Value != null ) ? ( AmnioticFluidTest.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{Environment.NewLine}";
             #endregion
 
             #region OralGlukoseToleranceTest [Line 16]
-            string glycData = $"{OralGlukoseToleranceTest.Glycosuria.Date.ToString ()},{OralGlukoseToleranceTest.Glycosuria.Initials.Replace (",", COMMAIDENTIFIER)},{OralGlukoseToleranceTest.Glycosuria.Value.Replace (",", COMMAIDENTIFIER)}";
-            string Week18Data = $"{OralGlukoseToleranceTest.Week18_20.Date.ToString ()},{OralGlukoseToleranceTest.Week18_20.Initials.Replace (",", COMMAIDENTIFIER)},{OralGlukoseToleranceTest.Week18_20.Value.Replace (",", COMMAIDENTIFIER)}";
-            string Week28Data = $"{OralGlukoseToleranceTest.Week28_30.Date.ToString ()},{OralGlukoseToleranceTest.Week28_30.Initials.Replace (",", COMMAIDENTIFIER)},{OralGlukoseToleranceTest.Week28_30.Value.Replace (",", COMMAIDENTIFIER)}";
+            string glycData = $"{OralGlukoseToleranceTest.Glycosuria.Date.ToString ()},{( ( OralGlukoseToleranceTest.Glycosuria.Initials != null ) ? ( OralGlukoseToleranceTest.Glycosuria.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( OralGlukoseToleranceTest.Glycosuria.Value != null ) ? ( OralGlukoseToleranceTest.Glycosuria.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}";
+            string Week18Data = $"{OralGlukoseToleranceTest.Week18_20.Date.ToString ()},{( ( OralGlukoseToleranceTest.Week18_20.Initials != null ) ? ( OralGlukoseToleranceTest.Week18_20.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( OralGlukoseToleranceTest.Week18_20.Value != null ) ? ( OralGlukoseToleranceTest.Week18_20.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}";
+            string Week28Data = $"{OralGlukoseToleranceTest.Week28_30.Date.ToString ()},{( ( OralGlukoseToleranceTest.Week28_30.Initials != null ) ? ( OralGlukoseToleranceTest.Week28_30.Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( OralGlukoseToleranceTest.Week28_30.Value != null ) ? ( OralGlukoseToleranceTest.Week28_30.Value.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}";
 
             string oralData = $"{glycData}{OBJECTSEPERATOR}{Week18Data}{OBJECTSEPERATOR}{Week28Data}{Environment.NewLine}";
 
             journalString += oralData;
             #endregion
 
-            journalString += $"{AdditonalContext.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{( ( AdditonalContext != null ) ? ( AdditonalContext.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{Environment.NewLine}";
 
-            journalString += $"{BirthplaceInfo.BirthplaceWish.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.BirthPreperationWish.ToString ()},{BirthplaceInfo.ChangedBirthplace.Replace (",", COMMAIDENTIFIER)},{( int ) BirthplaceInfo.ConFormat},{BirthplaceInfo.MidwifeCenterCity.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.MidwifeCenterHouseNumber.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.MidwifeCenterName.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.MidwifeCenterPhone.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.MidwifeCenterPostalCode.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.MidwifeCenterStreet.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.MidwifeConsultationWish.Replace (",", COMMAIDENTIFIER)},{BirthplaceInfo.PrimaryExpectedBirthplace.Replace (",", COMMAIDENTIFIER)}{Environment.NewLine}";
+            journalString += $"{( ( BirthplaceInfo.BirthplaceWish != null ) ? ( BirthplaceInfo.BirthplaceWish.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{BirthplaceInfo.BirthPreperationWish.ToString ()},{( ( BirthplaceInfo.ChangedBirthplace != null ) ? ( BirthplaceInfo.ChangedBirthplace.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( int ) BirthplaceInfo.ConFormat},{( ( BirthplaceInfo.MidwifeCenterCity != null ) ? ( BirthplaceInfo.MidwifeCenterCity.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( BirthplaceInfo.MidwifeCenterHouseNumber != null ) ? ( BirthplaceInfo.MidwifeCenterHouseNumber.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( BirthplaceInfo.MidwifeCenterName != null ) ? ( BirthplaceInfo.MidwifeCenterName.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( BirthplaceInfo.MidwifeCenterPhone != null ) ? ( BirthplaceInfo.MidwifeCenterPhone.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( BirthplaceInfo.MidwifeCenterPostalCode != null ) ? ( BirthplaceInfo.MidwifeCenterPostalCode.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( BirthplaceInfo.MidwifeCenterStreet != null ) ? ( BirthplaceInfo.MidwifeCenterStreet.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( BirthplaceInfo.MidwifeConsultationWish != null ) ? ( BirthplaceInfo.MidwifeConsultationWish.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( BirthplaceInfo.PrimaryExpectedBirthplace != null ) ? ( BirthplaceInfo.PrimaryExpectedBirthplace.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}";
 
             return journalString;
         }

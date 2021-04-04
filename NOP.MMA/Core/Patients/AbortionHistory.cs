@@ -18,7 +18,13 @@ namespace NOP.MMA.Core.Patients
         }
 
         private readonly List<IAbortionHistoryEntry> history = null;
-        public IReadOnlyList<IAbortionHistoryEntry> History { get; }
+        public IReadOnlyList<IAbortionHistoryEntry> History
+        {
+            get
+            {
+                return history;
+            }
+        }
         public IAbortionHistoryEntry this[ int _index ]
         {
             get

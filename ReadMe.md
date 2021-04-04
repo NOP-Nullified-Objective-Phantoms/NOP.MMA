@@ -166,9 +166,9 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Finalized `TravelerJournal` specific objects
 - **[v0.5.0](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.5.0)**
   - Created Unit Test Project
-    - Created Tests for `PatientFactory` (All Passed)
-    - Added Tests for `PregnancyJournal` (All Passed)
-    - Added Tests for `PatientRepo` (All Passed)
+    - Created Tests for `PatientFactory` (_All Passed_)
+    - Added Tests for `PregnancyJournal` (_All Passed_)
+    - Added Tests for `PatientRepo` (_All Passed_)
   - Implemented Helpers
     - Added `PatientData` Class
     - Added `PatientSocialData` class
@@ -189,3 +189,25 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Fixed wrong log file name in `Debug` class 
     - Added `FileName` property to the `PatientRepo` and changed `StoragePath` property to only point to the storage folder instead of the storage file
     - Implemented log file debugging in `PatientRepo`
+- **[v]()**
+  - Extended Unit Test Project
+    - Implemented Unit Tests for `TravelerJournal` in the `JournalFactoryTests` (_All Passed_)
+    - Implemented Unit Tests for `PregnancyJournalRepo` (_All Passed_)
+    - Implemented Unit Tests for `TravelerJournalRepo` (_All Passed_)
+  - Implemented Helpers
+    - Added `JournalHelper` class
+    - Added the ability for `JournalHelper` to include manually storage of `TravelerJournal` objects as well
+  - Revision
+    - Fixed NULL values in `Anamnese`
+    - Fixed NULL values in `PregnancyJournal`
+    - Fixed NULL value in `AbortionHistory`
+    - Fixed NULL value in `PregnancyHistory`
+    - Fixed bad timestamp for `Debug` entries
+    - Fixed an issue where the `PregnancyJournalRepo` couldn't generate a fully qualified path to it's storage folder
+    - Fixed a false positive in `PatientRepoTests`
+    - Fixed a false positive in `PregnancyJournalRepoTests`
+    - Added exception handling to `JournalRepo` class
+    - Added exception handling to `PatientRepo` class
+    - Added exception handling to `PregnancyJournalRepo`
+    - Added exception handling to `TravelerJournal`
+    - Added exception handling to `TravelerJournalRepo`
