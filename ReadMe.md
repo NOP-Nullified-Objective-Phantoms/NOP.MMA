@@ -189,7 +189,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Fixed wrong log file name in `Debug` class 
     - Added `FileName` property to the `PatientRepo` and changed `StoragePath` property to only point to the storage folder instead of the storage file
     - Implemented log file debugging in `PatientRepo`
-- **[v]()**
+- **[0.6.0](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.6.0)**
   - Extended Unit Test Project
     - Implemented Unit Tests for `TravelerJournal` in the `JournalFactoryTests` (_All Passed_)
     - Implemented Unit Tests for `PregnancyJournalRepo` (_All Passed_)
