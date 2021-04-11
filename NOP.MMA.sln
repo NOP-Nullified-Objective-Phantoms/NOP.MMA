@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NOP.MMA", "NOP.MMA\NOP.MMA.csproj", "{DB96A979-ADCE-4072-8DEF-DE52885064C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NOP.MMA.Tests", "NOP.MMA.Tests\NOP.MMA.Tests.csproj", "{E717C92A-E408-46E2-99EA-B4733425C40D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NOP.MMA.Tests", "NOP.MMA.Tests\NOP.MMA.Tests.csproj", "{E717C92A-E408-46E2-99EA-B4733425C40D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NOP.MMA.GUI", "NOP.MMA.GUI\NOP.MMA.GUI.csproj", "{3FC5E4E2-B135-467E-AE3C-EEC744E2C33C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E717C92A-E408-46E2-99EA-B4733425C40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E717C92A-E408-46E2-99EA-B4733425C40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E717C92A-E408-46E2-99EA-B4733425C40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FC5E4E2-B135-467E-AE3C-EEC744E2C33C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FC5E4E2-B135-467E-AE3C-EEC744E2C33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FC5E4E2-B135-467E-AE3C-EEC744E2C33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FC5E4E2-B135-467E-AE3C-EEC744E2C33C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
