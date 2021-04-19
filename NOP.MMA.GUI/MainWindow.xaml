@@ -5,8 +5,220 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NOP.MMA.GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Medical Management Application" MinHeight="800" Height="1080" MinWidth="900" Width="1920" WindowState="Maximized" >
+    <Grid Background="CornflowerBlue">
+        <!--#region Definititions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" MinHeight="25" ></RowDefinition>
+            <RowDefinition Height="200*" MinHeight="200"></RowDefinition>
+            <RowDefinition Height="5*" MinHeight="5"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--#endregion-->
 
+        <!--#region Info Bar-->
+        <Border BorderBrush="Black" BorderThickness="1">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0"></Setter>
+                        <Setter Property="Background" Value="DarkGray"></Setter>
+                        <Setter Property="Width" Value="50"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                    </Style>
+
+                </StackPanel.Resources>
+
+                <Button Content="Filer"></Button>
+                <Button Content="Rediger"></Button>
+                <Button Content="Hjælp"></Button>
+            </StackPanel>
+        </Border>
+
+        <!--#endregion-->
+
+        <!--#region Global Content Area-->
+        <Grid Grid.Row="1">
+            <!--#region  Definitions-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="280*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--#endregion-->
+
+            <!--#region Nav Panel-->
+            <Border BorderBrush="Black" BorderThickness="1,0,1,0" Background="Gray">
+                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Width" Value="100"></Setter>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button x:Name="patientOverview" Content="Patient Oversigt" FontWeight="Bold" Click="Button_Click">
+                        <Button.LayoutTransform>
+                            <RotateTransform CenterX=".5" CenterY=".5" Angle="90" />
+                        </Button.LayoutTransform>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region Global Content Area-->
+            <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <Grid Grid.Column="1">
+                    <!--#region Definitions-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="16*" MinHeight="16"></RowDefinition>
+                        <RowDefinition Height="36*" MinHeight="36"/>
+                        <RowDefinition Height="915*" MinHeight="915"/>
+                        <RowDefinition Height="35*" MinHeight="35" MaxHeight="35"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--#endregion-->
+
+                    <!--#region Nav Content Area-->
+                    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1,0,1,1" Margin="10,34,10,10" Grid.RowSpan="2">
+                        <Grid x:Name="navContent">
+                            <!--#region Definitions-->
+                            <!--
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25*" MinHeight="25"></RowDefinition>
+                            <RowDefinition Height="140*" MinHeight="140"></RowDefinition>
+                            <RowDefinition Height="40*" MinHeight="40"></RowDefinition>
+                            <RowDefinition Height="625*" MinHeight="625"></RowDefinition>
+                            <RowDefinition Height="85*" MinHeight="85"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        -->
+                            <!--#endregion-->
+
+                            <!--#region Tab Content Header-->
+                            <!--
+                        <Border Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" BorderBrush="Black" BorderThickness="0,1,1,0" CornerRadius="0,15,0,0" Background="LightGray">
+                            <Label Content="123456-7890, Hansen, Bob" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                        </Border>
+                        -->
+                            <!--#endregion-->
+
+                            <!--#region Tab Content Close Button-->
+                            <!--
+                        <Border CornerRadius="15,0,0,0" BorderBrush="DarkRed" BorderThickness="6" HorizontalAlignment="Right" >
+                            <Button Content="X" Width="20" Background="DarkRed" Foreground="White" BorderThickness="0"></Button>
+                        </Border>
+                        -->
+                            <!--#endregion-->
+
+                            <!--#region Patient Data Area-->
+                            <!--
+                        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0" Background="LightGray">
+                            <Grid >
+                                -->
+                            <!--#region Definitions-->
+                            <!--
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                -->
+                            <!--#endregion-->
+                            <!--
+
+                                <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,10,10,10">
+                                    <TextBlock Width="250">Bob Hansen</TextBlock>
+                                </Border>
+                                <Border Grid.Row="1"  BorderBrush="Black" BorderThickness="1,1,1,1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,10,10,10">
+                                    <TextBlock Width="250">Elmegaardvej, 67, 1.tv, 6270 Tønder</TextBlock>
+                                </Border>
+                                <Border Grid.Row="2"  BorderBrush="Black" BorderThickness="1,1,1,1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,10,10,10">
+                                    <TextBlock Width="250">Bob Hansen</TextBlock>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        -->
+                            <!--#endregion-->
+
+                            <!--#region Content Nav Bar-->
+                            <!--
+                        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightGray">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="25,0,0,0">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Width" Value="100"></Setter>
+                                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                                        <Setter Property="BorderThickness" Value="6"></Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <Border CornerRadius="15,15,0,0" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right">
+                                    <Border CornerRadius="15,15,0,0" BorderBrush="LightGray" BorderThickness="6" HorizontalAlignment="Right" >
+                                        <Button Content="Svangerskabs Journal" FontWeight="Bold" Width="250" Background="LightGray" Foreground="Black" BorderThickness="0"></Button>
+                                    </Border>
+                                </Border>
+                                <Border CornerRadius="15,15,0,0" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Right">
+                                    <Border CornerRadius="15,15,0,0" BorderBrush="LightGray" BorderThickness="6" HorizontalAlignment="Right" >
+                                        <Button Content="Vandre Journal" FontWeight="Bold" Width="250" Background="LightGray" Foreground="Black" BorderThickness="0"></Button>
+                                    </Border>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                        -->
+                            <!--#endregion-->
+
+                            <!--#region Content Area-->
+                            <!--
+                        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0" Background="LightGray">
+                            <Border Grid.Row="3" BorderBrush="Black" BorderThickness="1,1,1,1" Background="White" Margin="25,0,25,0">
+                                <Grid x:Name="navTabContentContainer">
+
+                                </Grid>
+                            </Border>
+                        </Border>
+                        -->
+                            <!--#endregion-->
+
+                            <!--#region Button Panel-->
+                            <!--
+                        <Border Grid.Row="4" BorderBrush="Black" BorderThickness="0" Background="LightGray">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" Background="LightGray" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Button Content="Delete" FontWeight="Bold" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Background="LightGray" Foreground="Black" BorderThickness="2" Margin="25,0,0,0"></Button>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Background="LightGray" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <Button Content="Save" FontWeight="Bold" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Background="LightGray" Foreground="Black" BorderThickness="2" Margin="0,0,25,0"></Button>
+                                    <Button Content="Print" FontWeight="Bold" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center" Background="LightGray" Foreground="Black" BorderThickness="2" Margin="0,0,25,0"></Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        -->
+                            <!--#endregion-->
+                        </Grid>
+                    </Border>
+                    <!--#endregion-->
+
+                    <!--#region Nav Minimize Bar-->
+                    <Border Grid.Row="2" Background="Gray" BorderBrush="Black" BorderThickness="0,1,1,0" Margin="0,926,0,0" Grid.RowSpan="2">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Background="Gray">
+                            <StackPanel x:Name="navHeaders" Orientation="Horizontal" Background="Gray">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Margin" Value="2,0,2,0"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                    <!--#endregion-->
+                </Grid>
+            </ScrollViewer>
+            <!--#endregion-->
+
+        </Grid>
+        <!--#endregion-->
+
+        <!--Bottom Horizontal Gray bar-->
+        <Border Grid.Row="2" Background="Gray" BorderBrush="Black" BorderThickness="1"/>
     </Grid>
 </Window>
