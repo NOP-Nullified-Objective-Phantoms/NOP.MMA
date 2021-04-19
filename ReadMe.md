@@ -211,3 +211,20 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Added exception handling to `PregnancyJournalRepo`
     - Added exception handling to `TravelerJournal`
     - Added exception handling to `TravelerJournalRepo`
+-  **[v]()**
+   - Implemented Tab System
+     - Added `ITabCollection` interface
+     - Added `ITabItem` interface
+     - Added `ITabItem<T>` interface
+     - Added `NavTabPanel` class
+     - Added `TabCollection` class
+     - Added `PatientDataTab` class
+     - Added `TabItem` class
+   - Implemented View Models
+     - Added `PregnancyJournalViewModel`
+     - Added `TravelerJournalViewModel`
+     - Added sample code in MainWindow` class
+     - Added GUI setup for the base layout (_**NOTE:** Legacy code included_)
+   - Revision
+     - Fixed comma crash when building a `Patient` from storage
+     - Fixed wrong path when setting storage path in `PregnancyJournalRepo` and `TravelerJournalRepo`
