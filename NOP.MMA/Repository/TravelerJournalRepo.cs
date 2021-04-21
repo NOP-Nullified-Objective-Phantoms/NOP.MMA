@@ -41,19 +41,19 @@ namespace NOP.MMA.Repository
             {
                 if ( journalFile.Name.Contains (FileID) )
                 {
-                    SetStorage (journalFile.Name);
+                    SetStorage (journalFile.Name.Replace (".csv", string.Empty));
 
                     ITravelerJournal journal = JournalFactory.CreateEmpty (JournalType.TravelerJournal) as ITravelerJournal;
                     try
                     {
                         journal.BuildEntity (Storage.ReadAll ());
                     }
-                    catch ( Exception _e)
+                    catch ( Exception _e )
                     {
 
                         Debug.LogWarning (_e.ToString ());
                     }
-                    
+
 
                     tJournals.Add (journal);
                 }

@@ -78,7 +78,7 @@ namespace NOP.MMA.Core.Patients
                     ID = _id;
                     SSN = data[ 1 ];
                     Name = data[ 2 ];
-                    Address = data[ 3 ];
+                    Address = data[ 3 ].Replace ("{!!}", ",");
                     Email = data[ 4 ];
                     PrivatePhone = data[ 5 ];
                     WorkPhone = data[ 6 ];
@@ -105,7 +105,7 @@ namespace NOP.MMA.Core.Patients
         [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "<Pending>")]
         public string SaveEntity ()
         {
-            return $"PatientID{ID},{SSN},{Name},{Address},{Email},{PrivatePhone},{WorkPhone},{PrivateGP},{DoctorsName},{DoctorsAddress},{DoctorsPhone},{( int ) CivilStatus},{Cohibitable.ToString ()},{ChildFathersName},{ChildFathersSSN},{NeedTranslator.ToString ()},{TranslatorLanguage},{Nationality},{OtherInfo}";
+            return $"PatientID{ID},{SSN},{Name},{Address.Replace (",", "{!!}")},{Email},{PrivatePhone},{WorkPhone},{PrivateGP},{DoctorsName},{DoctorsAddress},{DoctorsPhone},{( int ) CivilStatus},{Cohibitable.ToString ()},{ChildFathersName},{ChildFathersSSN},{NeedTranslator.ToString ()},{TranslatorLanguage},{Nationality},{OtherInfo}";
         }
     }
 }

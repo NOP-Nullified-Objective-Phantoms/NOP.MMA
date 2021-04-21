@@ -47,7 +47,7 @@ namespace NOP.MMA.Repository
             {
                 if ( journalFile.Name.Contains (FileID) )
                 {
-                    SetStorage (journalFile.Name);
+                    SetStorage (journalFile.Name.Replace (".csv", string.Empty));
 
                     IPregnancyJournal journal = JournalFactory.CreateEmpty (JournalType.PregnancyJournal) as IPregnancyJournal;
                     try
