@@ -52,22 +52,6 @@ namespace NOP.MMA.GUI.Tabs
 
         }
 
-        /// <summary>
-        /// The event that should trigger when the tab header is clicked
-        /// </summary>
-        public RoutedEventHandler OnClick { get; set; }
-        /// <summary>
-        /// The even that should trigger when the header close button is clicked
-        /// </summary>
-        public RoutedEventHandler OnCloseClick { get; set; }
-        /// <summary>
-        /// The color applied to the header background when the <see cref="ITabItem"/> is focused
-        /// </summary>
-        public SolidColorBrush HighlightColor { get; set; } = Brushes.White;
-        /// <summary>
-        /// The color applied to the header background when the <see cref="ITabItem"/> is not focused
-        /// </summary>
-        public SolidColorBrush DefaultColor { get; set; } = Brushes.Gray;
         public IPatient Context { get; set; }
 
         private string BuildHeaderText ()
