@@ -211,7 +211,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Added exception handling to `PregnancyJournalRepo`
     - Added exception handling to `TravelerJournal`
     - Added exception handling to `TravelerJournalRepo`
--  **[v]()**
+-  **[0.7.1](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.7.1)**
    - Implemented Tab System
      - Added `ITabCollection` interface
      - Added `ITabItem` interface
