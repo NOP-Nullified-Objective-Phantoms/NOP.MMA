@@ -241,7 +241,7 @@ namespace NOP.MMA.GUI.Tabs
 
                 if ( !string.IsNullOrWhiteSpace (searchbar.Text) )
                 {
-                    List<IPatient> patients = PatientRepo.Link.GetEnumerable ().Where (item => item.Name.ToLower ().Contains (searchbar.Text.ToLower ())).ToList ();
+                    List<IPatient> patients = PatientRepo.Link.GetEnumerable ().Where (item => item.Name.ToLower ().Contains (searchbar.Text.ToLower ()) || item.SSN.Replace ("-", string.Empty).Contains (searchbar.Text.Replace ("-", string.Empty))).ToList ();
 
                     foreach ( IPatient patient in patients )
                     {
