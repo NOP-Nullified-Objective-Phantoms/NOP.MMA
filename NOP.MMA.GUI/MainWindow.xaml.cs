@@ -24,6 +24,9 @@ namespace NOP.MMA.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The panel that holds all current initializes <see cref="TabItem"/> <see langword="objects"/>
+        /// </summary>
         internal static NavTabPanel panel;
 
         public MainWindow ()
@@ -33,6 +36,11 @@ namespace NOP.MMA.GUI
             panel = new NavTabPanel (navHeaders, navContent);
         }
 
+        /// <summary>
+        /// Create a new <see cref="PatientIndexTab"/> and minimize any open tab
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click ( object sender, RoutedEventArgs e )
         {
             panel.MinimizeTab (panel.FindTab (item => item.IsVisible == true));
@@ -47,8 +55,9 @@ namespace NOP.MMA.GUI
             //TravelerJournalRepo.Link.InsertData (tJournal);    //  Insert new test dummy into data storage if needed
 
 
-            IPatient patient = PatientRepo.Link.GetDataByIdentifier (1);    //  Getting test dummy from data storage
-            panel.CreatePatientDataTab (patient.Name, patient); //  Creates a new tab for the dummy
+            //IPatient patient = PatientRepo.Link.GetDataByIdentifier (1);    //  Getting test dummy from data storage
+            //panel.CreatePatientDataTab (patient.Name, patient); //  Creates a new tab for the dummy
+            panel.CreatePatientOverviewTab ("Patient Oversigt");
         }
     }
 }

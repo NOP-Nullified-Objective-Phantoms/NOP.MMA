@@ -15,26 +15,6 @@ namespace NOP.MMA.GUI.Tabs
     internal class PatientDataTab : TabItem, ITabItem<IPatient>
     {
         /// <summary>
-        /// The <see cref="StackPanel"/> that contains the header <see langword="object"/> for <see langword="this"/> tab
-        /// </summary>
-        private StackPanel headerParent;
-        /// <summary>
-        /// The <see cref="Grid"/> that contains the content <see langword="object"/> for <see langword="this"/> tab
-        /// </summary>
-        private Grid contentParent;
-        /// <summary>
-        /// The header <see cref="Button"/> for <see langword="this"/> tab
-        /// </summary>
-        private Button header;
-        /// <summary>
-        /// The close <see cref="Button"/> for <see langword="this"/> tab
-        /// </summary>
-        private Button close;
-        /// <summary>
-        /// The content <see cref="Grid"/> for <see langword="this"/> tab
-        /// </summary>
-        private Grid content;
-        /// <summary>
         /// The area where to display the context data
         /// </summary>
         private Grid journalDisplayGrid;
@@ -54,19 +34,6 @@ namespace NOP.MMA.GUI.Tabs
 
         public IPatient Context { get; set; }
 
-        private string BuildHeaderText ()
-        {
-            string tempHeader = Header;
-
-            if ( tempHeader != null && tempHeader.Length > 15 )
-            {
-                tempHeader = tempHeader.Remove (15);
-                tempHeader += "...";
-            }
-
-            return tempHeader;
-        }
-
         private void BuildContainer ()
         {
             content = new Grid ();
@@ -75,74 +42,6 @@ namespace NOP.MMA.GUI.Tabs
             content.RowDefinitions.Add (BuildRow (40));
             content.RowDefinitions.Add (BuildRow (615));
             content.RowDefinitions.Add (BuildRow (85));
-        }
-
-        private void BuildContentHeaderArea ()
-        {
-            #region Tab Header
-            /*
-                <Border Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" BorderBrush="Black" BorderThickness="0,1,1,0" CornerRadius="0,15,0,0" Background="LightGray">
-                    <Label Content="123456-7890, Hansen, Bob" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-                </Border>
-             */
-
-            Border headerBorder = new Border ()
-            {
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Top,
-                Width = 200,
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness (0, 1, 1, 0),
-                CornerRadius = new CornerRadius (0, 15, 0, 0),
-                Background = Brushes.LightGray
-            };
-
-            Label headerText = new Label ()
-            {
-                Content = $"{Context.SSN}, {Context.Name}",
-                FontWeight = FontWeights.Bold,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
-
-            headerBorder.Child = headerText;
-            #endregion
-
-            #region tab Close Button
-            /*
-                <Border CornerRadius="15,0,0,0" BorderBrush="DarkRed" BorderThickness="6" HorizontalAlignment="Right" >
-                    <Button Content="X" Width="20" Background="DarkRed" Foreground="White" BorderThickness="0"></Button>
-                </Border>
-             */
-
-            Border closeBorder = new Border ()
-            {
-                HorizontalAlignment = HorizontalAlignment.Right,
-                BorderBrush = Brushes.DarkRed,
-                BorderThickness = new Thickness (6),
-                CornerRadius = new CornerRadius (15, 0, 0, 0)
-            };
-
-            Button closeButton = new Button ()
-            {
-                Content = "X",
-                Background = Brushes.DarkRed,
-                Foreground = Brushes.White,
-                BorderThickness = new Thickness (0)
-            };
-
-            closeButton.Click += ( o, e ) =>
-            {
-                MainWindow.panel.CloseTab (MainWindow.panel.FindTab (item => item.ID == ID));
-            };
-
-            closeBorder.Child = closeButton;
-            #endregion
-
-            content.Children.Add (headerBorder);
-            content.Children.Add (closeBorder);
-
-            Grid.SetRow (headerBorder, 0);
-            Grid.SetRow (closeButton, 0);
         }
 
         private void BuildPatientDataArea ()
@@ -181,9 +80,9 @@ namespace NOP.MMA.GUI.Tabs
             };
 
             Grid patientData = new Grid ();
-            patientData.RowDefinitions.Add (BuildRow (1, true));
-            patientData.RowDefinitions.Add (BuildRow (1, true));
-            patientData.RowDefinitions.Add (BuildRow (1, true));
+            patientData.RowDefinitions.Add (BuildRow (1, 1));
+            patientData.RowDefinitions.Add (BuildRow (1, 1));
+            patientData.RowDefinitions.Add (BuildRow (1, 1));
 
             gridBorder.Child = patientData;
 
@@ -254,6 +153,74 @@ namespace NOP.MMA.GUI.Tabs
 
             content.Children.Add (gridBorder);
             Grid.SetRow (gridBorder, 1);
+        }
+
+        private void BuildContentHeaderArea ( string _headertext )
+        {
+            #region Tab Header
+            /*
+                <Border Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" BorderBrush="Black" BorderThickness="0,1,1,0" CornerRadius="0,15,0,0" Background="LightGray">
+                    <Label Content="123456-7890, Hansen, Bob" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                </Border>
+             */
+
+            Border headerBorder = new Border ()
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Width = 200,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (0, 1, 1, 0),
+                CornerRadius = new CornerRadius (0, 15, 0, 0),
+                Background = Brushes.LightGray
+            };
+
+            Label headerText = new Label ()
+            {
+                Content = _headertext,
+                FontWeight = FontWeights.Bold,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            headerBorder.Child = headerText;
+            #endregion
+
+            #region tab Close Button
+            /*
+                <Border CornerRadius="15,0,0,0" BorderBrush="DarkRed" BorderThickness="6" HorizontalAlignment="Right" >
+                    <Button Content="X" Width="20" Background="DarkRed" Foreground="White" BorderThickness="0"></Button>
+                </Border>
+             */
+
+            Border closeBorder = new Border ()
+            {
+                HorizontalAlignment = HorizontalAlignment.Right,
+                BorderBrush = Brushes.DarkRed,
+                BorderThickness = new Thickness (6),
+                CornerRadius = new CornerRadius (15, 0, 0, 0)
+            };
+
+            Button closeButton = new Button ()
+            {
+                Content = "X",
+                Background = Brushes.DarkRed,
+                Foreground = Brushes.White,
+                BorderThickness = new Thickness (0)
+            };
+
+            closeButton.Click += ( o, e ) =>
+            {
+                MainWindow.panel.CloseTab (MainWindow.panel.FindTab (item => item.ID == ID));
+            };
+
+            closeBorder.Child = closeButton;
+            #endregion
+
+            content.Children.Add (headerBorder);
+            content.Children.Add (closeBorder);
+
+            Grid.SetRow (headerBorder, 0);
+            Grid.SetRow (closeButton, 0);
         }
 
         private void BuildNavBarArea ()
@@ -597,62 +564,6 @@ namespace NOP.MMA.GUI.Tabs
 
         }
 
-        private void BuildHeaderElement ()
-        {
-            header = new Button
-            {
-                FontWeight = FontWeights.Bold,
-                Width = 100,
-                MinWidth = 100,
-                Content = BuildHeaderText (),
-            };
-
-            header.Click += OnClick;
-
-            close = new Button
-            {
-                FontWeight = FontWeights.Bold,
-                Background = Brushes.DarkRed,
-                Foreground = Brushes.White,
-                Content = "X",
-            };
-
-            close.Click += OnCloseClick;
-
-            if ( IsVisible )
-            {
-                header.Background = Brushes.White;
-            }
-            else
-            {
-                header.Background = Brushes.Gray;
-            }
-
-            headerParent.Children.Add (header);
-            headerParent.Children.Add (close);
-        }
-
-        /// <summary>
-        /// Build a <see cref="RowDefinition"/> with a height of <paramref name="_height"/>
-        /// </summary>
-        /// <param name="_height">The height of the row</param>
-        /// <param name="_noMinimum">Whether or not to use the <paramref name="_height"/> as minimum height as well</param>
-        /// <returns></returns>
-        private RowDefinition BuildRow ( int _height, bool _noMinimum = false )
-        {
-            RowDefinition def = new RowDefinition ()
-            {
-                Height = new GridLength (_height, GridUnitType.Star),
-            };
-
-            if ( !_noMinimum )
-            {
-                def.MinHeight = _height;
-            }
-
-            return def;
-        }
-
         public override void Construct ( StackPanel _headerArea, Grid _contentArea )
         {
             headerParent = _headerArea;
@@ -664,7 +575,7 @@ namespace NOP.MMA.GUI.Tabs
 
                 BuildHeaderElement ();
 
-                BuildContentHeaderArea ();
+                BuildContentHeaderArea ($"{Context.SSN}, {Context.Name}");
 
                 BuildPatientDataArea ();
 
@@ -676,29 +587,6 @@ namespace NOP.MMA.GUI.Tabs
 
                 _contentArea.Children.Add (content);
             }
-        }
-
-        public override void Show ( bool _show = true )
-        {
-            IsVisible = _show;
-
-            if ( IsVisible )
-            {
-                header.Background = HighlightColor;
-            }
-            else
-            {
-                header.Background = DefaultColor;
-            }
-
-            content.Visibility = ( ( _show ) ? ( Visibility.Visible ) : ( Visibility.Collapsed ) );
-        }
-
-        public override void Close ()
-        {
-            headerParent.Children.Remove (header);
-            headerParent.Children.Remove (close);
-            contentParent.Children.Remove (content);
         }
     }
 }

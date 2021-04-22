@@ -6,6 +6,9 @@ using System.Windows.Controls;
 
 namespace NOP.MMA.GUI.Tabs
 {
+    /// <summary>
+    /// Represents a collection of <see cref="TabItem"/> <see langword="objects"/> that can populate a <see cref="StackPanel"/> display with tabs
+    /// </summary>
     internal class NavTabPanel : TabCollection
     {
         /// <summary>
@@ -29,7 +32,7 @@ namespace NOP.MMA.GUI.Tabs
         private readonly Grid contentArea;
 
         /// <summary>
-        /// <inheritdoc/> and remove it from the <see cref="TabCollection"/>
+        /// <inheritdoc/> and remove it from the <see cref="TabCollection"/>. If there's other tabs in the <see cref="TabCollection"/> this will switch tab to the latest tab added to the <see cref="TabCollection"/>
         /// </summary>
         /// <param name="_tab">The tab to close</param>
         /// <returns><inheritdoc/></returns>
@@ -40,7 +43,14 @@ namespace NOP.MMA.GUI.Tabs
             if ( item != null )
             {
                 item.Close ();
-                return Tabs.Remove (item);
+
+                if ( Tabs.Remove (item) && FindTab (item => item.IsVisible == true) == null )
+                {
+                    if ( Tabs.Count > 0 && Tabs[ ( ( Tabs.Count - 1 >= 0 ) ? ( Tabs.Count - 1 ) : ( Tabs.Count ) ) ] != null )
+                    {
+                        return OpenTab (Tabs[ ( ( Tabs.Count - 1 >= 0 ) ? ( Tabs.Count - 1 ) : ( Tabs.Count ) ) ]);
+                    }
+                }
             }
 
             return false;
@@ -78,20 +88,14 @@ namespace NOP.MMA.GUI.Tabs
         }
 
         /// <summary>
-        /// Create a new tab and add it to the <see cref="TabCollection"/>
+        /// Apply the base configuration for all <see cref="TabItem"/> <see langword="objects"/> in the <see cref="TabCollection"/>
         /// </summary>
-        /// <param name="_headerText">The text to display as header</param>
-        /// <param name="_showContent">Whether or not to display the tab after creation</param>
-        /// <returns>The newly created <see cref="ITabItem"/></returns>
-        public ITabItem CreatePatientDataTab ( string _headerText, IPatient _context, bool _showContent = true )
+        /// <param name="_tab">The tab to configure</param>
+        /// <param name="_showContent">Whether or not to show the tab after configuration</param>
+        private void ConfigurateTab ( TabItem _tab, bool _showContent )
         {
-            PatientDataTab item = new PatientDataTab (_headerText, _showContent)
-            {
-                Context = _context
-            };
-
             #region On Click Behaviour
-            item.OnClick = ( o, e ) =>
+            _tab.OnClick = ( o, e ) =>
             {
                 ITabItem other = FindTab (item => item.IsVisible == true);
                 if ( other != null )
@@ -99,30 +103,58 @@ namespace NOP.MMA.GUI.Tabs
                     MinimizeTab (other);
                 }
 
-                OpenTab (item);
+                OpenTab (_tab);
             };
             #endregion
 
             #region On Close Behaviour
-            item.OnCloseClick = ( o, e ) =>
-            {
-                CloseTab (item);
-
-                if ( FindTab (item => item.IsVisible == true) == null )
-                {
-                    if ( Tabs.Count > 0 && Tabs[ 0 ] != null )
-                    {
-                        OpenTab (Tabs[ 0 ]);
-                    }
-                }
-            };
+            _tab.OnCloseClick = ( o, e ) =>
+             {
+                 CloseTab (_tab);
+             };
             #endregion
 
-            Tabs.Add (item);
+            Tabs.Add (_tab);
 
-            item.Construct (tabDisplay, contentArea);
+            _tab.Construct (tabDisplay, contentArea);
 
-            return item;
+            if ( _showContent )
+            {
+                MinimizeTab (FindTab (item => item.IsVisible == true && item.ID != _tab.ID));
+            }
+        }
+
+        /// <summary>
+        /// Create a new instance of type <see cref="PatientDataTab"/> and add it to the <see cref="TabCollection"/>
+        /// </summary>
+        /// <param name="_headerText">The text to display as header</param>
+        /// <param name="_showContent">Whether or not to display the tab after creation</param>
+        /// <returns>The newly created <see cref="ITabItem"/></returns>
+        public ITabItem CreatePatientDataTab ( string _headerText, IPatient _context, bool _showContent = true )
+        {
+            TabItem tab = new PatientDataTab (_headerText, _showContent)
+            {
+                Context = _context
+            };
+
+            ConfigurateTab (tab, _showContent);
+
+            return tab;
+        }
+
+        /// <summary>
+        /// Create a new instance of type <see cref="PatientIndexTab"/> and add it to the <see cref="TabCollection"/>
+        /// </summary>
+        /// <param name="_headerText">The text to display as header</param>
+        /// <param name="_showContent">Whether or not to display the tab after creation</param>
+        /// <returns>The newly created <see cref="ITabItem"/></returns>
+        public ITabItem CreatePatientOverviewTab ( string _headerText, bool _showContent = true )
+        {
+            TabItem tab = new PatientIndexTab (_headerText, _showContent);
+
+            ConfigurateTab (tab, _showContent);
+
+            return tab;
         }
     }
 }

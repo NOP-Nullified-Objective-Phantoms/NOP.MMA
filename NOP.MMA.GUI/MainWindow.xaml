@@ -79,36 +79,36 @@
                     <!--#region Nav Content Area-->
                     <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1,0,1,1" Margin="10,34,10,10" Grid.RowSpan="2">
                         <Grid x:Name="navContent">
-                            <!--#region Definitions-->
+                            <!--#region Definitions--><!--
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25*" MinHeight="25"></RowDefinition>
                                 <RowDefinition Height="140*" MinHeight="140"></RowDefinition>
                                 <RowDefinition Height="750*" MinHeight="750"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <!--#endregion-->
+                            --><!--#endregion-->
 
-                            <!--#region Tab Content Header-->
+                            <!--#region Tab Content Header--><!--
                             <Border Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" BorderBrush="Black" BorderThickness="0,1,1,0" CornerRadius="0,15,0,0" Background="LightGray">
                                 <Label Content="Patient Oversigt" FontWeight="Bold" Height="29" HorizontalAlignment="Center"></Label>
                             </Border>
-                            <!--#endregion-->
+                            --><!--#endregion-->
 
-                            <!--#region Tab Content Close Button-->
+                            <!--#region Tab Content Close Button--><!--
                             <Border CornerRadius="15,0,0,0" BorderBrush="DarkRed" BorderThickness="6" HorizontalAlignment="Right" >
                                 <Button Content="X" Width="20" Background="DarkRed" Foreground="White" BorderThickness="0"></Button>
                             </Border>
-                            <!--#endregion-->
+                            --><!--#endregion-->
 
-                            <!--#region Header Text-->
+                            <!--#region Header Text--><!--
                             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0" Background="LightGray">
                                 <Label Content="Patient Oversigt" FontWeight="Bold" BorderBrush="Black" BorderThickness="0,0,0,2" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                             </Border>
-                            <!--#endregion-->
+                            --><!--#endregion-->
 
-                            <!--#region SearchArea-->
+                            <!--#region SearchArea--><!--
                             <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0" Background="LightGray">
                                 <Grid>
-                                    <!--#region Definitions-->
+                                    --><!--#region Definitions--><!--
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="*" MinWidth="600"></ColumnDefinition>
@@ -119,14 +119,14 @@
                                         <RowDefinition Height="15*"></RowDefinition>
                                         <RowDefinition Height="5*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <!--#endregion-->
+                                    --><!--#endregion-->
 
-                                    <!--#region Search Header-->
+                                    <!--#region Search Header--><!--
                                     <Label Grid.Row="0" Grid.Column="1" Content="Søg" FontWeight="Bold" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center"></Label>
                                     <TextBox Grid.Row="0"  Grid.Column="1" Width="500" Height="50" FontSize="30" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBox>
-                                    <!--#endregion-->
+                                    --><!--#endregion-->
 
-                                    <!--#region Search Results-->
+                                    <!--#region Search Results--><!--
                                     <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="searchResultsBorder" Height="600" BorderBrush="Black" BorderThickness="1,1,1,1" Margin="25,0,25,25" Background="White">
                                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                                             <StackPanel x:Name="searchResults" Orientation="Vertical">
@@ -145,10 +145,10 @@
                                             </StackPanel>
                                         </ScrollViewer>
                                     </Border>
-                                    <!--#endregion-->
+                                   --><!--#endregion--><!--
                                 </Grid>
                             </Border>
-                            <!--#endregion-->
+                            --><!--#endregion-->
                         </Grid>
                     </Border>
                     <!--#endregion-->
