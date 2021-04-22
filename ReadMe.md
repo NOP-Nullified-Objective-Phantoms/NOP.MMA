@@ -238,5 +238,6 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Refactored and cleaned up the code of` NavTabPanel`
     - Moved common properties and methods from `PatientDataTap` into `TabItem`
     - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
+    - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
     - Removed `PregnancyJournalTab` and `PregnancyJOurnalPanel` because they were obselete
     - Moved click events out of `PatientDataTa`b and into `TabItem`, as it makes more sense to have them inherited
