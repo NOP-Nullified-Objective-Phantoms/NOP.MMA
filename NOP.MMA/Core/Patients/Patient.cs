@@ -105,7 +105,7 @@ namespace NOP.MMA.Core.Patients
         [System.Diagnostics.CodeAnalysis.SuppressMessage ("Style", "IDE0071:Simplify interpolation", Justification = "<Pending>")]
         public string SaveEntity ()
         {
-            return $"PatientID{ID},{SSN},{Name},{Address.Replace (",", "{!!}")},{Email},{PrivatePhone},{WorkPhone},{PrivateGP},{DoctorsName},{DoctorsAddress},{DoctorsPhone},{( int ) CivilStatus},{Cohibitable.ToString ()},{ChildFathersName},{ChildFathersSSN},{NeedTranslator.ToString ()},{TranslatorLanguage},{Nationality},{OtherInfo}";
+            return $"PatientID{ID},{SSN},{Name},{Address?.Replace (",", "{!!}")},{Email},{PrivatePhone},{WorkPhone},{PrivateGP},{DoctorsName},{DoctorsAddress?.Replace (",", "{!!}")},{DoctorsPhone},{( int ) CivilStatus},{Cohibitable.ToString ()},{ChildFathersName},{ChildFathersSSN},{NeedTranslator.ToString ()},{TranslatorLanguage},{Nationality},{OtherInfo}";
         }
     }
 }
