@@ -228,3 +228,16 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
    - Revision
      - Fixed comma crash when building a `Patient` from storage
      - Fixed wrong path when setting storage path in `PregnancyJournalRepo` and `TravelerJournalRepo`
+- **[0.8.2](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.8.2)**
+  - Implemented Patient Overview Tab
+    - Added `PationIndexTab` class
+    - Added Template code for Patient Overview Tab
+    - Legacy Code (_XAML `PatientIndexTab` Template_)
+    - `NavTabPanel` can now create `PatientIndexTab` and `PatientDataTab`
+  - Revision
+    - Refactored and cleaned up the code of` NavTabPanel`
+    - Moved common properties and methods from `PatientDataTap` into `TabItem`
+    - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
+    - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
+    - Removed `PregnancyJournalTab` and `PregnancyJOurnalPanel` because they were obselete
+    - Moved click events out of `PatientDataTa`b and into `TabItem`, as it makes more sense to have them inherited
