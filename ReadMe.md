@@ -228,7 +228,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
    - Revision
      - Fixed comma crash when building a `Patient` from storage
      - Fixed wrong path when setting storage path in `PregnancyJournalRepo` and `TravelerJournalRepo`
-- **[v](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v)**
+- **[0.8.2](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.8.2)**
   - Implemented Patient Overview Tab
     - Added `PationIndexTab` class
     - Added Template code for Patient Overview Tab
