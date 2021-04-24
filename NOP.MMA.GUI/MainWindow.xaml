@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NOP.MMA.GUI"
         mc:Ignorable="d"
-        Title="Medical Management Application" MinHeight="800" Height="1080" MinWidth="900" Width="1920" WindowState="Maximized" >
+        Title="Medical Management Application" MinHeight="800" Height="1080" MinWidth="1500" Width="1920" WindowState="Maximized" >
     <Grid Background="CornflowerBlue">
         <!--#region Definititions-->
         <Grid.RowDefinitions>
