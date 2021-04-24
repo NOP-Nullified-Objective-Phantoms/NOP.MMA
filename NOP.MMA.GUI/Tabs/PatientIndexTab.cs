@@ -338,7 +338,7 @@ namespace NOP.MMA.GUI.Tabs
             searchResults.Resources.Add (typeof (Button), panelStyle);
             #endregion
 
-            resultsBorder.Child = searchResults;
+            scroll.Content = searchResults;
             grid.Children.Add (resultsBorder);
             #endregion
 
