@@ -678,7 +678,16 @@ namespace NOP.MMA.GUI.Tabs
 
             upperLeftGrid.Children.Add (BuildTextFieldCell ("Sidste Mens 1 Dag", travelerJournalModel.MenstrualInfo.LastMentruationalDay.ToShortDateString (), CellLocation.TopLeft, 0, 0));
             upperLeftGrid.Children.Add (BuildTextFieldCell ("Cyklus", travelerJournalModel.MenstrualInfo.MenstruationalCycle, CellLocation.TopMiddle, 0, 1));
-            upperLeftGrid.Children.Add (BuildTextFieldCell ("Beregning Sikker", travelerJournalModel.MenstrualInfo.IsCalculationSafe.ToString (), CellLocation.TopMiddle, 0, 2));
+
+            Grid stateGrid = new Grid ();
+            stateGrid.ColumnDefinitions.Add (BuildColumn (1));
+            stateGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (stateGrid, 0);
+            Grid.SetColumn (stateGrid, 2);
+            upperLeftGrid.Children.Add (stateGrid);
+
+            stateGrid.Children.Add (BuildBooleanFieldCell ("Beregning Sikker", "Ja", travelerJournalModel.MenstrualInfo.IsCalculationSafe, CellLocation.Middle, 0, 0));
+            stateGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !travelerJournalModel.MenstrualInfo.IsCalculationSafe, CellLocation.MiddleLeft, 0, 1));
             #endregion
 
             #region Upper Middle Left
@@ -703,8 +712,29 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetColumn (lowerMiddleLeftGrid, 0);
             patientCoreDataGrid.Children.Add (lowerMiddleLeftGrid);
 
-            lowerMiddleLeftGrid.Children.Add (BuildTextFieldCell ("Moderens Rhesustype", travelerJournalModel.MothersRhesusFactor.ToString (), CellLocation.MiddleLeft, 0, 0));
-            lowerMiddleLeftGrid.Children.Add (BuildTextFieldCell ("Irregulære Antistoffer i 6. - 10. uge", travelerJournalModel.IrregularAntibody.ToString (), CellLocation.MiddleLeft, 0, 1));
+            #region Rhesus
+            Grid rhesusGrid = new Grid ();
+            rhesusGrid.ColumnDefinitions.Add (BuildColumn (1));
+            rhesusGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (rhesusGrid, 0);
+            Grid.SetColumn (rhesusGrid, 0);
+            lowerMiddleLeftGrid.Children.Add (rhesusGrid);
+
+            rhesusGrid.Children.Add (BuildBooleanFieldCell ("Moderens Rhesustype", "Positiv", travelerJournalModel.MothersRhesusFactor, CellLocation.Middle, 0, 0));
+            rhesusGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", !travelerJournalModel.MothersRhesusFactor, CellLocation.MiddleLeft, 0, 1));
+            #endregion
+
+            #region Antibody
+            Grid antibodyGrid = new Grid ();
+            antibodyGrid.ColumnDefinitions.Add (BuildColumn (1));
+            antibodyGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (antibodyGrid, 0);
+            Grid.SetColumn (antibodyGrid, 1);
+            lowerMiddleLeftGrid.Children.Add (antibodyGrid);
+
+            antibodyGrid.Children.Add (BuildBooleanFieldCell ("Irregulære Antistoffer i 6. - 10. uge", "Positiv", travelerJournalModel.IrregularAntibody, CellLocation.Middle, 0, 0));
+            antibodyGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", !travelerJournalModel.IrregularAntibody, CellLocation.MiddleLeft, 0, 1));
+            #endregion
             #endregion
 
             #region Lower Left
@@ -715,10 +745,10 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetColumn (lowerLeftGrid, 0);
             patientCoreDataGrid.Children.Add (lowerLeftGrid);
 
-            lowerLeftGrid.Children.Add (BuildTextFieldCell ("Uge 29 anity-D immuniglobulin er givet", travelerJournalModel.AntiDImmunoglobulinGiven.Value, CellLocation.BottomLeft, 0, 0));
+            lowerLeftGrid.Children.Add (BuildBooleanFieldCell ("Uge 29 anity-D immuniglobulin er givet", string.Empty, ( travelerJournalModel.AntiDImmunoglobulinGiven.Value != null ), CellLocation.BottomLeft, 0, 0));
             lowerLeftGrid.Children.Add (BuildTextFieldCell ("Dato, initialer", $"{travelerJournalModel.AntiDImmunoglobulinGiven.Date.ToShortDateString ()}, {travelerJournalModel.AntiDImmunoglobulinGiven.Initials}", CellLocation.BottomLeft, 0, 1));
             #endregion
-            #endregion
+            #endregion 
 
             #region Right Column
             #region Upper Right
@@ -741,8 +771,32 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetColumn (upperMiddleRightGrid, 1);
             patientCoreDataGrid.Children.Add (upperMiddleRightGrid);
 
-            upperMiddleRightGrid.Children.Add (BuildTextFieldCell ("Hep B", travelerJournalModel.HepB.Result.ToString (), CellLocation.MiddleLeft, 0, 0));
-            upperMiddleRightGrid.Children.Add (BuildTextFieldCell ("Blodtype Taget", travelerJournalModel.BloodTypeDetermined.ToString (), CellLocation.MiddleRight, 0, 1));
+            #region Hep B
+            Grid hepBGrid = new Grid ();
+            hepBGrid.ColumnDefinitions.Add (BuildColumn (1));
+            hepBGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (hepBGrid, 0);
+            Grid.SetColumn (hepBGrid, 0);
+            upperMiddleRightGrid.Children.Add (hepBGrid);
+
+
+            bool hepBResult = ( travelerJournalModel.HepB.Result == ScreeningInfo.Positive );
+
+            hepBGrid.Children.Add (BuildBooleanFieldCell ("Hep B", "Positiv", hepBResult, CellLocation.Middle, 0, 0));
+            hepBGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", !hepBResult, CellLocation.MiddleLeft, 0, 1));
+            #endregion
+
+            #region Bloodtype Taken
+            Grid bloodGrid = new Grid ();
+            bloodGrid.ColumnDefinitions.Add (BuildColumn (1));
+            bloodGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (bloodGrid, 0);
+            Grid.SetColumn (bloodGrid, 1);
+            upperMiddleRightGrid.Children.Add (bloodGrid);
+
+            bloodGrid.Children.Add (BuildBooleanFieldCell ("Blodtype Taget", "Ja", travelerJournalModel.BloodTypeDetermined, CellLocation.Middle, 0, 0));
+            bloodGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !travelerJournalModel.BloodTypeDetermined, CellLocation.MiddleLeft, 0, 1));
+            #endregion
             #endregion
 
             #region Lower Middle Right
@@ -753,8 +807,29 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetColumn (lowerMiddleRightGrid, 1);
             patientCoreDataGrid.Children.Add (lowerMiddleRightGrid);
 
-            lowerMiddleRightGrid.Children.Add (BuildTextFieldCell ("Barnets Rhesustype (uge 25)", travelerJournalModel.ChildsRhesusFactor.ToString (), CellLocation.MiddleLeft, 0, 0));
-            lowerMiddleRightGrid.Children.Add (BuildTextFieldCell ("Antistof hos rh.neg. i 25. uge", travelerJournalModel.AntibodyByRhesusNegative.ToString (), CellLocation.MiddleRight, 0, 1));
+            #region Child Rhesus
+            Grid childRhesusGrid = new Grid ();
+            childRhesusGrid.ColumnDefinitions.Add (BuildColumn (1));
+            childRhesusGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (childRhesusGrid, 0);
+            Grid.SetColumn (childRhesusGrid, 0);
+            lowerMiddleRightGrid.Children.Add (childRhesusGrid);
+
+            childRhesusGrid.Children.Add (BuildBooleanFieldCell ("Barnets Rhesustype (uge 25)", "Positiv", travelerJournalModel.ChildsRhesusFactor, CellLocation.Middle, 0, 0));
+            childRhesusGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", !travelerJournalModel.ChildsRhesusFactor, CellLocation.MiddleLeft, 0, 1));
+            #endregion
+
+            #region Antibody By Rhesus Negative
+            Grid byRhesusNegativGrid = new Grid ();
+            byRhesusNegativGrid.ColumnDefinitions.Add (BuildColumn (1));
+            byRhesusNegativGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (byRhesusNegativGrid, 0);
+            Grid.SetColumn (byRhesusNegativGrid, 1);
+            lowerMiddleRightGrid.Children.Add (byRhesusNegativGrid);
+
+            byRhesusNegativGrid.Children.Add (BuildBooleanFieldCell ("Antistof hos rh.neg. i 25. uge", "Positiv", travelerJournalModel.BloodTypeDetermined, CellLocation.Middle, 0, 0));
+            byRhesusNegativGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", !travelerJournalModel.BloodTypeDetermined, CellLocation.MiddleLeft, 0, 1));
+            #endregion
             #endregion
 
             #region Lower Right
@@ -765,11 +840,15 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetColumn (lowerRightGrid, 1);
             patientCoreDataGrid.Children.Add (lowerRightGrid);
 
-            lowerRightGrid.Children.Add (BuildTextFieldCell ("Urindyrkning: Set x ved fund af gruppe B-streptokokker uanset hvornår i graviditeten", travelerJournalModel.UrineCulture.Value, CellLocation.BottomLeft, 0, 0));
+            lowerRightGrid.Children.Add (BuildBooleanFieldCell ("Urindyrkning: Set x ved fund af gruppe B-streptokokker uanset hvornår i graviditeten", string.Empty, travelerJournalModel.UrineCulture.Value != null, CellLocation.BottomLeft, 0, 0));
             lowerRightGrid.Children.Add (BuildTextFieldCell ("Dato, Initialer", $"{travelerJournalModel.UrineCulture.Date.ToShortDateString ()}, {travelerJournalModel.UrineCulture.Initials}", CellLocation.BottomRight, 0, 1));
             #endregion
             #endregion
             #endregion
+
+            #region Journal Stamps
+
+            #endregion 
 
             journalDisplayGrid.Children.Add (scroll);
         }
@@ -814,6 +893,56 @@ namespace NOP.MMA.GUI.Tabs
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Margin = new Thickness (10, 0, 0, 0),
                 IsReadOnly = _readOnly
+            };
+
+            cellContainer.Children.Add (cellHeader);
+            cellContainer.Children.Add (cellContent);
+
+            return cellBorder;
+        }
+
+        /// <summary>
+        /// Build a cell containing a header <see cref="Label"/> and a boolean <see cref="CheckBox"/>
+        /// </summary>
+        /// <param name="_headerText">The text to apply to the header <see cref="Label"/></param>
+        /// <param name="_content">The text to display for the <see cref="CheckBox"/>. Ex: <i>[ ] ContentText</i></param>
+        /// <param name="_state">The state of the <see cref="CheckBox"/></param>
+        /// <param name="_cellLoc">Where on the <see cref="Grid"/> the cell is located. (<i><strong>Note:</strong> This is used to define where the <see cref="Border"/> is applied to the <see cref="UIElement"/></i>)</param>
+        /// <param name="_row">Which row on the <see cref="Grid"/> the cell should be placed in</param>
+        /// <param name="_column">Which column on the <see cref="Grid"/> the cell should be placed in</param>
+        /// <param name="_readOnly">Whether or not the <see cref="CheckBox"/> state is <see langword="readonly"/></param>
+        /// <returns></returns>
+        private UIElement BuildBooleanFieldCell ( string _headerText, string _content, bool _state, CellLocation _cellLoc, int _row, int _column, bool _readOnly = true )
+        {
+            Border cellBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = BuildCellBorder (_cellLoc),
+            };
+
+            Grid.SetRow (cellBorder, _row);
+            Grid.SetColumn (cellBorder, _column);
+
+            Grid cellContainer = new Grid ();
+
+            cellBorder.Child = cellContainer;
+
+            Label cellHeader = new Label ()
+            {
+                Content = _headerText,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                FontWeight = FontWeights.Bold
+            };
+
+            CheckBox cellContent = new CheckBox ()
+            {
+                Content = _content,
+                IsChecked = _state,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Margin = new Thickness (10, 0, 0, 0),
+                IsEnabled = !_readOnly
             };
 
             cellContainer.Children.Add (cellHeader);

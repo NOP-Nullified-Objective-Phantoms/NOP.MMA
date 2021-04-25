@@ -42,7 +42,13 @@ namespace NOP.MMA.Core.Journals
         public bool BloodTypeDetermined { get; set; }
         public bool AntibodyByRhesusNegative { get; set; }
         public bool IrregularAntibody { get; set; }
+        /// <summary>
+        /// If <see langword="null"/> the Anti-D Immunoglobulin is not given
+        /// </summary>
         public JournalData AntiDImmunoglobulinGiven { get; set; }
+        /// <summary>
+        /// <see langword="Null"/> if <see langword="false"/>; Otherwise, if <see langword="true"/>, not <see langword="null"/>
+        /// </summary>
         public JournalData UrineCulture { get; set; }
         private readonly List<JournalStamp> journalStamps;
         public IReadOnlyList<JournalStamp> JournalStamps

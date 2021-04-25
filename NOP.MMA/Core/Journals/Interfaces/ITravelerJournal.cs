@@ -24,6 +24,9 @@ namespace NOP.MMA.Core.Journals
         /// If <see langword="null"/> the Anti-D Immunoglobulin is not given
         /// </summary>
         JournalData AntiDImmunoglobulinGiven { get; set; }
+        /// <summary>
+        /// <see langword="Null"/> if <see langword="false"/>; Otherwise, if <see langword="true"/>, not <see langword="null"/>
+        /// </summary>
         JournalData UrineCulture { get; set; }
         IReadOnlyList<JournalStamp> JournalStamps { get; }
         IReadOnlyList<JournalComment> JournalComments { get; }
