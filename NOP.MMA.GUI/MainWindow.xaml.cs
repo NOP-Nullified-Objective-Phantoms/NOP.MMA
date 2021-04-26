@@ -49,11 +49,31 @@ namespace NOP.MMA.GUI
             //PatientRepo.Link.InsertData (patient);    //  Insert new test dummy into data storage if needed
 
             //IPregnancyJournal pJournal = JournalFactory.CreateWithPatient (JournalType.PregnancyJournal, patient) as IPregnancyJournal;  //  Use To create a new test dummy
-
             //PregnancyJournalRepo.Link.InsertData (pJournal);    //  Insert new test dummy into data storage if needed
+
             //ITravelerJournal tJournal = JournalFactory.CreateWithPatient (JournalType.TravelerJournal, patient) as ITravelerJournal;  //  Use To create a new test dummy
             //TravelerJournalRepo.Link.InsertData (tJournal);    //  Insert new test dummy into data storage if needed
 
+            //JournalStamp stamp = new JournalStamp ()
+            //{
+            //    BloodPressure = "Test",
+            //    FetusActivity = true,
+            //    GestationAge = "Test",
+            //    Date = DateTime.Now,
+            //    Edema = true,
+            //    ExaminationLocation = "Test",
+            //    FetusGender = "Test",
+            //    FosterRepresentation = "Test",
+            //    Initials = "Test",
+            //    UrinSample = "Test",
+            //    UterusSizeInCM = 0.00,
+            //    Weight = 0.00
+            //};
+
+            //ITravelerJournal journal = TravelerJournalRepo.Link.GetDataByIdentifier (1);
+            //journal.AddJournalStamp (stamp);
+
+            //TravelerJournalRepo.Link.UpdateData (journal);
 
             //IPatient patient = PatientRepo.Link.GetDataByIdentifier (1);    //  Getting test dummy from data storage
             //panel.CreatePatientDataTab (patient.Name, patient); //  Creates a new tab for the dummy

@@ -631,7 +631,7 @@ namespace NOP.MMA.GUI.Tabs
             phoneArea.ColumnDefinitions.Add (BuildColumn (1));
 
             phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Privat/Mobil", travelerJournalModel.PatientData.PrivatePhone, CellLocation.BottomLeft, 0, 0));
-            phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Arbejde", travelerJournalModel.PatientData.WorkPhone, CellLocation.BottoMiddle, 0, 1));
+            phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Arbejde", travelerJournalModel.PatientData.WorkPhone, CellLocation.BottomMiddle, 0, 1));
 
             Grid.SetRow (phoneArea, 3);
             Grid.SetColumn (phoneArea, 0);
@@ -654,6 +654,7 @@ namespace NOP.MMA.GUI.Tabs
             patientCoreDataGrid.RowDefinitions.Add (BuildRow (1, 40));
             patientCoreDataGrid.ColumnDefinitions.Add (BuildColumn (1));
             patientCoreDataGrid.ColumnDefinitions.Add (BuildColumn (1));
+
             Border patientCoreDataAreaBorder = new Border ()
             {
                 BorderBrush = Brushes.Black,
@@ -847,10 +848,110 @@ namespace NOP.MMA.GUI.Tabs
             #endregion
 
             #region Journal Stamps
+            Grid journalStampsGrid = new Grid ();
+            #region Rows = 12
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            #endregion
+            #region Columns = 12
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            #endregion
 
+            Border journalStampsAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+            Grid.SetRow (journalStampsAreaBorder, 3);
+
+            journalStampsAreaBorder.Child = journalStampsGrid;
+            display.Children.Add (journalStampsAreaBorder);
+
+            journalStampsGrid.Children.Add (BuildListItemCell ("Dato", CellLocation.TopLeft, 0, 0, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Gestations alder", CellLocation.TopLeft, 0, 1, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Vægt", CellLocation.TopLeft, 0, 2, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Blodtryk", CellLocation.TopLeft, 0, 3, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Urin A S Leu Nit", CellLocation.TopLeft, 0, 4, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Ødem", CellLocation.TopLeft, 0, 5, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Symfysefund.mål", CellLocation.TopLeft, 0, 6, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Foster Præsentation", CellLocation.TopLeft, 0, 7, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Faterkøn", CellLocation.TopLeft, 0, 8, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Foster Aktivitet", CellLocation.TopLeft, 0, 9, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Undersøgelsessted", CellLocation.TopLeft, 0, 10, true));
+            journalStampsGrid.Children.Add (BuildListItemCell ("Initialer", CellLocation.Middle, 0, 11, true));
+
+            if ( travelerJournalModel.JournalStamps != null && travelerJournalModel.JournalStamps.Count > 0 )
+            {
+                for ( int row = 0; row < travelerJournalModel.JournalStamps.Count; row++ )
+                {
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].Date.ToShortDateString (), CellLocation.TopLeft, row + 1, 0));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].GestationAge, CellLocation.TopLeft, row + 1, 1));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].Weight.ToString ("0.00"), CellLocation.TopLeft, row + 1, 2));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].BloodPressure, CellLocation.TopLeft, row + 1, 3));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].UrinSample, CellLocation.TopLeft, row + 1, 4));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].Edema.ToString (), CellLocation.TopLeft, row + 1, 5));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].UterusSizeInCM.ToString ("0.00"), CellLocation.TopLeft, row + 1, 6));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].FosterRepresentation, CellLocation.TopLeft, row + 1, 7));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].FetusGender, CellLocation.TopLeft, row + 1, 8));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].FetusActivity.ToString (), CellLocation.TopLeft, row + 1, 9));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].ExaminationLocation, CellLocation.TopLeft, row + 1, 10));
+                    journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].Initials, CellLocation.Middle, row + 1, 11));
+                }
+            }
             #endregion 
 
             journalDisplayGrid.Children.Add (scroll);
+        }
+
+        private UIElement BuildListItemCell ( string _content, CellLocation _cellLoc, int _row, int _column, bool _bold = false )
+        {
+            Border cellBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = BuildCellBorder (_cellLoc),
+            };
+
+            Grid.SetRow (cellBorder, _row);
+            Grid.SetColumn (cellBorder, _column);
+
+            Grid cellContainer = new Grid ();
+
+            cellBorder.Child = cellContainer;
+
+            Label cellContent = new Label ()
+            {
+                Content = _content,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                FontWeight = ( ( _bold ) ? ( FontWeights.Bold ) : ( FontWeights.Normal ) )
+            };
+
+            cellContainer.Children.Add (cellContent);
+
+            return cellBorder;
         }
 
         /// <summary>
@@ -986,7 +1087,7 @@ namespace NOP.MMA.GUI.Tabs
                 case CellLocation.BottomRight:
                     border = new Thickness (0, 0, 0, 0);
                     break;
-                case CellLocation.BottoMiddle:
+                case CellLocation.BottomMiddle:
                     border = new Thickness (0, 0, 1, 0);
                     break;
                 default:
@@ -1042,7 +1143,7 @@ namespace NOP.MMA.GUI.Tabs
             Middle,
             BottomLeft,
             BottomRight,
-            BottoMiddle
+            BottomMiddle
         }
     }
 }
