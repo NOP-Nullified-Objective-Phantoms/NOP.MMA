@@ -926,6 +926,15 @@ namespace NOP.MMA.GUI.Tabs
             journalDisplayGrid.Children.Add (scroll);
         }
 
+        /// <summary>
+        /// Build a cell where the <paramref name="_content"/> stretches the entire cell
+        /// </summary>
+        /// <param name="_content">The content of the cell</param>
+        /// <param name="_cellLoc">Where on the <see cref="Grid"/> the cell is located. (<i><strong>Note:</strong> This is used to define where the <see cref="Border"/> is applied to the <see cref="UIElement"/></i>)</param>
+        /// <param name="_row">Which row on the <see cref="Grid"/> the cell should be placed in</param>
+        /// <param name="_column">Which column on the <see cref="Grid"/> the cell should be placed in</param>
+        /// <param name="_bold">Whether or not the <paramref name="_content"/> should be bold or not</param>
+        /// <returns></returns>
         private UIElement BuildListItemCell ( string _content, CellLocation _cellLoc, int _row, int _column, bool _bold = false )
         {
             Border cellBorder = new Border ()
