@@ -70,8 +70,15 @@ namespace NOP.MMA.GUI
             //    Weight = 0.00
             //};
 
+            //JournalComment comment = new JournalComment ()
+            //{
+            //    Date = DateTime.Now,
+            //    Comment = "Test Comment"
+            //};
+
             //ITravelerJournal journal = TravelerJournalRepo.Link.GetDataByIdentifier (1);
             //journal.AddJournalStamp (stamp);
+            //journal.AddJournalComment (comment);
 
             //TravelerJournalRepo.Link.UpdateData (journal);
 

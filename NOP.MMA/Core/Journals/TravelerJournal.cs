@@ -84,7 +84,7 @@ namespace NOP.MMA.Core.Journals
         public string AdditonalContext { get; set; }
         public BirthplaceInformation BirthplaceInfo { get; set; }
 
-        public bool AddJournalSComment ( JournalComment _comment )
+        public bool AddJournalComment ( JournalComment _comment )
         {
             journalComments.Add (_comment);
 
@@ -286,7 +286,7 @@ namespace NOP.MMA.Core.Journals
                                 Date = _commentDate
                             };
 
-                            AddJournalSComment (comment);
+                            AddJournalComment (comment);
                         }
                         else
                         {
@@ -536,11 +536,11 @@ namespace NOP.MMA.Core.Journals
 
             #region UltraSoundScans [Line 11]
             string ultraData = string.Empty;
-            for ( int i = 0; i < journalComments.Count; i++ )
+            for ( int i = 0; i < UltraSoundScans.Count; i++ )
             {
                 ultraData += $"{ultraSoundScans[ i ].AmnioticFluidAmount.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].Date.ToString ()},{( ( ultraSoundScans[ i ].ExaminationLocation != null ) ? ( ultraSoundScans[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].Flow != null ) ? ( ultraSoundScans[ i ].Flow.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].FosterRepresentation != null ) ? ( ultraSoundScans[ i ].FosterRepresentation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].GestationAge != null ) ? ( ultraSoundScans[ i ].GestationAge.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].Initials != null ) ? ( ultraSoundScans[ i ].Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{ultraSoundScans[ i ].USWeight.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].WeightDifference.ToString (new CultureInfo ("en-US"))}";
 
-                if ( i != journalComments.Count - 1 )
+                if ( i != UltraSoundScans.Count - 1 )
                 {
                     ultraData += COLITEMSEPERATOR;
                 }

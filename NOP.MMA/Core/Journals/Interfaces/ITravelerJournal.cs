@@ -33,7 +33,7 @@ namespace NOP.MMA.Core.Journals
         IReadOnlyList<UltrasoundResult> UltraSoundScans { get; }
         bool AddJournalStamp ( JournalStamp _stamp );
         bool RemoveJournalStamp ( DateTime _stampDate );
-        bool AddJournalSComment ( JournalComment _comment );
+        bool AddJournalComment ( JournalComment _comment );
         bool RemoveJournalComment ( DateTime _commentDate );
         bool AddUltraSoundScan ( UltrasoundResult _scan );
         bool RemoveUltrasoundScan ( DateTime _scanDate );

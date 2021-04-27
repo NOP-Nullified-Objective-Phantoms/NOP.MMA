@@ -746,7 +746,7 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetColumn (lowerLeftGrid, 0);
             patientCoreDataGrid.Children.Add (lowerLeftGrid);
 
-            lowerLeftGrid.Children.Add (BuildBooleanFieldCell ("Uge 29 anity-D immuniglobulin er givet", string.Empty, ( travelerJournalModel.AntiDImmunoglobulinGiven.Value != null ), CellLocation.BottomLeft, 0, 0));
+            lowerLeftGrid.Children.Add (BuildBooleanFieldCell ("Uge 29 anity-D immuniglobulin er givet", string.Empty, !string.IsNullOrWhiteSpace (travelerJournalModel.AntiDImmunoglobulinGiven.Value), CellLocation.BottomLeft, 0, 0));
             lowerLeftGrid.Children.Add (BuildTextFieldCell ("Dato, initialer", $"{travelerJournalModel.AntiDImmunoglobulinGiven.Date.ToShortDateString ()}, {travelerJournalModel.AntiDImmunoglobulinGiven.Initials}", CellLocation.BottomLeft, 0, 1));
             #endregion
             #endregion 
@@ -841,7 +841,7 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetColumn (lowerRightGrid, 1);
             patientCoreDataGrid.Children.Add (lowerRightGrid);
 
-            lowerRightGrid.Children.Add (BuildBooleanFieldCell ("Urindyrkning: Set x ved fund af gruppe B-streptokokker uanset hvornår i graviditeten", string.Empty, travelerJournalModel.UrineCulture.Value != null, CellLocation.BottomLeft, 0, 0));
+            lowerRightGrid.Children.Add (BuildBooleanFieldCell ("Urindyrkning: Set x ved fund af gruppe B-streptokokker uanset hvornår i graviditeten", string.Empty, !string.IsNullOrWhiteSpace (travelerJournalModel.UrineCulture.Value), CellLocation.BottomLeft, 0, 0));
             lowerRightGrid.Children.Add (BuildTextFieldCell ("Dato, Initialer", $"{travelerJournalModel.UrineCulture.Date.ToShortDateString ()}, {travelerJournalModel.UrineCulture.Initials}", CellLocation.BottomRight, 0, 1));
             #endregion
             #endregion
@@ -921,7 +921,55 @@ namespace NOP.MMA.GUI.Tabs
                     journalStampsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalStamps[ row ].Initials, CellLocation.Middle, row + 1, 11));
                 }
             }
-            #endregion 
+            #endregion
+
+            #region Journal Comments
+            Grid journalCommentsGrid = new Grid ();
+            #region Rows = 15
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            #endregion
+            #region Columns = 4
+            journalCommentsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            journalCommentsGrid.ColumnDefinitions.Add (BuildColumn (11));
+            #endregion
+
+            Border journalCommentsAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+            Grid.SetRow (journalCommentsAreaBorder, 4);
+
+            journalCommentsAreaBorder.Child = journalCommentsGrid;
+            display.Children.Add (journalCommentsAreaBorder);
+
+            journalCommentsGrid.Children.Add (BuildListItemCell ("Dato", CellLocation.TopLeft, 0, 0, true));
+            journalCommentsGrid.Children.Add (BuildListItemCell ("Supplerende Oplysninger, herundder jordmoderfaglig vurdering af ressourcer/risici/belastniger", CellLocation.TopLeft, 0, 1, true));
+
+            if ( travelerJournalModel.JournalComments != null && travelerJournalModel.JournalComments.Count > 0 )
+            {
+                for ( int row = 0; row < travelerJournalModel.JournalComments.Count; row++ )
+                {
+                    journalCommentsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalComments[ row ].Date.ToShortDateString (), CellLocation.TopLeft, row + 1, 0));
+                    journalCommentsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalComments[ row ].Comment, CellLocation.TopLeft, row + 1, 1));
+                }
+            }
+            #endregion
 
             journalDisplayGrid.Children.Add (scroll);
         }
