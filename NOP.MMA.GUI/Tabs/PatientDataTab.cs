@@ -850,19 +850,19 @@ namespace NOP.MMA.GUI.Tabs
             #region Journal Stamps
             Grid journalStampsGrid = new Grid ();
             #region Rows = 12
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
-            journalStampsGrid.RowDefinitions.Add (BuildRow (1));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalStampsGrid.RowDefinitions.Add (BuildRow (1, 40));
             #endregion
             #region Columns = 12
             journalStampsGrid.ColumnDefinitions.Add (BuildColumn (1));
@@ -926,21 +926,21 @@ namespace NOP.MMA.GUI.Tabs
             #region Journal Comments
             Grid journalCommentsGrid = new Grid ();
             #region Rows = 15
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
-            journalCommentsGrid.RowDefinitions.Add (BuildRow (1));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
             #endregion
             #region Columns = 4
             journalCommentsGrid.ColumnDefinitions.Add (BuildColumn (1));
@@ -951,7 +951,7 @@ namespace NOP.MMA.GUI.Tabs
             {
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness (1, 1, 1, 1),
-                Margin = new Thickness (10, 10, 10, 0)
+                Margin = new Thickness (10, 5, 10, 0)
             };
             Grid.SetRow (journalCommentsAreaBorder, 4);
 
@@ -969,6 +969,157 @@ namespace NOP.MMA.GUI.Tabs
                     journalCommentsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalComments[ row ].Comment, CellLocation.TopLeft, row + 1, 1));
                 }
             }
+            #endregion
+
+            #region Screenings
+            Grid screeningAreaGrid = new Grid ();
+            screeningAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            screeningAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            screeningAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            screeningAreaGrid.RowDefinitions.Add (BuildRow (4, 160));
+            Border screeningAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+
+            screeningAreaBorder.Child = screeningAreaGrid;
+
+            Grid.SetRow (screeningAreaBorder, 5);
+            display.Children.Add (screeningAreaBorder);
+
+            #region Test Area
+            Grid testAreaGrid = new Grid ();
+            testAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            testAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            testAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            screeningAreaGrid.Children.Add (testAreaGrid);
+
+            Grid.SetRow (testAreaGrid, 0);
+
+            testAreaGrid.Children.Add (BuildTextFieldCell ("Doubletest Dato", travelerJournalModel.DoubleTest.ToShortDateString (), CellLocation.TopLeft, 0, 0));
+            testAreaGrid.Children.Add (BuildTextFieldCell ("Nakkefoldsscanning Dato", travelerJournalModel.NuchalFoldScan.ToShortTimeString (), CellLocation.TopLeft, 0, 1));
+            testAreaGrid.Children.Add (BuildTextFieldCell ("Tripletest Dato", travelerJournalModel.TripleTest.ToShortDateString (), CellLocation.TopMiddle, 0, 2)); ;
+            #endregion
+
+            #region DS Area
+            Grid dsAreaGrid = new Grid ();
+            dsAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            dsAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            dsAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            screeningAreaGrid.Children.Add (dsAreaGrid);
+
+            Grid.SetRow (dsAreaGrid, 1);
+
+            dsAreaGrid.Children.Add (BuildListItemCell ("Odds for DS udmeldt til kvinden (Ved kombinationstest det samlede odds)", CellLocation.TopLeft, 0, 0, true));
+            dsAreaGrid.Children.Add (BuildTextFieldCell ("1:", travelerJournalModel.OddsForDS.Value, CellLocation.TopLeft, 0, 1));
+            dsAreaGrid.Children.Add (BuildTextFieldCell ("Initialer", travelerJournalModel.OddsForDS.Initials, CellLocation.TopMiddle, 0, 2));
+            #endregion
+
+            #region Foster Area
+            Grid fosterAreaGrid = new Grid ();
+            fosterAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            fosterAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            fosterAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            screeningAreaGrid.Children.Add (fosterAreaGrid);
+
+            Grid.SetRow (fosterAreaGrid, 2);
+
+            #region Foster Test Area
+            Grid fosterTestGrid = new Grid ();
+            fosterTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+            fosterTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (fosterTestGrid, 0);
+            Grid.SetColumn (fosterTestGrid, 0);
+            fosterTestGrid.Children.Add (BuildBooleanFieldCell ("Prøver", "Moderkageprøve", !string.IsNullOrWhiteSpace (travelerJournalModel.PlacentaTest.Value), CellLocation.Middle, 0, 0));
+            fosterTestGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fostervandsprøve", !string.IsNullOrWhiteSpace (travelerJournalModel.AmnioticFluidTest.Value), CellLocation.MiddleLeft, 0, 1));
+            fosterAreaGrid.Children.Add (fosterTestGrid);
+            #endregion
+
+            #region Foster Date Area
+            Grid fosterDateGrid = new Grid ();
+            fosterDateGrid.ColumnDefinitions.Add (BuildColumn (1));
+            fosterDateGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (fosterDateGrid, 0);
+            Grid.SetColumn (fosterDateGrid, 1);
+            fosterDateGrid.Children.Add (BuildTextFieldCell ("Moderkageprøve Dato", travelerJournalModel.PlacentaTest.Date.ToShortDateString (), CellLocation.TopLeft, 0, 0));
+            fosterDateGrid.Children.Add (BuildTextFieldCell ("Fostervandsprøve Dato", travelerJournalModel.AmnioticFluidTest.Date.ToShortDateString (), CellLocation.MiddleLeft, 0, 1));
+            fosterAreaGrid.Children.Add (fosterDateGrid);
+            #endregion
+
+            #region Foster Initials Area
+            Grid fosterInitialsGrid = new Grid ();
+            fosterInitialsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            fosterInitialsGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (fosterInitialsGrid, 0);
+            Grid.SetColumn (fosterInitialsGrid, 2);
+            fosterInitialsGrid.Children.Add (BuildTextFieldCell ("Moderkageprøve Initialer", travelerJournalModel.PlacentaTest.Initials, CellLocation.TopLeft, 0, 0));
+            fosterInitialsGrid.Children.Add (BuildTextFieldCell ("Fostervandsprøve Initialer", travelerJournalModel.AmnioticFluidTest.Initials, CellLocation.MiddleLeft, 0, 1));
+            fosterAreaGrid.Children.Add (fosterInitialsGrid);
+            #endregion
+            #endregion
+
+            #region Ultrasound scans
+            Grid ultraGrid = new Grid ();
+            #region Rows = 4
+            ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
+            ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
+            ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
+            ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
+            ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
+            #endregion
+            #region Columns = 10
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            ultraGrid.ColumnDefinitions.Add (BuildColumn (1));
+            #endregion
+
+            Grid.SetRow (ultraGrid, 3);
+            screeningAreaGrid.Children.Add (ultraGrid);
+
+            ultraGrid.Children.Add (BuildListItemCell ("Ultralydsscanning", CellLocation.TopLeft, 0, 0, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Dato", CellLocation.TopLeft, 0, 1, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Ga (U + D)", CellLocation.TopLeft, 0, 2, true));
+            ultraGrid.Children.Add (BuildListItemCell ("UL Vægt", CellLocation.TopLeft, 0, 3, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Vægtafvigelse %", CellLocation.TopLeft, 0, 4, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Fosterpræsentation", CellLocation.TopLeft, 0, 5, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Fostervand", CellLocation.TopLeft, 0, 6, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Flow", CellLocation.TopLeft, 0, 7, true));
+            //ultraGrid.Children.Add (BuildListItemCell ("Konklusion", CellLocation.TopLeft, 0, 8, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Undersøgelsessted", CellLocation.TopLeft, 0, 8, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Initialer", CellLocation.TopLeft, 0, 9, true));
+
+            if ( travelerJournalModel.UltraSoundScans != null && travelerJournalModel.UltraSoundScans.Count > 0 )
+            {
+                for ( int row = 0; row < travelerJournalModel.UltraSoundScans.Count; row++ )
+                {
+                    ultraGrid.Children.Add (BuildListItemCell ("Scan Result", CellLocation.TopLeft, row + 1, 0, true));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].Date.ToShortDateString (), CellLocation.TopLeft, row + 1, 1));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].GestationAge, CellLocation.TopLeft, row + 1, 2));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].USWeight.ToString ("0.00"), CellLocation.TopLeft, row + 1, 3));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].WeightDifference.ToString ("0.00"), CellLocation.TopLeft, row + 1, 4));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].FosterRepresentation, CellLocation.TopLeft, row + 1, 5));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].AmnioticFluidAmount.ToString ("0.00"), CellLocation.TopLeft, row + 1, 6));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].Flow, CellLocation.TopLeft, row + 1, 7));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].ExaminationLocation, CellLocation.TopLeft, row + 1, 8));
+                    ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].Initials, CellLocation.Middle, row + 1, 9));
+                }
+            }
+            #endregion
             #endregion
 
             journalDisplayGrid.Children.Add (scroll);

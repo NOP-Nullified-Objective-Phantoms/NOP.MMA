@@ -76,9 +76,23 @@ namespace NOP.MMA.GUI
             //    Comment = "Test Comment"
             //};
 
-            //ITravelerJournal journal = TravelerJournalRepo.Link.GetDataByIdentifier (1);
+            //UltrasoundResult result = new UltrasoundResult ()
+            //{
+            //    AmnioticFluidAmount = 0.00,
+            //    GestationAge = "12+2",
+            //    Date = DateTime.Now,
+            //    ExaminationLocation = "Test",
+            //    Flow = "Test",
+            //    FosterRepresentation = "Test",
+            //    Initials = "MSM",
+            //    USWeight = 0.00,
+            //    WeightDifference = 0.00
+            //};
+
+           //ITravelerJournal journal = TravelerJournalRepo.Link.GetDataByIdentifier (1);
             //journal.AddJournalStamp (stamp);
             //journal.AddJournalComment (comment);
+            //journal.AddUltraSoundScan (result);
 
             //TravelerJournalRepo.Link.UpdateData (journal);
 
