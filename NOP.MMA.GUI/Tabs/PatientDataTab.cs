@@ -313,20 +313,17 @@ namespace NOP.MMA.GUI.Tabs
                 travelerJournalModel = null;
                 IPregnancyJournal journal = PregnancyJournalRepo.Link.GetEnumerable ().ToList ().Find (item => item.PatientData.ID == Context.ID);
 
-                pregnancyJournalModel = new PregnancyJournalViewModel ()
+                if ( journal != null )
                 {
-                    Abortions = journal.Abortions,
-                    Anamnese = journal.Anamnese,
-                    ID = journal.ID,
-                    Investegations = journal.Investegations,
-                    ResAndRiskAssessement = journal.ResAndRiskAssessement,
-                    JournalDestination = journal.JournalDestination,
-                    PatientData = journal.PatientData,
-                    Pregnancies = journal.Pregnancies
-                };
+                    SetJournalModel (JournalType.PregnancyJournal, journal);
 
-                //journalDisplayGrid.Children.Add (new Label () { Content = $"Journal Loaded with ID: {pregnancyJournalModel.ID}" });
-                BuildPregnancyJournalDisplay ();
+                    BuildPregnancyJournalDisplay ();
+                    return;
+                }
+
+                ClearDisplay (journalDisplayGrid);
+
+                journalDisplayGrid.Children.Add (BuildCreateJournalButton ("Tilføj Svangerskabsjournal", JournalType.PregnancyJournal));
             };
 
             preggoButtonInnerBorder.Child = preggoButton;
@@ -366,38 +363,17 @@ namespace NOP.MMA.GUI.Tabs
                 pregnancyJournalModel = null;
                 ITravelerJournal journal = TravelerJournalRepo.Link.GetEnumerable ().ToList ().Find (item => item.PatientData.ID == Context.ID);
 
-                travelerJournalModel = new TravelerJournalViewModel ()
+                if ( journal != null )
                 {
-                    AdditonalContext = journal.AdditonalContext,
-                    AmnioticFluidTest = journal.AmnioticFluidTest,
-                    AntibodyByRhesusNegative = journal.AntibodyByRhesusNegative,
-                    AntiDImmunoglobulinGiven = journal.AntiDImmunoglobulinGiven,
-                    IrregularAntibody = journal.IrregularAntibody,
-                    BirthplaceInfo = journal.BirthplaceInfo,
-                    BloodTypeDetermined = journal.BloodTypeDetermined,
-                    ChildsRhesusFactor = journal.ChildsRhesusFactor,
-                    DoubleTest = journal.DoubleTest,
-                    HepB = journal.HepB,
-                    ID = journal.ID,
-                    JournalComments = journal.JournalComments,
-                    JournalDestination = journal.JournalDestination,
-                    JournalStamps = journal.JournalStamps,
-                    MenstrualInfo = journal.MenstrualInfo,
-                    MothersRhesusFactor = journal.MothersRhesusFactor,
-                    NaegelsRule = journal.NaegelsRule,
-                    NuchalFoldScan = journal.NuchalFoldScan,
-                    OddsForDS = journal.OddsForDS,
-                    OralGlukoseToleranceTest = journal.OralGlukoseToleranceTest,
-                    PatientData = journal.PatientData,
-                    PlacentaTest = journal.PlacentaTest,
-                    TripleTest = journal.TripleTest,
-                    UltraSoundScans = journal.UltraSoundScans,
-                    UltrasoundTermin = journal.UltrasoundTermin,
-                    UrineCulture = journal.UrineCulture,
-                    WeightInfo = journal.WeightInfo
-                };
+                    SetJournalModel (JournalType.TravelerJournal, journal);
 
-                BuildTravelerJournalDisplay ();
+                    BuildTravelerJournalDisplay ();
+                    return;
+                }
+
+                ClearDisplay (journalDisplayGrid);
+
+                journalDisplayGrid.Children.Add (BuildCreateJournalButton ("Tilføj Vandrejournal", JournalType.TravelerJournal));
             };
 
             travelerButtonInnerBorder.Child = travelerButton;
@@ -501,11 +477,17 @@ namespace NOP.MMA.GUI.Tabs
                 {
                     IPregnancyJournal journal = PregnancyJournalRepo.Link.GetDataByIdentifier (pregnancyJournalModel.ID);
                     PregnancyJournalRepo.Link.DeleteData (journal);
+
+                    ClearDisplay (journalDisplayGrid);
+                    journalDisplayGrid.Children.Add (BuildCreateJournalButton ("Tilføj Svangerskabsjournal", JournalType.PregnancyJournal));
                 }
-                else
+                else if ( travelerJournalModel != null )
                 {
                     ITravelerJournal journal = TravelerJournalRepo.Link.GetDataByIdentifier (travelerJournalModel.ID);
                     TravelerJournalRepo.Link.DeleteData (journal);
+
+                    ClearDisplay (journalDisplayGrid);
+                    journalDisplayGrid.Children.Add (BuildCreateJournalButton ("Tilføj Vandrejournal", JournalType.TravelerJournal));
                 }
             };
 
@@ -1478,6 +1460,101 @@ namespace NOP.MMA.GUI.Tabs
             _container.RowDefinitions.Clear ();
             _container.ColumnDefinitions.Clear ();
             _container.Children.Clear ();
+        }
+
+        /// <summary>
+        /// Set the view model to be used based on <paramref name="_type"/> to <paramref name="_journal"/>
+        /// </summary>
+        /// <param name="_type"></param>
+        /// <param name="_journal"></param>
+        private void SetJournalModel ( JournalType _type, IJournal _journal )
+        {
+            if ( _journal is IPregnancyJournal _pJournal )
+            {
+                pregnancyJournalModel = new PregnancyJournalViewModel ()
+                {
+                    Abortions = _pJournal.Abortions,
+                    Anamnese = _pJournal.Anamnese,
+                    ID = _pJournal.ID,
+                    Investegations = _pJournal.Investegations,
+                    ResAndRiskAssessement = _pJournal.ResAndRiskAssessement,
+                    JournalDestination = _pJournal.JournalDestination,
+                    PatientData = _pJournal.PatientData,
+                    Pregnancies = _pJournal.Pregnancies
+                };
+            }
+            else if ( _journal is ITravelerJournal _tJournal )
+            {
+                travelerJournalModel = new TravelerJournalViewModel ()
+                {
+                    AdditonalContext = _tJournal.AdditonalContext,
+                    AmnioticFluidTest = _tJournal.AmnioticFluidTest,
+                    AntibodyByRhesusNegative = _tJournal.AntibodyByRhesusNegative,
+                    AntiDImmunoglobulinGiven = _tJournal.AntiDImmunoglobulinGiven,
+                    IrregularAntibody = _tJournal.IrregularAntibody,
+                    BirthplaceInfo = _tJournal.BirthplaceInfo,
+                    BloodTypeDetermined = _tJournal.BloodTypeDetermined,
+                    ChildsRhesusFactor = _tJournal.ChildsRhesusFactor,
+                    DoubleTest = _tJournal.DoubleTest,
+                    HepB = _tJournal.HepB,
+                    ID = _tJournal.ID,
+                    JournalComments = _tJournal.JournalComments,
+                    JournalDestination = _tJournal.JournalDestination,
+                    JournalStamps = _tJournal.JournalStamps,
+                    MenstrualInfo = _tJournal.MenstrualInfo,
+                    MothersRhesusFactor = _tJournal.MothersRhesusFactor,
+                    NaegelsRule = _tJournal.NaegelsRule,
+                    NuchalFoldScan = _tJournal.NuchalFoldScan,
+                    OddsForDS = _tJournal.OddsForDS,
+                    OralGlukoseToleranceTest = _tJournal.OralGlukoseToleranceTest,
+                    PatientData = _tJournal.PatientData,
+                    PlacentaTest = _tJournal.PlacentaTest,
+                    TripleTest = _tJournal.TripleTest,
+                    UltraSoundScans = _tJournal.UltraSoundScans,
+                    UltrasoundTermin = _tJournal.UltrasoundTermin,
+                    UrineCulture = _tJournal.UrineCulture,
+                    WeightInfo = _tJournal.WeightInfo
+                };
+            }
+        }
+
+        /// <summary>
+        /// Build a button that can create an <see cref="IPregnancyJournal"/> or an <see cref="ITravelerJournal"/> based on <paramref name="_type"/>
+        /// </summary>
+        /// <param name="_content">The text written on the button</param>
+        /// <param name="_type"></param>
+        /// <returns></returns>
+        private Button BuildCreateJournalButton ( string _content, JournalType _type )
+        {
+            Button button = new Button ()
+            {
+                Content = _content,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            button.Click += ( o, e ) =>
+            {
+                IJournal journal = JournalFactory.CreateWithPatient (_type, Context);
+
+                switch ( _type )
+                {
+                    case JournalType.PregnancyJournal:
+                        PregnancyJournalRepo.Link.InsertData (journal);
+                        SetJournalModel (JournalType.PregnancyJournal, journal);
+                        BuildPregnancyJournalDisplay ();
+                        break;
+                    case JournalType.TravelerJournal:
+                        TravelerJournalRepo.Link.InsertData (journal);
+                        SetJournalModel (JournalType.TravelerJournal, journal);
+                        BuildTravelerJournalDisplay ();
+                        break;
+                    default:
+                        break;
+                }
+            };
+
+            return button;
         }
 
         public override void Construct ( StackPanel _headerArea, Grid _contentArea )
