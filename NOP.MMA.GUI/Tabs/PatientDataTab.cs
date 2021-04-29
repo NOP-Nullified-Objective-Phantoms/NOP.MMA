@@ -581,6 +581,7 @@ namespace NOP.MMA.GUI.Tabs
             display.RowDefinitions.Add (BuildRow (15, 600));
             display.RowDefinitions.Add (BuildRow (7, 280));
             display.RowDefinitions.Add (BuildRow (3, 120));
+            display.RowDefinitions.Add (BuildRow (5, 200));
             #endregion
 
             scroll.Content = display;
@@ -631,7 +632,7 @@ namespace NOP.MMA.GUI.Tabs
             phoneArea.ColumnDefinitions.Add (BuildColumn (1));
 
             phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Privat/Mobil", travelerJournalModel.PatientData.PrivatePhone, CellLocation.BottomLeft, 0, 0));
-            phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Arbejde", travelerJournalModel.PatientData.WorkPhone, CellLocation.BottomMiddle, 0, 1));
+            phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Arbejde", travelerJournalModel.PatientData.WorkPhone, CellLocation.BottomLeft, 0, 1));
 
             Grid.SetRow (phoneArea, 3);
             Grid.SetColumn (phoneArea, 0);
@@ -639,10 +640,10 @@ namespace NOP.MMA.GUI.Tabs
             #endregion
 
             #region Right Column
-            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Navn", travelerJournalModel.PatientData.DoctorsName, CellLocation.TopRight, 0, 1));
-            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Adresse", travelerJournalModel.PatientData.DoctorsAddress, CellLocation.MiddleRight, 1, 1));
-            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Email", string.Empty, CellLocation.MiddleRight, 2, 1));
-            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Tlf.", travelerJournalModel.PatientData.DoctorsPhone, CellLocation.BottomRight, 3, 1));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Navn", travelerJournalModel.PatientData.DoctorsName, CellLocation.TopMiddle, 0, 1));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Adresse", travelerJournalModel.PatientData.DoctorsAddress, CellLocation.TopMiddle, 1, 1));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Email", string.Empty, CellLocation.TopMiddle, 2, 1));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Tlf.", travelerJournalModel.PatientData.DoctorsPhone, CellLocation.BottomMiddle, 3, 1));
             #endregion
             #endregion
 
@@ -761,7 +762,7 @@ namespace NOP.MMA.GUI.Tabs
             patientCoreDataGrid.Children.Add (upperRightGrid);
 
             upperRightGrid.Children.Add (BuildTextFieldCell ("Naegels Termin", travelerJournalModel.NaegelsRule.ToShortDateString (), CellLocation.TopLeft, 0, 0));
-            upperRightGrid.Children.Add (BuildTextFieldCell ("Ultralydfastsat Termin", travelerJournalModel.UltrasoundTermin.ToShortDateString (), CellLocation.TopRight, 0, 1));
+            upperRightGrid.Children.Add (BuildTextFieldCell ("Ultralydfastsat Termin", travelerJournalModel.UltrasoundTermin.ToShortDateString (), CellLocation.TopMiddle, 0, 1));
             #endregion
 
             #region Upper Middle Right
@@ -796,7 +797,7 @@ namespace NOP.MMA.GUI.Tabs
             upperMiddleRightGrid.Children.Add (bloodGrid);
 
             bloodGrid.Children.Add (BuildBooleanFieldCell ("Blodtype Taget", "Ja", travelerJournalModel.BloodTypeDetermined, CellLocation.Middle, 0, 0));
-            bloodGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !travelerJournalModel.BloodTypeDetermined, CellLocation.MiddleLeft, 0, 1));
+            bloodGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !travelerJournalModel.BloodTypeDetermined, CellLocation.TopMiddle, 0, 1));
             #endregion
             #endregion
 
@@ -829,7 +830,7 @@ namespace NOP.MMA.GUI.Tabs
             lowerMiddleRightGrid.Children.Add (byRhesusNegativGrid);
 
             byRhesusNegativGrid.Children.Add (BuildBooleanFieldCell ("Antistof hos rh.neg. i 25. uge", "Positiv", travelerJournalModel.BloodTypeDetermined, CellLocation.Middle, 0, 0));
-            byRhesusNegativGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", !travelerJournalModel.BloodTypeDetermined, CellLocation.MiddleLeft, 0, 1));
+            byRhesusNegativGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", !travelerJournalModel.BloodTypeDetermined, CellLocation.TopMiddle, 0, 1));
             #endregion
             #endregion
 
@@ -842,7 +843,7 @@ namespace NOP.MMA.GUI.Tabs
             patientCoreDataGrid.Children.Add (lowerRightGrid);
 
             lowerRightGrid.Children.Add (BuildBooleanFieldCell ("Urindyrkning: Set x ved fund af gruppe B-streptokokker uanset hvornår i graviditeten", string.Empty, !string.IsNullOrWhiteSpace (travelerJournalModel.UrineCulture.Value), CellLocation.BottomLeft, 0, 0));
-            lowerRightGrid.Children.Add (BuildTextFieldCell ("Dato, Initialer", $"{travelerJournalModel.UrineCulture.Date.ToShortDateString ()}, {travelerJournalModel.UrineCulture.Initials}", CellLocation.BottomRight, 0, 1));
+            lowerRightGrid.Children.Add (BuildTextFieldCell ("Dato, Initialer", $"{travelerJournalModel.UrineCulture.Date.ToShortDateString ()}, {travelerJournalModel.UrineCulture.Initials}", CellLocation.BottomMiddle, 0, 1));
             #endregion
             #endregion
             #endregion
@@ -959,14 +960,14 @@ namespace NOP.MMA.GUI.Tabs
             display.Children.Add (journalCommentsAreaBorder);
 
             journalCommentsGrid.Children.Add (BuildListItemCell ("Dato", CellLocation.TopLeft, 0, 0, true));
-            journalCommentsGrid.Children.Add (BuildListItemCell ("Supplerende Oplysninger, herundder jordmoderfaglig vurdering af ressourcer/risici/belastniger", CellLocation.TopLeft, 0, 1, true));
+            journalCommentsGrid.Children.Add (BuildListItemCell ("Supplerende Oplysninger, herundder jordmoderfaglig vurdering af ressourcer/risici/belastniger", CellLocation.TopMiddle, 0, 1, true));
 
             if ( travelerJournalModel.JournalComments != null && travelerJournalModel.JournalComments.Count > 0 )
             {
                 for ( int row = 0; row < travelerJournalModel.JournalComments.Count; row++ )
                 {
                     journalCommentsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalComments[ row ].Date.ToShortDateString (), CellLocation.TopLeft, row + 1, 0));
-                    journalCommentsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalComments[ row ].Comment, CellLocation.TopLeft, row + 1, 1));
+                    journalCommentsGrid.Children.Add (BuildListItemCell (travelerJournalModel.JournalComments[ row ].Comment, CellLocation.TopMiddle, row + 1, 1));
                 }
             }
             #endregion
@@ -1061,7 +1062,7 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetRow (fosterInitialsGrid, 0);
             Grid.SetColumn (fosterInitialsGrid, 2);
             fosterInitialsGrid.Children.Add (BuildTextFieldCell ("Moderkageprøve Initialer", travelerJournalModel.PlacentaTest.Initials, CellLocation.TopLeft, 0, 0));
-            fosterInitialsGrid.Children.Add (BuildTextFieldCell ("Fostervandsprøve Initialer", travelerJournalModel.AmnioticFluidTest.Initials, CellLocation.MiddleLeft, 0, 1));
+            fosterInitialsGrid.Children.Add (BuildTextFieldCell ("Fostervandsprøve Initialer", travelerJournalModel.AmnioticFluidTest.Initials, CellLocation.TopMiddle, 0, 1));
             fosterAreaGrid.Children.Add (fosterInitialsGrid);
             #endregion
             #endregion
@@ -1101,7 +1102,7 @@ namespace NOP.MMA.GUI.Tabs
             ultraGrid.Children.Add (BuildListItemCell ("Flow", CellLocation.TopLeft, 0, 7, true));
             //ultraGrid.Children.Add (BuildListItemCell ("Konklusion", CellLocation.TopLeft, 0, 8, true));
             ultraGrid.Children.Add (BuildListItemCell ("Undersøgelsessted", CellLocation.TopLeft, 0, 8, true));
-            ultraGrid.Children.Add (BuildListItemCell ("Initialer", CellLocation.TopLeft, 0, 9, true));
+            ultraGrid.Children.Add (BuildListItemCell ("Initialer", CellLocation.TopMiddle, 0, 9, true));
 
             if ( travelerJournalModel.UltraSoundScans != null && travelerJournalModel.UltraSoundScans.Count > 0 )
             {
@@ -1119,6 +1120,169 @@ namespace NOP.MMA.GUI.Tabs
                     ultraGrid.Children.Add (BuildListItemCell (travelerJournalModel.UltraSoundScans[ row ].Initials, CellLocation.Middle, row + 1, 9));
                 }
             }
+            #endregion
+            #endregion
+
+            #region Diabetes Screening - OGTT
+            Grid ogttgAreaGrid = new Grid ();
+            ogttgAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            ogttgAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            ogttgAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            ogttgAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            Border ogttAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+
+            ogttAreaBorder.Child = ogttgAreaGrid;
+
+            Grid.SetRow (ogttAreaBorder, 6);
+            display.Children.Add (ogttAreaBorder);
+
+            #region Row 1
+            Grid row1Grid = new Grid ();
+            row1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            row1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (row1Grid, 0);
+
+            ogttgAreaGrid.Children.Add (row1Grid);
+
+            #region  Week 18-20
+            Grid week18_20Grid = new Grid ();
+            week18_20Grid.ColumnDefinitions.Add (BuildColumn (1));
+            week18_20Grid.ColumnDefinitions.Add (BuildColumn (1));
+            week18_20Grid.ColumnDefinitions.Add (BuildColumn (1));
+            week18_20Grid.Children.Add (BuildListItemCell ("Uge 18-20*", CellLocation.TopLeft, 0, 0, true));
+            week18_20Grid.Children.Add (BuildTextFieldCell ("Dato", travelerJournalModel.OralGlukoseToleranceTest.Week18_20.Date.ToShortDateString (), CellLocation.TopLeft, 0, 1));
+            week18_20Grid.Children.Add (BuildTextFieldCell ("2 Timers Værdi", travelerJournalModel.OralGlukoseToleranceTest.Week18_20.Value, CellLocation.TopLeft, 0, 2));
+
+            Grid.SetColumn (week18_20Grid, 0);
+            row1Grid.Children.Add (week18_20Grid);
+            #endregion
+
+            #region  Week 28-30
+            Grid week28_30Grid = new Grid ();
+            week28_30Grid.ColumnDefinitions.Add (BuildColumn (1));
+            week28_30Grid.ColumnDefinitions.Add (BuildColumn (1));
+            week28_30Grid.ColumnDefinitions.Add (BuildColumn (1));
+            week28_30Grid.Children.Add (BuildListItemCell ("Uge 28-30**", CellLocation.TopLeft, 0, 0, true));
+            week28_30Grid.Children.Add (BuildTextFieldCell ("Dato", travelerJournalModel.OralGlukoseToleranceTest.Week28_30.Date.ToShortDateString (), CellLocation.TopLeft, 0, 1));
+            week28_30Grid.Children.Add (BuildTextFieldCell ("2 Timers Værdi", travelerJournalModel.OralGlukoseToleranceTest.Week28_30.Value, CellLocation.TopMiddle, 0, 2));
+
+            Grid.SetColumn (week28_30Grid, 1);
+            row1Grid.Children.Add (week28_30Grid);
+            #endregion
+            #endregion
+
+            #region Row 2
+            Grid row2Grid = new Grid ();
+            row2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            row2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (row2Grid, 1);
+
+            ogttgAreaGrid.Children.Add (row2Grid);
+
+            #region  Glycosuria
+            Grid glycosuriaGrid = new Grid ();
+            glycosuriaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            glycosuriaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            glycosuriaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            glycosuriaGrid.Children.Add (BuildListItemCell ("Ved glucosuri, såfremt der ikke er udført OGTT inden for 4 uger", CellLocation.TopLeft, 0, 0, true));
+            glycosuriaGrid.Children.Add (BuildTextFieldCell ("Dato", travelerJournalModel.OralGlukoseToleranceTest.Glycosuria.Date.ToShortDateString (), CellLocation.TopLeft, 0, 1));
+            glycosuriaGrid.Children.Add (BuildTextFieldCell ("2 Timers Værdi", travelerJournalModel.OralGlukoseToleranceTest.Glycosuria.Value, CellLocation.TopLeft, 0, 2));
+
+            row2Grid.Children.Add (glycosuriaGrid);
+            #endregion
+            #endregion
+
+            #region Row 3
+            Grid row3Grid = new Grid ();
+            row3Grid.RowDefinitions.Add (BuildRow (1));
+            row3Grid.RowDefinitions.Add (BuildRow (1));
+            Grid.SetRow (row3Grid, 3);
+
+            row3Grid.Children.Add (BuildListItemCell ("Risikofaktorer: 1: Tidligere GDM | 2: Familiær Disposition | 3: BMI før graviditet >= 27 | 4: Tidligere fødsel af barn med fødselsvægt >= 4500 G | 5: Glucosuri", CellLocation.Middle, 0, 0));
+            row3Grid.Children.Add (BuildListItemCell ("* Ved tidligere GDM eller mindt 2 risikofaktorer måles OGTT i 18.-20. og 28.-20. uge. | ** Ved 1 risikofaktorer måles OGTT i 28.-20. uge", CellLocation.BottomMiddle, 1, 0));
+
+            ogttgAreaGrid.Children.Add (row3Grid);
+            #endregion
+            #endregion
+
+            #region Birth Info
+            Grid birthInfoAreaGrid = new Grid ();
+            birthInfoAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            birthInfoAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            birthInfoAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            birthInfoAreaGrid.RowDefinitions.Add (BuildRow (1, 40));
+            birthInfoAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+            birthInfoAreaGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Border birthInfoAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+
+            birthInfoAreaBorder.Child = birthInfoAreaGrid;
+
+            Grid.SetRow (birthInfoAreaBorder, 7);
+            display.Children.Add (birthInfoAreaBorder);
+
+            #region Left
+            birthInfoAreaGrid.Children.Add (BuildTextFieldCell ("Ønsket Fødested", travelerJournalModel.BirthplaceInfo.BirthplaceWish, CellLocation.TopLeft, 0, 0));
+
+            Grid leftMiddleGrid = new Grid ();
+            leftMiddleGrid.ColumnDefinitions.Add (BuildColumn (1));
+            leftMiddleGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (leftMiddleGrid, 1);
+            Grid.SetColumn (leftMiddleGrid, 0);
+            birthInfoAreaGrid.Children.Add (leftMiddleGrid);
+
+            leftMiddleGrid.Children.Add (BuildTextFieldCell ("Primært planlagt fødested", travelerJournalModel.BirthplaceInfo.PrimaryExpectedBirthplace, CellLocation.TopLeft, 0, 0));
+            leftMiddleGrid.Children.Add (BuildTextFieldCell ("Ændret Fødested", travelerJournalModel.BirthplaceInfo.ChangedBirthplace, CellLocation.TopLeft, 0, 1));
+
+            birthInfoAreaGrid.Children.Add (BuildTextFieldCell ("Evt. ønsket jm-konsultation (sted/ugedag/jordemoder)", travelerJournalModel.BirthplaceInfo.MidwifeConsultationWish, CellLocation.TopLeft, 2, 0));
+            birthInfoAreaGrid.Children.Add (BuildListItemCell ("Udfyldes af af jordemoderen", CellLocation.BottomLeft, 3, 0, true));
+            #endregion
+
+            #region Right
+            birthInfoAreaGrid.Children.Add (BuildTextFieldCell ("Jordmodercenter", travelerJournalModel.BirthplaceInfo.MidwifeCenterName, CellLocation.TopMiddle, 0, 1));
+
+            birthInfoAreaGrid.Children.Add (BuildTextFieldCell ("Adresse", $"{travelerJournalModel.BirthplaceInfo.MidwifeCenterStreet} {travelerJournalModel.BirthplaceInfo.MidwifeCenterHouseNumber}, {travelerJournalModel.BirthplaceInfo.MidwifeCenterPostalCode} {travelerJournalModel.BirthplaceInfo.MidwifeCenterCity}", CellLocation.TopMiddle, 1, 1));
+            birthInfoAreaGrid.Children.Add (BuildTextFieldCell ("Telfon/Mobil", travelerJournalModel.BirthplaceInfo.MidwifeCenterPhone, CellLocation.TopMiddle, 2, 1));
+
+            Grid midwifeValueGrid = new Grid ();
+            midwifeValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            midwifeValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (midwifeValueGrid, 3);
+            Grid.SetColumn (midwifeValueGrid, 1);
+            birthInfoAreaGrid.Children.Add (midwifeValueGrid);
+
+            #region Birth Preperation Wish
+            Grid birthPreperationWishGrid = new Grid ();
+            birthPreperationWishGrid.ColumnDefinitions.Add (BuildColumn (1));
+            birthPreperationWishGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetColumn (birthPreperationWishGrid, 0);
+            midwifeValueGrid.Children.Add (birthPreperationWishGrid);
+
+            birthPreperationWishGrid.Children.Add (BuildBooleanFieldCell ("Ønskes fødselsforberedende undervisning", "Ja", travelerJournalModel.BirthplaceInfo.BirthPreperationWish, CellLocation.BottomMiddle, 0, 0));
+            birthPreperationWishGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !travelerJournalModel.BirthplaceInfo.BirthPreperationWish, CellLocation.BottomMiddle, 0, 1));
+            #endregion
+
+            #region Con Format
+            Grid conFormatWishGrid = new Grid ();
+            conFormatWishGrid.ColumnDefinitions.Add (BuildColumn (1));
+            conFormatWishGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetColumn (conFormatWishGrid, 1);
+            midwifeValueGrid.Children.Add (conFormatWishGrid);
+
+            conFormatWishGrid.Children.Add (BuildBooleanFieldCell ("Konsultationsform", "Individuel", travelerJournalModel.BirthplaceInfo.ConFormat == ConsultationFormat.Individual, CellLocation.BottomMiddle, 0, 0));
+            conFormatWishGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Gruppe", travelerJournalModel.BirthplaceInfo.ConFormat == ConsultationFormat.Group, CellLocation.BottomMiddle, 0, 1));
+            #endregion
             #endregion
             #endregion
 
@@ -1275,16 +1439,16 @@ namespace NOP.MMA.GUI.Tabs
                     border = new Thickness (0, 0, 1, 1);
                     break;
                 case CellLocation.TopRight:
-                    border = new Thickness (0, 0, 0, 1);
+                    border = new Thickness (1, 0, 0, 1);
                     break;
                 case CellLocation.TopMiddle:
-                    border = new Thickness (0, 0, 1, 1);
+                    border = new Thickness (0, 0, 0, 1);
                     break;
                 case CellLocation.MiddleLeft:
                     border = new Thickness (0, 0, 1, 1);
                     break;
                 case CellLocation.MiddleRight:
-                    border = new Thickness (0, 0, 0, 1);
+                    border = new Thickness (1, 0, 0, 1);
                     break;
                 case CellLocation.Middle:
                     border = new Thickness (0, 0, 0, 1);
@@ -1293,10 +1457,10 @@ namespace NOP.MMA.GUI.Tabs
                     border = new Thickness (0, 0, 1, 0);
                     break;
                 case CellLocation.BottomRight:
-                    border = new Thickness (0, 0, 0, 0);
+                    border = new Thickness (0, 1, 0, 0);
                     break;
                 case CellLocation.BottomMiddle:
-                    border = new Thickness (0, 0, 1, 0);
+                    border = new Thickness (0, 0, 0, 0);
                     break;
                 default:
                     break;
