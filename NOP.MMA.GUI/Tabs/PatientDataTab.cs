@@ -1578,6 +1578,22 @@ namespace NOP.MMA.GUI.Tabs
 
                 BuildButtonPanel ();
 
+                #region Open Pregnancy Journal Tab
+                IPregnancyJournal journal = PregnancyJournalRepo.Link.GetEnumerable ().ToList ().Find (item => item.PatientData.ID == Context.ID);
+
+                if ( journal != null )
+                {
+                    SetJournalModel (JournalType.PregnancyJournal, journal);
+
+                    BuildPregnancyJournalDisplay ();
+                    return;
+                }
+
+                ClearDisplay (journalDisplayGrid);
+
+                journalDisplayGrid.Children.Add (BuildCreateJournalButton ("Tilføj Svangerskabsjournal", JournalType.PregnancyJournal));
+                #endregion
+
                 _contentArea.Children.Add (content);
             }
         }
