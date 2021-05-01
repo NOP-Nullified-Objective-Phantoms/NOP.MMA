@@ -44,7 +44,7 @@ namespace NOP.MMA.Core.Journals
 
                 if ( int.TryParse (coreJournalData[ 0 ].Replace ("JournalID", string.Empty), out int _id) && int.TryParse (coreJournalData[ 2 ], out int _journalDest) )
                 {
-                    if (int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) )
+                    if ( int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) )
                     {
                         ID = _id;
                     }
@@ -108,7 +108,7 @@ namespace NOP.MMA.Core.Journals
 
                         if ( aEntryDataStream != string.Empty )
                         {
-                            if ( aEntryData.Length == 3 && int.TryParse (data[ 9 ], out int _year) )
+                            if ( aEntryData.Length == 3 && int.TryParse (aEntryData[ 2 ], out int _year) )
                             {
                                 AbortionHistoryEntry aEntry = new AbortionHistoryEntry ()
                                 {
@@ -450,12 +450,12 @@ namespace NOP.MMA.Core.Journals
             }
             #endregion
 
-            #region Pregancy History record build [Line 2]
+            #region Abortion History record build [Line 2]
             string abortionsString = string.Empty;
 
             for ( int i = 0; i < Abortions.History.Count; i++ )
             {
-                pregnanciesString += $"{( ( Abortions.History[ i ].PlannedAbortionGA != null ) ? ( Abortions.History[ i ].PlannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( Abortions.History[ i ].UnplannedAbortionGA != null ) ? ( Abortions.History[ i ].UnplannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{Abortions.History[ i ].Year}";
+                abortionsString += $"{( ( Abortions.History[ i ].PlannedAbortionGA != null ) ? ( Abortions.History[ i ].PlannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( Abortions.History[ i ].UnplannedAbortionGA != null ) ? ( Abortions.History[ i ].UnplannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{Abortions.History[ i ].Year}";
 
                 if ( i != Abortions.History.Count - 1 )
                 {

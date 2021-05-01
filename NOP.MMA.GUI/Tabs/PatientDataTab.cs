@@ -542,6 +542,320 @@ namespace NOP.MMA.GUI.Tabs
         private void BuildPregnancyJournalDisplay ()
         {
             ClearDisplay (journalDisplayGrid);
+
+            ScrollViewer scroll = new ScrollViewer ()
+            {
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            };
+
+            #region Display Grid
+            Grid display = new Grid ();
+            display.RowDefinitions.Add (BuildRow (1, 40));
+            display.RowDefinitions.Add (BuildRow (4, 160));
+            display.RowDefinitions.Add (BuildRow (5, 200));
+            display.RowDefinitions.Add (BuildRow (4, 160));
+            display.RowDefinitions.Add (BuildRow (5, 200));
+            display.RowDefinitions.Add (BuildRow (5, 200));
+            display.RowDefinitions.Add (BuildRow (3, 120));
+            display.RowDefinitions.Add (BuildRow (12, 240));
+            #endregion
+
+            scroll.Content = display;
+
+            #region Header
+            Label headerText = new Label ()
+            {
+                Content = "Svangerskabsjournal",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                FontWeight = FontWeights.Bold,
+                FontSize = 20,
+            };
+
+            Grid.SetRow (headerText, 0);
+            display.Children.Add (headerText);
+            #endregion
+
+            #region Patient Data Area
+            Grid patientDataGrid = new Grid ();
+            patientDataGrid.RowDefinitions.Add (BuildRow (1, 40));
+            patientDataGrid.RowDefinitions.Add (BuildRow (1, 40));
+            patientDataGrid.RowDefinitions.Add (BuildRow (1, 40));
+            patientDataGrid.RowDefinitions.Add (BuildRow (1, 40));
+            patientDataGrid.ColumnDefinitions.Add (BuildColumn (1));
+            patientDataGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Border patientDataAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 0, 10, 0)
+            };
+
+            patientDataAreaBorder.Child = patientDataGrid;
+
+            Grid.SetRow (patientDataAreaBorder, 1);
+            display.Children.Add (patientDataAreaBorder);
+
+            #region Left Column
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Personnummer, Navn", $"{pregnancyJournalModel.PatientData.SSN}, {pregnancyJournalModel.PatientData.Name}", CellLocation.TopLeft, 0, 0));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Addresse", pregnancyJournalModel.PatientData.Address, CellLocation.MiddleLeft, 1, 0));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Email", pregnancyJournalModel.PatientData.Email, CellLocation.MiddleLeft, 2, 0));
+
+            Grid phoneArea = new Grid ();
+            phoneArea.ColumnDefinitions.Add (BuildColumn (1));
+            phoneArea.ColumnDefinitions.Add (BuildColumn (1));
+
+            phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Privat/Mobil", pregnancyJournalModel.PatientData.PrivatePhone, CellLocation.BottomLeft, 0, 0));
+            phoneArea.Children.Add (BuildTextFieldCell ("Tlf. Arbejde", pregnancyJournalModel.PatientData.WorkPhone, CellLocation.BottomLeft, 0, 1));
+
+            Grid.SetRow (phoneArea, 3);
+            Grid.SetColumn (phoneArea, 0);
+            patientDataGrid.Children.Add (phoneArea);
+            #endregion
+
+            #region Right Column
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Navn", pregnancyJournalModel.PatientData.DoctorsName, CellLocation.TopMiddle, 0, 1));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Adresse", pregnancyJournalModel.PatientData.DoctorsAddress, CellLocation.TopMiddle, 1, 1));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Email", string.Empty, CellLocation.TopMiddle, 2, 1));
+            patientDataGrid.Children.Add (BuildTextFieldCell ("Lægens Tlf.", pregnancyJournalModel.PatientData.DoctorsPhone, CellLocation.BottomMiddle, 3, 1));
+            #endregion
+            #endregion
+
+            #region Social Info
+            Grid socialInfoGrid = new Grid ();
+            socialInfoGrid.RowDefinitions.Add (BuildRow (1, 40));
+            socialInfoGrid.RowDefinitions.Add (BuildRow (1, 40));
+            socialInfoGrid.RowDefinitions.Add (BuildRow (1, 40));
+            socialInfoGrid.RowDefinitions.Add (BuildRow (1, 40));
+
+            Border socialInfoBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+
+            socialInfoBorder.Child = socialInfoGrid;
+
+            Grid.SetRow (socialInfoBorder, 2);
+            display.Children.Add (socialInfoBorder);
+
+
+            #region Civil Status
+            Grid civilStatusGrid = new Grid ();
+            civilStatusGrid.RowDefinitions.Add (BuildRow (1));
+            civilStatusGrid.RowDefinitions.Add (BuildRow (1));
+            civilStatusGrid.ColumnDefinitions.Add (BuildColumn (1));
+            civilStatusGrid.ColumnDefinitions.Add (BuildColumn (2));
+            civilStatusGrid.ColumnDefinitions.Add (BuildColumn (2));
+
+            Grid.SetRow (civilStatusGrid, 0);
+            Grid.SetColumn (civilStatusGrid, 0);
+            Grid.SetRowSpan (civilStatusGrid, 2);
+            socialInfoGrid.Children.Add (civilStatusGrid);
+
+            UIElement civilStatusLabel = BuildListItemCell ("Civilstand", CellLocation.TopLeft, 0, 0, true, true, 20);
+            Grid.SetRowSpan (civilStatusLabel, 2);
+            civilStatusGrid.Children.Add (civilStatusLabel);
+
+            #region Civil Status Values
+            Grid civilStatusValueGrid = new Grid ();
+            civilStatusValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            civilStatusValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            civilStatusValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            civilStatusValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            civilStatusValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (civilStatusValueGrid, 0);
+            Grid.SetColumn (civilStatusValueGrid, 1);
+
+            civilStatusValueGrid.Children.Add (BuildBooleanFieldCell ("Sæt X", "Ugift", ( pregnancyJournalModel.PatientData.CivilStatus == MaritalStatus.UnMarried ), CellLocation.TopMiddle, 0, 0));
+            civilStatusValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Gift", ( pregnancyJournalModel.PatientData.CivilStatus == MaritalStatus.Married ), CellLocation.TopMiddle, 0, 1));
+            civilStatusValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Seperaret", ( pregnancyJournalModel.PatientData.CivilStatus == MaritalStatus.Seperated ), CellLocation.TopMiddle, 0, 2));
+            civilStatusValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fraskildt", ( pregnancyJournalModel.PatientData.CivilStatus == MaritalStatus.Divorced ), CellLocation.TopMiddle, 0, 3));
+            civilStatusValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Enke", ( pregnancyJournalModel.PatientData.CivilStatus == MaritalStatus.Widowed ), CellLocation.TopLeft, 0, 4));
+
+            civilStatusGrid.Children.Add (civilStatusValueGrid);
+            #endregion
+
+            #region Cohabitable Values
+            Grid cohabitableValueGrid = new Grid ();
+            cohabitableValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            cohabitableValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (cohabitableValueGrid, 0);
+            Grid.SetColumn (cohabitableValueGrid, 2);
+
+            cohabitableValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Samboende", pregnancyJournalModel.PatientData.Cohibitable, CellLocation.TopMiddle, 0, 0));
+            cohabitableValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Enlig", !pregnancyJournalModel.PatientData.Cohibitable, CellLocation.TopMiddle, 0, 1));
+
+            civilStatusGrid.Children.Add (cohabitableValueGrid);
+            #endregion
+
+            #region Childs Fathers Info
+            civilStatusGrid.Children.Add (BuildTextFieldCell ("Barnefars Navn", pregnancyJournalModel.PatientData.ChildFathersName, CellLocation.TopLeft, 1, 1));
+            civilStatusGrid.Children.Add (BuildTextFieldCell ("Personnummer", pregnancyJournalModel.PatientData.ChildFathersSSN, CellLocation.TopMiddle, 1, 2));
+            #endregion
+            #endregion
+
+            #region Language
+            Grid languageGrid = new Grid ();
+            languageGrid.RowDefinitions.Add (BuildRow (1));
+            languageGrid.ColumnDefinitions.Add (BuildColumn (1));
+            languageGrid.ColumnDefinitions.Add (BuildColumn (1));
+            languageGrid.ColumnDefinitions.Add (BuildColumn (2));
+            languageGrid.ColumnDefinitions.Add (BuildColumn (2));
+
+            Grid.SetRow (languageGrid, 2);
+            Grid.SetColumn (languageGrid, 0);
+            socialInfoGrid.Children.Add (languageGrid);
+
+            languageGrid.Children.Add (BuildListItemCell ("Sprog", CellLocation.TopLeft, 0, 0, true, true, 20));
+
+            #region Need Translator
+            Grid transGrid = new Grid ();
+            transGrid.ColumnDefinitions.Add (BuildColumn (1));
+            transGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (transGrid, 0);
+            Grid.SetColumn (transGrid, 1);
+
+            transGrid.Children.Add (BuildBooleanFieldCell ("Behov for tolkebistand", "Ja", pregnancyJournalModel.PatientData.NeedTranslator, CellLocation.TopMiddle, 0, 0));
+            transGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.PatientData.NeedTranslator, CellLocation.TopLeft, 0, 1));
+
+            languageGrid.Children.Add (transGrid);
+            #endregion
+
+            languageGrid.Children.Add (BuildTextFieldCell ("Hvis ja, hvilket sprog", pregnancyJournalModel.PatientData.TranslatorLanguage, CellLocation.TopLeft, 0, 2));
+            languageGrid.Children.Add (BuildTextFieldCell ("National oprindelse", pregnancyJournalModel.PatientData.Nationality, CellLocation.TopMiddle, 0, 3));
+            #endregion
+
+            socialInfoGrid.Children.Add (BuildTextFieldCell ("Supplerende oplysninger", pregnancyJournalModel.PatientData.OtherInfo, CellLocation.BottomMiddle, 3, 0));
+            #endregion
+
+            #region Pregnancies
+            Grid pregnanciesGrid = new Grid ();
+            #region Rows = 5
+            pregnanciesGrid.RowDefinitions.Add (BuildRow (1, 40));
+            pregnanciesGrid.RowDefinitions.Add (BuildRow (1, 40));
+            pregnanciesGrid.RowDefinitions.Add (BuildRow (1, 40));
+            pregnanciesGrid.RowDefinitions.Add (BuildRow (1, 40));
+            pregnanciesGrid.RowDefinitions.Add (BuildRow (1, 40));
+            #endregion
+            #region Columns = 10
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            pregnanciesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            #endregion
+
+            Border pregnanciesAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+            Grid.SetRow (pregnanciesAreaBorder, 3);
+
+            pregnanciesAreaBorder.Child = pregnanciesGrid;
+            display.Children.Add (pregnanciesAreaBorder);
+
+            pregnanciesGrid.Children.Add (BuildListItemCell ("År", CellLocation.TopLeft, 0, 0, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Levende", CellLocation.TopLeft, 0, 1, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Død", CellLocation.TopLeft, 0, 2, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Køn", CellLocation.TopLeft, 0, 3, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("GA", CellLocation.TopLeft, 0, 4, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Vægt", CellLocation.TopLeft, 0, 5, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Fødested", CellLocation.TopLeft, 0, 6, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Graviditetsforløb", CellLocation.TopLeft, 0, 7, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Fødselsoplevelse (God, Neutral, Dårlig)", CellLocation.TopLeft, 0, 8, true));
+            pregnanciesGrid.Children.Add (BuildListItemCell ("Barns nuværende tilsand", CellLocation.TopMiddle, 0, 9, true));
+
+            if ( pregnancyJournalModel.Pregnancies.History != null && pregnancyJournalModel.Pregnancies.History.Count > 0 )
+            {
+                for ( int row = 0; row < pregnancyJournalModel.Pregnancies.History.Count; row++ )
+                {
+                    pregnanciesGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Pregnancies.History[ row ].Year.ToString (), CellLocation.TopLeft, row + 1, 0));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (( ( pregnancyJournalModel.Pregnancies.History[ row ].BornAlive ) ? ( "Ja" ) : ( "Nej" ) ), CellLocation.TopLeft, row + 1, 1));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (( ( pregnancyJournalModel.Pregnancies.History[ row ].StillBorn ) ? ( "Ja" ) : ( "Nej" ) ), CellLocation.TopLeft, row + 1, 2));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (( ( pregnancyJournalModel.Pregnancies.History[ row ].Male ) ? ( "Dreng" ) : ( "Pige" ) ), CellLocation.TopLeft, row + 1, 3));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Pregnancies.History[ row ].GestationAge, CellLocation.TopLeft, row + 1, 4));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Pregnancies.History[ row ].Weight.ToString ("0.00"), CellLocation.TopLeft, row + 1, 5));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Pregnancies.History[ row ].PlaceOfBirth, CellLocation.TopLeft, row + 1, 6));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Pregnancies.History[ row ].PregnancyProgress, CellLocation.TopLeft, row + 1, 7));
+                    string experience = string.Empty;
+                    switch ( pregnancyJournalModel.Pregnancies.History[ row ].PregnancyExperience )
+                    {
+                        case Core.Experience.Good:
+                            experience = "God";
+                            break;
+                        case Core.Experience.Neutral:
+                            experience = "Neutral";
+                            break;
+                        case Core.Experience.Bad:
+                            experience = "Dårlig";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    pregnanciesGrid.Children.Add (BuildListItemCell (experience, CellLocation.TopLeft, row + 1, 8));
+                    pregnanciesGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Pregnancies.History[ row ].CurrentStatusOfChild, CellLocation.TopMiddle, row + 1, 9));
+
+                }
+            }
+            #endregion 
+
+            #region Abortions
+            Grid abortionsGrid = new Grid ();
+            #region Rows = 5
+            abortionsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            abortionsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            abortionsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            abortionsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            abortionsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            #endregion
+            #region Columns = 3
+            abortionsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            abortionsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            abortionsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            #endregion
+
+            Border abortionsAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+            Grid.SetRow (abortionsAreaBorder, 4);
+
+            abortionsAreaBorder.Child = abortionsGrid;
+            display.Children.Add (abortionsAreaBorder);
+
+            abortionsGrid.Children.Add (BuildListItemCell ("År", CellLocation.TopLeft, 0, 0, true));
+            abortionsGrid.Children.Add (BuildListItemCell ("Provokeret Uge", CellLocation.TopLeft, 0, 1, true));
+            abortionsGrid.Children.Add (BuildListItemCell ("Spontan Uge", CellLocation.TopMiddle, 0, 2, true));
+
+            if ( pregnancyJournalModel.Abortions.History != null && pregnancyJournalModel.Abortions.History.Count > 0 )
+            {
+                for ( int row = 0; row < pregnancyJournalModel.Abortions.History.Count; row++ )
+                {
+                    abortionsGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Abortions.History[ row ].Year.ToString (), CellLocation.TopLeft, row + 1, 0));
+                    abortionsGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Abortions.History[ row ].PlannedAbortionGA, CellLocation.TopLeft, row + 1, 1));
+                    abortionsGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Abortions.History[ row ].UnplannedAbortionGA, CellLocation.TopMiddle, row + 1, 2));
+                }
+            }
+            #endregion 
+            journalDisplayGrid.Children.Add (scroll);
         }
 
         private void BuildTravelerJournalDisplay ()
@@ -925,7 +1239,7 @@ namespace NOP.MMA.GUI.Tabs
             journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
             journalCommentsGrid.RowDefinitions.Add (BuildRow (1, 40));
             #endregion
-            #region Columns = 4
+            #region Columns = 2
             journalCommentsGrid.ColumnDefinitions.Add (BuildColumn (1));
             journalCommentsGrid.ColumnDefinitions.Add (BuildColumn (11));
             #endregion
@@ -1051,7 +1365,7 @@ namespace NOP.MMA.GUI.Tabs
 
             #region Ultrasound scans
             Grid ultraGrid = new Grid ();
-            #region Rows = 4
+            #region Rows = 5
             ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
             ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
             ultraGrid.RowDefinitions.Add (BuildRow (1, 40));
@@ -1279,8 +1593,10 @@ namespace NOP.MMA.GUI.Tabs
         /// <param name="_row">Which row on the <see cref="Grid"/> the cell should be placed in</param>
         /// <param name="_column">Which column on the <see cref="Grid"/> the cell should be placed in</param>
         /// <param name="_bold">Whether or not the <paramref name="_content"/> should be bold or not</param>
+        /// <param name="_center">Whether or not to center the content of the cell</param>
+        /// <param name="_fontSize">The size of the text in the cell</param>
         /// <returns></returns>
-        private UIElement BuildListItemCell ( string _content, CellLocation _cellLoc, int _row, int _column, bool _bold = false )
+        private UIElement BuildListItemCell ( string _content, CellLocation _cellLoc, int _row, int _column, bool _bold = false, bool _center = false, double _fontSize = 12 )
         {
             Border cellBorder = new Border ()
             {
@@ -1300,6 +1616,9 @@ namespace NOP.MMA.GUI.Tabs
                 Content = _content,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalContentAlignment = ( ( _center ) ? ( HorizontalAlignment.Center ) : ( HorizontalAlignment.Left ) ),
+                VerticalContentAlignment = ( ( _center ) ? ( VerticalAlignment.Center ) : ( VerticalAlignment.Top ) ),
+                FontSize = _fontSize,
                 FontWeight = ( ( _bold ) ? ( FontWeights.Bold ) : ( FontWeights.Normal ) )
             };
 
@@ -1578,6 +1897,8 @@ namespace NOP.MMA.GUI.Tabs
 
                 BuildButtonPanel ();
 
+                _contentArea.Children.Add (content);
+
                 #region Open Pregnancy Journal Tab
                 IPregnancyJournal journal = PregnancyJournalRepo.Link.GetEnumerable ().ToList ().Find (item => item.PatientData.ID == Context.ID);
 
@@ -1589,12 +1910,8 @@ namespace NOP.MMA.GUI.Tabs
                     return;
                 }
 
-                ClearDisplay (journalDisplayGrid);
-
                 journalDisplayGrid.Children.Add (BuildCreateJournalButton ("Tilføj Svangerskabsjournal", JournalType.PregnancyJournal));
                 #endregion
-
-                _contentArea.Children.Add (content);
             }
         }
 
