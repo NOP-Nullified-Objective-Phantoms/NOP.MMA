@@ -18,7 +18,7 @@ namespace NOP.MMA.Core.Journals
             HIV = new Screening ();
             Syphilis = new Screening ();
             Clamydia = new Screening ();
-            Gonore = new Screening ();
+            Gonorrhea = new Screening ();
             Hemoglobinopathy = new Screening ();
         }
 
@@ -26,7 +26,7 @@ namespace NOP.MMA.Core.Journals
         public Screening HIV { get; set; }
         public Screening Syphilis { get; set; }
         public Screening Clamydia { get; set; }
-        public Screening Gonore { get; set; }
+        public Screening Gonorrhea { get; set; }
         public Screening Hemoglobinopathy { get; set; }
         public DateTime DVataminReadingDate { get; set; }
         public string DVataminReadingResult { get; set; }

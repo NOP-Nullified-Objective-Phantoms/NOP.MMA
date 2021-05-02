@@ -557,8 +557,8 @@ namespace NOP.MMA.GUI.Tabs
             display.RowDefinitions.Add (BuildRow (4, 160));
             display.RowDefinitions.Add (BuildRow (5, 200));
             display.RowDefinitions.Add (BuildRow (21, 840));
-            display.RowDefinitions.Add (BuildRow (3, 120));
-            display.RowDefinitions.Add (BuildRow (12, 240));
+            display.RowDefinitions.Add (BuildRow (7, 280));
+            display.RowDefinitions.Add (BuildRow (12, 480));
             #endregion
 
             scroll.Content = display;
@@ -877,9 +877,6 @@ namespace NOP.MMA.GUI.Tabs
             anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
             anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
             anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
-            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
-            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
-            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
             #endregion
 
             Border ananmneseAreaBorder = new Border ()
@@ -896,10 +893,10 @@ namespace NOP.MMA.GUI.Tabs
             #region Termin
             Grid terminsGrid = new Grid ();
             terminsGrid.ColumnDefinitions.Add (BuildColumn (1));
-            terminsGrid.ColumnDefinitions.Add (BuildColumn (2));
-            terminsGrid.ColumnDefinitions.Add (BuildColumn (2));
-            terminsGrid.ColumnDefinitions.Add (BuildColumn (2));
-            terminsGrid.ColumnDefinitions.Add (BuildColumn (4));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (1));
             Grid.SetRow (terminsGrid, 0);
             Grid.SetColumn (terminsGrid, 0);
             Grid.SetRowSpan (terminsGrid, 1);
@@ -916,8 +913,8 @@ namespace NOP.MMA.GUI.Tabs
             #region Fertility
             Grid fertilityGrid = new Grid ();
             fertilityGrid.ColumnDefinitions.Add (BuildColumn (1));
-            fertilityGrid.ColumnDefinitions.Add (BuildColumn (5));
-            fertilityGrid.ColumnDefinitions.Add (BuildColumn (5));
+            fertilityGrid.ColumnDefinitions.Add (BuildColumn (2));
+            fertilityGrid.ColumnDefinitions.Add (BuildColumn (2));
             Grid.SetRow (fertilityGrid, 1);
             Grid.SetColumn (fertilityGrid, 0);
             Grid.SetRowSpan (fertilityGrid, 1);
@@ -1312,7 +1309,7 @@ namespace NOP.MMA.GUI.Tabs
             tobaccoGrid.Children.Add (rehabGrid);
 
             rehabGrid.Children.Add (BuildBooleanFieldCell ("Ønsker rygeafvænningstilbud", "Ja", pregnancyJournalModel.Anamnese.TobaccoInfo.RequestedRehab, CellLocation.TopMiddle, 0, 0));
-            rehabGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.TobaccoInfo.RequestedRehab, CellLocation.TopLeft, 0, 1));
+            rehabGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.TobaccoInfo.RequestedRehab, CellLocation.TopMiddle, 0, 1));
             #endregion
             #endregion
 
@@ -1356,7 +1353,7 @@ namespace NOP.MMA.GUI.Tabs
             alcoholGrid.Children.Add (multipleGrid);
 
             multipleGrid.Children.Add (BuildBooleanFieldCell ("Flere ved samme lejlighed (Evt. Bemærkninger under Samlet Vurtdering)", "Ja", pregnancyJournalModel.Anamnese.AlcoholInfo.MultiplePrSession, CellLocation.TopMiddle, 0, 0));
-            multipleGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.AlcoholInfo.MultiplePrSession, CellLocation.TopLeft, 0, 1));
+            multipleGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.AlcoholInfo.MultiplePrSession, CellLocation.TopMiddle, 0, 1));
             #endregion
             #endregion
 
@@ -1396,17 +1393,379 @@ namespace NOP.MMA.GUI.Tabs
             dietGrid.RowDefinitions.Add (BuildRow (1));
             dietGrid.ColumnDefinitions.Add (BuildColumn (1));
             dietGrid.ColumnDefinitions.Add (BuildColumn (4));
-
             Grid.SetRow (dietGrid, 17);
             Grid.SetColumn (dietGrid, 0);
             Grid.SetRowSpan (dietGrid, 1);
             anamneseGrid.Children.Add (dietGrid);
 
-            UIElement dietLabel = BuildListItemCell ("Kost og motion", CellLocation.TopLeft, 0, 0, true, true, 14);
+            UIElement dietLabel = BuildListItemCell ("Kost og motion", CellLocation.BottomLeft, 0, 0, true, true, 14);
             Grid.SetRowSpan (dietLabel, 1);
             dietGrid.Children.Add (dietLabel);
 
-            dietGrid.Children.Add (BuildTextFieldCell ("Evt. Bemærkninger", pregnancyJournalModel.Anamnese.DietAndActivity, CellLocation.TopMiddle, 0, 1));
+            dietGrid.Children.Add (BuildTextFieldCell ("Evt. Bemærkninger", pregnancyJournalModel.Anamnese.DietAndActivity, CellLocation.BottomMiddle, 0, 1));
+            #endregion
+            #endregion
+
+            #region Investegations
+            Grid investegationsGrid = new Grid ();
+            #region Rows = 7
+            investegationsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            investegationsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            investegationsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            investegationsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            investegationsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            investegationsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            investegationsGrid.RowDefinitions.Add (BuildRow (1, 40));
+            #endregion
+
+            Border investegationsAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+            Grid.SetRow (investegationsAreaBorder, 6);
+
+            investegationsAreaBorder.Child = investegationsGrid;
+            display.Children.Add (investegationsAreaBorder);
+
+            #region General Screening
+            Grid generalScreeningsGrid = new Grid ();
+            generalScreeningsGrid.RowDefinitions.Add (BuildRow (1));
+            generalScreeningsGrid.RowDefinitions.Add (BuildRow (1));
+            generalScreeningsGrid.RowDefinitions.Add (BuildRow (1));
+            generalScreeningsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            generalScreeningsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            generalScreeningsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            generalScreeningsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            Grid.SetRow (generalScreeningsGrid, 0);
+            Grid.SetColumn (generalScreeningsGrid, 0);
+            Grid.SetRowSpan (generalScreeningsGrid, 3);
+            investegationsGrid.Children.Add (generalScreeningsGrid);
+
+            UIElement generalScreeningsLabel = BuildListItemCell ("Generel screening", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (generalScreeningsLabel, 3);
+            generalScreeningsGrid.Children.Add (generalScreeningsLabel);
+
+            #region Hep B
+            Grid hepBGrid = new Grid ();
+            hepBGrid.RowDefinitions.Add (BuildRow (1));
+            hepBGrid.RowDefinitions.Add (BuildRow (1));
+            hepBGrid.RowDefinitions.Add (BuildRow (1));
+            Grid.SetRow (hepBGrid, 0);
+            Grid.SetColumn (hepBGrid, 1);
+            Grid.SetRowSpan (hepBGrid, 3);
+            generalScreeningsGrid.Children.Add (hepBGrid);
+
+            hepBGrid.Children.Add (BuildListItemCell ("Hep B", CellLocation.TopLeft, 0, 0, true, true));
+            hepBGrid.Children.Add (BuildTextFieldCell ("Dato", pregnancyJournalModel.Investegations.HepB.Date.ToShortDateString (), CellLocation.TopLeft, 1, 0));
+
+            Grid hepBValueGrid = new Grid ();
+            hepBValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            hepBValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            hepBValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (hepBValueGrid, 2);
+            hepBGrid.Children.Add (hepBValueGrid);
+
+            hepBValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Positiv", ( pregnancyJournalModel.Investegations.HepB.Result == ScreeningInfo.Positive ), CellLocation.TopMiddle, 0, 0));
+            hepBValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", ( pregnancyJournalModel.Investegations.HepB.Result == ScreeningInfo.Negativ ), CellLocation.TopMiddle, 0, 1));
+            hepBValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fravalgt", ( pregnancyJournalModel.Investegations.HepB.Result == ScreeningInfo.OptOut ), CellLocation.TopLeft, 0, 2));
+            #endregion
+
+            #region HIV
+            Grid hivGrid = new Grid ();
+            hivGrid.RowDefinitions.Add (BuildRow (1));
+            hivGrid.RowDefinitions.Add (BuildRow (1));
+            hivGrid.RowDefinitions.Add (BuildRow (1));
+            Grid.SetRow (hivGrid, 0);
+            Grid.SetColumn (hivGrid, 2);
+            Grid.SetRowSpan (hivGrid, 3);
+            generalScreeningsGrid.Children.Add (hivGrid);
+
+            hivGrid.Children.Add (BuildListItemCell ("HIV", CellLocation.TopLeft, 0, 0, true, true));
+            hivGrid.Children.Add (BuildTextFieldCell ("Dato", pregnancyJournalModel.Investegations.HIV.Date.ToShortDateString (), CellLocation.TopLeft, 1, 0));
+
+            Grid hivValueGrid = new Grid ();
+            hivValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            hivValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            hivValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (hivValueGrid, 2);
+            hivGrid.Children.Add (hivValueGrid);
+
+            hivValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Positiv", ( pregnancyJournalModel.Investegations.HIV.Result == ScreeningInfo.Positive ), CellLocation.TopMiddle, 0, 0));
+            hivValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", ( pregnancyJournalModel.Investegations.HIV.Result == ScreeningInfo.Negativ ), CellLocation.TopMiddle, 0, 1));
+            hivValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fravalgt", ( pregnancyJournalModel.Investegations.HIV.Result == ScreeningInfo.OptOut ), CellLocation.TopLeft, 0, 2));
+            #endregion
+
+            #region Syphilis
+            Grid syfGrid = new Grid ();
+            syfGrid.RowDefinitions.Add (BuildRow (1));
+            syfGrid.RowDefinitions.Add (BuildRow (1));
+            syfGrid.RowDefinitions.Add (BuildRow (1));
+            Grid.SetRow (syfGrid, 0);
+            Grid.SetColumn (syfGrid, 3);
+            Grid.SetRowSpan (syfGrid, 3);
+            generalScreeningsGrid.Children.Add (syfGrid);
+
+            syfGrid.Children.Add (BuildListItemCell ("Syfilis", CellLocation.TopMiddle, 0, 0, true, true));
+            syfGrid.Children.Add (BuildTextFieldCell ("Dato", pregnancyJournalModel.Investegations.Syphilis.Date.ToShortDateString (), CellLocation.TopMiddle, 1, 0));
+
+            Grid syfValueGrid = new Grid ();
+            syfValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            syfValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            syfValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (syfValueGrid, 2);
+            syfGrid.Children.Add (syfValueGrid);
+
+            syfValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Positiv", ( pregnancyJournalModel.Investegations.Syphilis.Result == ScreeningInfo.Positive ), CellLocation.TopMiddle, 0, 0));
+            syfValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", ( pregnancyJournalModel.Investegations.Syphilis.Result == ScreeningInfo.Negativ ), CellLocation.TopMiddle, 0, 1));
+            syfValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fravalgt", ( pregnancyJournalModel.Investegations.Syphilis.Result == ScreeningInfo.OptOut ), CellLocation.TopMiddle, 0, 2));
+            #endregion
+            #endregion
+
+            #region Selective Screening
+            Grid selectiveScreeningsGrid = new Grid ();
+            selectiveScreeningsGrid.RowDefinitions.Add (BuildRow (1));
+            selectiveScreeningsGrid.RowDefinitions.Add (BuildRow (1));
+            selectiveScreeningsGrid.RowDefinitions.Add (BuildRow (1));
+            selectiveScreeningsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            selectiveScreeningsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            selectiveScreeningsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            selectiveScreeningsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            Grid.SetRow (selectiveScreeningsGrid, 3);
+            Grid.SetColumn (selectiveScreeningsGrid, 0);
+            Grid.SetRowSpan (selectiveScreeningsGrid, 3);
+            investegationsGrid.Children.Add (selectiveScreeningsGrid);
+
+            UIElement selectiveScreeningsLabel = BuildListItemCell ("Selektiv screening", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (selectiveScreeningsLabel, 3);
+            selectiveScreeningsGrid.Children.Add (selectiveScreeningsLabel);
+
+            #region Clamydia
+            Grid clamydiaGrid = new Grid ();
+            clamydiaGrid.RowDefinitions.Add (BuildRow (1));
+            clamydiaGrid.RowDefinitions.Add (BuildRow (1));
+            clamydiaGrid.RowDefinitions.Add (BuildRow (1));
+            Grid.SetRow (clamydiaGrid, 0);
+            Grid.SetColumn (clamydiaGrid, 1);
+            Grid.SetRowSpan (clamydiaGrid, 3);
+            selectiveScreeningsGrid.Children.Add (clamydiaGrid);
+
+            clamydiaGrid.Children.Add (BuildListItemCell ("klamydia", CellLocation.TopLeft, 0, 0, true, true));
+            clamydiaGrid.Children.Add (BuildTextFieldCell ("Dato", pregnancyJournalModel.Investegations.Clamydia.Date.ToShortDateString (), CellLocation.TopLeft, 1, 0));
+
+            Grid clamydiaValueGrid = new Grid ();
+            clamydiaValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            clamydiaValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            clamydiaValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (clamydiaValueGrid, 2);
+            clamydiaGrid.Children.Add (clamydiaValueGrid);
+
+            clamydiaValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Positiv", ( pregnancyJournalModel.Investegations.Clamydia.Result == ScreeningInfo.Positive ), CellLocation.TopMiddle, 0, 0));
+            clamydiaValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", ( pregnancyJournalModel.Investegations.Clamydia.Result == ScreeningInfo.Negativ ), CellLocation.TopMiddle, 0, 1));
+            clamydiaValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fravalgt", ( pregnancyJournalModel.Investegations.Clamydia.Result == ScreeningInfo.OptOut ), CellLocation.TopLeft, 0, 2));
+            #endregion
+
+            #region Gonorrhea
+            Grid gonGrid = new Grid ();
+            gonGrid.RowDefinitions.Add (BuildRow (1));
+            gonGrid.RowDefinitions.Add (BuildRow (1));
+            gonGrid.RowDefinitions.Add (BuildRow (1));
+            Grid.SetRow (gonGrid, 0);
+            Grid.SetColumn (gonGrid, 2);
+            Grid.SetRowSpan (gonGrid, 3);
+            selectiveScreeningsGrid.Children.Add (gonGrid);
+
+            gonGrid.Children.Add (BuildListItemCell ("Gonorè", CellLocation.TopLeft, 0, 0, true, true));
+            gonGrid.Children.Add (BuildTextFieldCell ("Dato", pregnancyJournalModel.Investegations.Gonorrhea.Date.ToShortDateString (), CellLocation.TopLeft, 1, 0));
+
+            Grid gonValueGrid = new Grid ();
+            gonValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            gonValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            gonValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (gonValueGrid, 2);
+            gonGrid.Children.Add (gonValueGrid);
+
+            gonValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Positiv", ( pregnancyJournalModel.Investegations.Gonorrhea.Result == ScreeningInfo.Positive ), CellLocation.TopMiddle, 0, 0));
+            gonValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", ( pregnancyJournalModel.Investegations.Gonorrhea.Result == ScreeningInfo.Negativ ), CellLocation.TopMiddle, 0, 1));
+            gonValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fravalgt", ( pregnancyJournalModel.Investegations.Gonorrhea.Result == ScreeningInfo.OptOut ), CellLocation.TopLeft, 0, 2));
+            #endregion
+
+            #region Hemoglobinopathy
+            Grid hemGrid = new Grid ();
+            hemGrid.RowDefinitions.Add (BuildRow (1));
+            hemGrid.RowDefinitions.Add (BuildRow (1));
+            hemGrid.RowDefinitions.Add (BuildRow (1));
+            Grid.SetRow (hemGrid, 0);
+            Grid.SetColumn (hemGrid, 3);
+            Grid.SetRowSpan (hemGrid, 3);
+            selectiveScreeningsGrid.Children.Add (hemGrid);
+
+            hemGrid.Children.Add (BuildListItemCell ("Hæmoglobinopati", CellLocation.TopMiddle, 0, 0, true, true));
+            hemGrid.Children.Add (BuildTextFieldCell ("Dato", pregnancyJournalModel.Investegations.Hemoglobinopathy.Date.ToShortDateString (), CellLocation.TopMiddle, 1, 0));
+
+            Grid hemValueGrid = new Grid ();
+            hemValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            hemValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            hemValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (hemValueGrid, 2);
+            hemGrid.Children.Add (hemValueGrid);
+
+            hemValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Positiv", ( pregnancyJournalModel.Investegations.Hemoglobinopathy.Result == ScreeningInfo.Positive ), CellLocation.TopMiddle, 0, 0));
+            hemValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Negativ", ( pregnancyJournalModel.Investegations.Hemoglobinopathy.Result == ScreeningInfo.Negativ ), CellLocation.TopMiddle, 0, 1));
+            hemValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Fravalgt", ( pregnancyJournalModel.Investegations.Hemoglobinopathy.Result == ScreeningInfo.OptOut ), CellLocation.TopMiddle, 0, 2));
+            #endregion
+            #endregion
+
+            #region D-Vitamin
+            Grid vitaminGrid = new Grid ();
+            vitaminGrid.RowDefinitions.Add (BuildRow (1));
+            vitaminGrid.ColumnDefinitions.Add (BuildColumn (1));
+            vitaminGrid.ColumnDefinitions.Add (BuildColumn (4));
+            vitaminGrid.ColumnDefinitions.Add (BuildColumn (1));
+            vitaminGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (vitaminGrid, 6);
+            Grid.SetColumn (vitaminGrid, 0);
+            Grid.SetRowSpan (vitaminGrid, 1);
+            investegationsGrid.Children.Add (vitaminGrid);
+
+            UIElement vitaminLabel = BuildListItemCell ("D-Vitamin", CellLocation.BottomLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (vitaminLabel, 1);
+            vitaminGrid.Children.Add (vitaminLabel);
+
+            vitaminGrid.Children.Add (BuildListItemCell ("Måles på gravide kvinder med mørk hud eller som bærer en tildækkende påklædning om sommeren", CellLocation.BottomLeft, 0, 1));
+            vitaminGrid.Children.Add (BuildTextFieldCell ("Dato", pregnancyJournalModel.Investegations.DVataminReadingDate.ToShortDateString (), CellLocation.BottomLeft, 0, 2));
+            vitaminGrid.Children.Add (BuildTextFieldCell ("S-25 OH-D (nmol/L)", pregnancyJournalModel.Investegations.DVataminReadingResult, CellLocation.BottomMiddle, 0, 3));
+            #endregion
+            #endregion
+
+            #region Res and Risc
+            Grid resGrid = new Grid ();
+            #region Rows = 11
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            resGrid.RowDefinitions.Add (BuildRow (1, 40));
+            #endregion
+
+            Border resAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+            Grid.SetRow (resAreaBorder, 7);
+
+            resAreaBorder.Child = resGrid;
+            display.Children.Add (resAreaBorder);
+
+            #region Assessement
+            resGrid.Children.Add (BuildListItemCell ("Vurdering udfra foreliggende resultater af anamnese, undersøgelse og psyko-sociale forhold", CellLocation.BottomMiddle, 0, 0, true));
+            UIElement assessement = BuildTextFieldCell (null, pregnancyJournalModel.ResAndRiskAssessement.Assessment, CellLocation.TopMiddle, 1, 0);
+            Grid.SetRowSpan (assessement, 7);
+            resGrid.Children.Add (assessement);
+            #endregion
+
+            #region Niveau Distrubution
+            Grid niveauDisGrid = new Grid ();
+            niveauDisGrid.RowDefinitions.Add (BuildRow (1));
+            niveauDisGrid.RowDefinitions.Add (BuildRow (1));
+            niveauDisGrid.ColumnDefinitions.Add (BuildColumn (1));
+            niveauDisGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (niveauDisGrid, 8);
+            Grid.SetRowSpan (niveauDisGrid, 2);
+            resGrid.Children.Add (niveauDisGrid);
+
+            #region Left
+            #region Niveau Distrubution Values Row 1
+            Grid niveauDisValuesRow1Grid = new Grid ();
+            niveauDisValuesRow1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            niveauDisValuesRow1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (niveauDisValuesRow1Grid, 0);
+            Grid.SetColumn (niveauDisValuesRow1Grid, 0);
+            niveauDisGrid.Children.Add (niveauDisValuesRow1Grid);
+
+            niveauDisValuesRow1Grid.Children.Add (BuildBooleanFieldCell ("Niveaudeling", "Basistilbud", ( pregnancyJournalModel.ResAndRiskAssessement.NiveauDistrubution == NiveauDist.BasicOffer ), CellLocation.BottomMiddle, 0, 0));
+            niveauDisValuesRow1Grid.Children.Add (BuildBooleanFieldCell (string.Empty, "Udvidet basistilbud inklusiv tværfaglig samarbejde", ( pregnancyJournalModel.ResAndRiskAssessement.NiveauDistrubution == NiveauDist.ExtendedBasicOfferAndInterdisciplinaryCollaboration ), CellLocation.BottomLeft, 0, 1));
+            #endregion
+
+            #region Niveau Distrubution Values Row 2
+            Grid niveauDisValuesRow2Grid = new Grid ();
+            niveauDisValuesRow2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            niveauDisValuesRow2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (niveauDisValuesRow2Grid, 2);
+            Grid.SetColumn (niveauDisValuesRow2Grid, 0);
+            niveauDisGrid.Children.Add (niveauDisValuesRow2Grid);
+
+            niveauDisValuesRow2Grid.Children.Add (BuildBooleanFieldCell (string.Empty, "Udvidet basistilbud", ( pregnancyJournalModel.ResAndRiskAssessement.NiveauDistrubution == NiveauDist.ExtendedBasicOffer ), CellLocation.TopMiddle, 0, 0));
+            niveauDisValuesRow2Grid.Children.Add (BuildBooleanFieldCell (string.Empty, "Samarbejde med specialiserede institutioner/familieambulatorium", ( pregnancyJournalModel.ResAndRiskAssessement.NiveauDistrubution == NiveauDist.CollaborationWithSpecializedInstitutions ), CellLocation.TopLeft, 0, 1));
+            #endregion
+            #endregion
+
+            #region Right
+            #region Need Obstetric Assessement
+            Grid obsGrid = new Grid ();
+            obsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            obsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (obsGrid, 0);
+            Grid.SetColumn (obsGrid, 1);
+            niveauDisGrid.Children.Add (obsGrid);
+
+            obsGrid.Children.Add (BuildBooleanFieldCell ("Behov for henvisning til obstetrisk vurdering", "Ja", pregnancyJournalModel.ResAndRiskAssessement.NeedObstetricAssessement, CellLocation.TopMiddle, 0, 0));
+            obsGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.ResAndRiskAssessement.NeedObstetricAssessement, CellLocation.TopMiddle, 0, 1));
+            #endregion
+
+            niveauDisGrid.Children.Add (BuildTextFieldCell ("Hvis ja, angiv årsag", pregnancyJournalModel.ResAndRiskAssessement.ObstetricAssessmentNote, CellLocation.TopMiddle, 1, 1));
+            #endregion
+            #endregion
+
+            #region Social And Health Administration
+            Grid SocGrid = new Grid ();
+            SocGrid.RowDefinitions.Add (BuildRow (1));
+            SocGrid.RowDefinitions.Add (BuildRow (1));
+            SocGrid.ColumnDefinitions.Add (BuildColumn (1));
+            SocGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (SocGrid, 10);
+            Grid.SetRowSpan (SocGrid, 2);
+            resGrid.Children.Add (SocGrid);
+
+            #region Left
+            #region Social And Health Administration Values Row 1
+            Grid SocValuesRow1Grid = new Grid ();
+            SocValuesRow1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            SocValuesRow1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (SocValuesRow1Grid, 0);
+            Grid.SetColumn (SocValuesRow1Grid, 0);
+            SocGrid.Children.Add (SocValuesRow1Grid);
+
+            SocValuesRow1Grid.Children.Add (BuildTextFieldCell ("Undersøgende læge", pregnancyJournalModel.PatientData.DoctorsName, CellLocation.TopLeft, 0, 0));
+            SocValuesRow1Grid.Children.Add (BuildTextFieldCell ("Dato", DateTime.Now.ToShortDateString (), CellLocation.TopLeft, 0, 1));
+            #endregion
+            #endregion
+
+            #region Right
+            #region Need Social And Health Administration
+            Grid needSocGrid = new Grid ();
+            needSocGrid.ColumnDefinitions.Add (BuildColumn (1));
+            needSocGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (needSocGrid, 0);
+            Grid.SetColumn (needSocGrid, 1);
+            SocGrid.Children.Add (needSocGrid);
+
+            needSocGrid.Children.Add (BuildBooleanFieldCell ("Behov for henvisning til Social- og Sunhedsforvaltning", "Ja", pregnancyJournalModel.ResAndRiskAssessement.NeedSocialAndHealthAdministration, CellLocation.TopMiddle, 0, 0));
+            needSocGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.ResAndRiskAssessement.NeedSocialAndHealthAdministration, CellLocation.TopRight, 0, 1));
+            #endregion
+
+            SocGrid.Children.Add (BuildTextFieldCell ("Hvis ja, angiv årsag", pregnancyJournalModel.ResAndRiskAssessement.SocialAndHealthAdministrationNote, CellLocation.BottomRight, 1, 1));
+            #endregion
             #endregion
             #endregion
 
@@ -2325,7 +2684,7 @@ namespace NOP.MMA.GUI.Tabs
                     border = new Thickness (0, 0, 1, 0);
                     break;
                 case CellLocation.BottomRight:
-                    border = new Thickness (0, 1, 0, 0);
+                    border = new Thickness (1, 0, 0, 0);
                     break;
                 case CellLocation.BottomMiddle:
                     border = new Thickness (0, 0, 0, 0);

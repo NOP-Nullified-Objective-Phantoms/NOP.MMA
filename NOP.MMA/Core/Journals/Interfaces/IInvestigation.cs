@@ -28,7 +28,7 @@ namespace NOP.MMA.Core.Journals
         /// <summary>
         /// The result of a Gonore <see cref="Screening"/>
         /// </summary>
-        Screening Gonore { get; set; }
+        Screening Gonorrhea { get; set; }
         /// <summary>
         /// The result of a Hemoglobinopathy <see cref="Screening"/>
         /// </summary>

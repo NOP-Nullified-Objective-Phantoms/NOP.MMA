@@ -330,7 +330,7 @@ namespace NOP.MMA.Core.Journals
                         string[] gonDataStream = investigationStream[ 3 ].Split (",");
                         if ( DateTime.TryParse (gonDataStream[ 0 ], out DateTime _gonDate) && int.TryParse (gonDataStream[ 1 ], out int _gonResult) )
                         {
-                            Investegations.Gonore = new Screening (_gonDate, ( ScreeningInfo ) _gonResult);
+                            Investegations.Gonorrhea = new Screening (_gonDate, ( ScreeningInfo ) _gonResult);
                         }
                         else
                         {
@@ -508,7 +508,7 @@ namespace NOP.MMA.Core.Journals
             investigationString += $"{Investegations.Clamydia.Date.ToString ()},{( int ) Investegations.Clamydia.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.DVataminReadingDate.ToString ()}{OBJECTSEPERATOR}";
             investigationString += $"{( ( Investegations.DVataminReadingResult != null ) ? ( Investegations.DVataminReadingResult.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{OBJECTSEPERATOR}";
-            investigationString += $"{Investegations.Gonore.Date.ToString ()},{( int ) Investegations.Gonore.Result}{OBJECTSEPERATOR}";
+            investigationString += $"{Investegations.Gonorrhea.Date.ToString ()},{( int ) Investegations.Gonorrhea.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.Hemoglobinopathy.Date.ToString ()},{( int ) Investegations.Hemoglobinopathy.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.HepB.Date.ToString ()},{( int ) Investegations.HepB.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.HIV.Date.ToString ()},{( int ) Investegations.HIV.Result}{OBJECTSEPERATOR}";
