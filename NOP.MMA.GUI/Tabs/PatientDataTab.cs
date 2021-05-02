@@ -315,7 +315,7 @@ namespace NOP.MMA.GUI.Tabs
 
                 if ( journal != null )
                 {
-                    SetJournalModel (JournalType.PregnancyJournal, journal);
+                    SetJournalModel (journal);
 
                     BuildPregnancyJournalDisplay ();
                     return;
@@ -365,7 +365,7 @@ namespace NOP.MMA.GUI.Tabs
 
                 if ( journal != null )
                 {
-                    SetJournalModel (JournalType.TravelerJournal, journal);
+                    SetJournalModel (journal);
 
                     BuildTravelerJournalDisplay ();
                     return;
@@ -1167,6 +1167,247 @@ namespace NOP.MMA.GUI.Tabs
             allergyRow2Grid.Children.Add (BuildBooleanFieldCell (string.Empty, "Dobbelt", ( pregnancyJournalModel.Anamnese.Allergies.ChildAllergyRisk == ChildDisposedAllergy.Double ), CellLocation.TopMiddle, 0, 2));
             #endregion
             #endregion
+
+            #region Chronics
+            Grid chronicGrid = new Grid ();
+            chronicGrid.RowDefinitions.Add (BuildRow (1));
+            chronicGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicGrid.ColumnDefinitions.Add (BuildColumn (4));
+
+            Grid.SetRow (chronicGrid, 10);
+            Grid.SetColumn (chronicGrid, 0);
+            Grid.SetRowSpan (chronicGrid, 1);
+            anamneseGrid.Children.Add (chronicGrid);
+
+            UIElement chronicLabel = BuildListItemCell ("Kroniske sygdomme", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (chronicLabel, 1);
+            chronicGrid.Children.Add (chronicLabel);
+
+            Grid chronicValueGrid = new Grid ();
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            chronicValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (chronicValueGrid, 0);
+            Grid.SetColumn (chronicValueGrid, 1);
+            chronicGrid.Children.Add (chronicValueGrid);
+
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Kredsløb", pregnancyJournalModel.Anamnese.ChronicMedicalData.Circulation, CellLocation.TopLeft, 0, 0));
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Luftveje", pregnancyJournalModel.Anamnese.ChronicMedicalData.Airways, CellLocation.TopLeft, 0, 1));
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Thyroidea", pregnancyJournalModel.Anamnese.ChronicMedicalData.Thyroidea, CellLocation.TopLeft, 0, 2));
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Diabetes", pregnancyJournalModel.Anamnese.ChronicMedicalData.Diabetes, CellLocation.TopLeft, 0, 3));
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Epilepsi", pregnancyJournalModel.Anamnese.ChronicMedicalData.Epilepsy, CellLocation.TopLeft, 0, 4));
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Psykisk Sygdom", pregnancyJournalModel.Anamnese.ChronicMedicalData.PsychologicalIllness, CellLocation.TopLeft, 0, 5));
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Herpes Genitalis", pregnancyJournalModel.Anamnese.ChronicMedicalData.HerpesGenitalis, CellLocation.TopLeft, 0, 6));
+            chronicValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Recidiverende UVI", pregnancyJournalModel.Anamnese.ChronicMedicalData.RecurrentUTI, CellLocation.TopMiddle, 0, 7));
+            #endregion
+
+            #region Medicin
+            Grid medicinGrid = new Grid ();
+            medicinGrid.RowDefinitions.Add (BuildRow (1));
+            medicinGrid.ColumnDefinitions.Add (BuildColumn (1));
+            medicinGrid.ColumnDefinitions.Add (BuildColumn (4));
+
+            Grid.SetRow (medicinGrid, 11);
+            Grid.SetColumn (medicinGrid, 0);
+            Grid.SetRowSpan (medicinGrid, 1);
+            anamneseGrid.Children.Add (medicinGrid);
+
+            UIElement medicinLabel = BuildListItemCell ("Medicin", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (medicinLabel, 1);
+            medicinGrid.Children.Add (medicinLabel);
+
+            medicinGrid.Children.Add (BuildTextFieldCell (null, pregnancyJournalModel.Anamnese.Medicin, CellLocation.TopMiddle, 0, 1));
+            #endregion
+
+            #region MFR Vaccination
+            Grid mfrGrid = new Grid ();
+            mfrGrid.RowDefinitions.Add (BuildRow (1));
+            mfrGrid.ColumnDefinitions.Add (BuildColumn (1));
+            mfrGrid.ColumnDefinitions.Add (BuildColumn (4));
+
+            Grid.SetRow (mfrGrid, 12);
+            Grid.SetColumn (mfrGrid, 0);
+            Grid.SetRowSpan (mfrGrid, 1);
+            anamneseGrid.Children.Add (mfrGrid);
+
+            UIElement mfrLabel = BuildListItemCell ("MFR Vaccinationsstatus", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (mfrLabel, 1);
+            mfrGrid.Children.Add (mfrLabel);
+
+            Grid mfrValueGrid = new Grid ();
+            mfrValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            mfrValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            mfrValueGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (mfrValueGrid, 0);
+            Grid.SetColumn (mfrValueGrid, 1);
+            mfrGrid.Children.Add (mfrValueGrid);
+
+            mfrValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Vaccineret", ( pregnancyJournalModel.Anamnese.MMRVaccinated == MMRVaccinationStatus.Vaccinated ), CellLocation.TopMiddle, 0, 0));
+            mfrValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Ikke Vaccineret", ( pregnancyJournalModel.Anamnese.MMRVaccinated == MMRVaccinationStatus.NotVaccinated ), CellLocation.TopMiddle, 0, 1));
+            mfrValueGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Ukendt", ( pregnancyJournalModel.Anamnese.MMRVaccinated == MMRVaccinationStatus.Unknown ), CellLocation.TopMiddle, 0, 2));
+            #endregion
+
+            #region Past Admittance
+            Grid admittanceGrid = new Grid ();
+            admittanceGrid.RowDefinitions.Add (BuildRow (1));
+            admittanceGrid.ColumnDefinitions.Add (BuildColumn (1));
+            admittanceGrid.ColumnDefinitions.Add (BuildColumn (3));
+
+            Grid.SetRow (admittanceGrid, 13);
+            Grid.SetColumn (admittanceGrid, 0);
+            Grid.SetRowSpan (admittanceGrid, 1);
+            anamneseGrid.Children.Add (admittanceGrid);
+
+            UIElement admittanceLabel = BuildListItemCell ("Tidligere indlæggelser og behandlinger af relevans for graviditeter", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (admittanceLabel, 1);
+            admittanceGrid.Children.Add (admittanceLabel);
+
+            admittanceGrid.Children.Add (BuildTextFieldCell (null, pregnancyJournalModel.Anamnese.PastAdmittance, CellLocation.TopMiddle, 0, 1));
+            #endregion
+
+            #region Tobacco
+            Grid tobaccoGrid = new Grid ();
+            tobaccoGrid.RowDefinitions.Add (BuildRow (1));
+            tobaccoGrid.ColumnDefinitions.Add (BuildColumn (1));
+            tobaccoGrid.ColumnDefinitions.Add (BuildColumn (1));
+            tobaccoGrid.ColumnDefinitions.Add (BuildColumn (1));
+            tobaccoGrid.ColumnDefinitions.Add (BuildColumn (1));
+            tobaccoGrid.ColumnDefinitions.Add (BuildColumn (1));
+
+            Grid.SetRow (tobaccoGrid, 14);
+            Grid.SetColumn (tobaccoGrid, 0);
+            Grid.SetRowSpan (tobaccoGrid, 1);
+            anamneseGrid.Children.Add (tobaccoGrid);
+
+            UIElement tobaccoLabel = BuildListItemCell ("Tobak", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (tobaccoLabel, 1);
+            tobaccoGrid.Children.Add (tobaccoLabel);
+
+            #region Smoker
+            Grid SmokerGrid = new Grid ();
+            SmokerGrid.ColumnDefinitions.Add (BuildColumn (1));
+            SmokerGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (SmokerGrid, 0);
+            Grid.SetColumn (SmokerGrid, 1);
+            tobaccoGrid.Children.Add (SmokerGrid);
+
+            SmokerGrid.Children.Add (BuildBooleanFieldCell ("Ryger", "Ja", pregnancyJournalModel.Anamnese.TobaccoInfo.Smoker, CellLocation.TopMiddle, 0, 0));
+            SmokerGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.TobaccoInfo.Smoker, CellLocation.TopLeft, 0, 1));
+            #endregion
+
+            tobaccoGrid.Children.Add (BuildTextFieldCell ("Antal cigaretter pr. dag", pregnancyJournalModel.Anamnese.TobaccoInfo.AmountPrDay.ToString (), CellLocation.TopLeft, 0, 2));
+            tobaccoGrid.Children.Add (BuildTextFieldCell ("Evt. ophørsdato", pregnancyJournalModel.Anamnese.TobaccoInfo.QuitDate.ToShortDateString (), CellLocation.TopLeft, 0, 3));
+
+            #region rehab
+            Grid rehabGrid = new Grid ();
+            rehabGrid.ColumnDefinitions.Add (BuildColumn (1));
+            rehabGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (rehabGrid, 0);
+            Grid.SetColumn (rehabGrid, 4);
+            tobaccoGrid.Children.Add (rehabGrid);
+
+            rehabGrid.Children.Add (BuildBooleanFieldCell ("Ønsker rygeafvænningstilbud", "Ja", pregnancyJournalModel.Anamnese.TobaccoInfo.RequestedRehab, CellLocation.TopMiddle, 0, 0));
+            rehabGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.TobaccoInfo.RequestedRehab, CellLocation.TopLeft, 0, 1));
+            #endregion
+            #endregion
+
+            #region Alchol
+            Grid alcoholGrid = new Grid ();
+            alcoholGrid.RowDefinitions.Add (BuildRow (1));
+            alcoholGrid.ColumnDefinitions.Add (BuildColumn (1));
+            alcoholGrid.ColumnDefinitions.Add (BuildColumn (1));
+            alcoholGrid.ColumnDefinitions.Add (BuildColumn (1));
+            alcoholGrid.ColumnDefinitions.Add (BuildColumn (2));
+
+            Grid.SetRow (alcoholGrid, 15);
+            Grid.SetColumn (alcoholGrid, 0);
+            Grid.SetRowSpan (alcoholGrid, 1);
+            anamneseGrid.Children.Add (alcoholGrid);
+
+            UIElement alcoholLabel = BuildListItemCell ("Alkohol", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (alcoholLabel, 1);
+            alcoholGrid.Children.Add (alcoholLabel);
+
+            #region Drinker
+            Grid drinkerGrid = new Grid ();
+            drinkerGrid.ColumnDefinitions.Add (BuildColumn (1));
+            drinkerGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (drinkerGrid, 0);
+            Grid.SetColumn (drinkerGrid, 1);
+            alcoholGrid.Children.Add (drinkerGrid);
+
+            drinkerGrid.Children.Add (BuildBooleanFieldCell ("Forbrug efter erkendt graviditet", "Ja", pregnancyJournalModel.Anamnese.AlcoholInfo.DuringPregnancy, CellLocation.TopMiddle, 0, 0));
+            drinkerGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.AlcoholInfo.DuringPregnancy, CellLocation.TopLeft, 0, 1));
+            #endregion
+
+            alcoholGrid.Children.Add (BuildTextFieldCell ("Antal genstande pr. dag", pregnancyJournalModel.Anamnese.AlcoholInfo.AmountPrWeek.ToString (), CellLocation.TopLeft, 0, 2));
+
+            #region Multiple Pr. Session
+            Grid multipleGrid = new Grid ();
+            multipleGrid.ColumnDefinitions.Add (BuildColumn (1));
+            multipleGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (multipleGrid, 0);
+            Grid.SetColumn (multipleGrid, 4);
+            alcoholGrid.Children.Add (multipleGrid);
+
+            multipleGrid.Children.Add (BuildBooleanFieldCell ("Flere ved samme lejlighed (Evt. Bemærkninger under Samlet Vurtdering)", "Ja", pregnancyJournalModel.Anamnese.AlcoholInfo.MultiplePrSession, CellLocation.TopMiddle, 0, 0));
+            multipleGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.AlcoholInfo.MultiplePrSession, CellLocation.TopLeft, 0, 1));
+            #endregion
+            #endregion
+
+            #region Other Drugs
+            Grid drugsGrid = new Grid ();
+            drugsGrid.RowDefinitions.Add (BuildRow (1));
+            drugsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            drugsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            drugsGrid.ColumnDefinitions.Add (BuildColumn (3));
+
+            Grid.SetRow (drugsGrid, 16);
+            Grid.SetColumn (drugsGrid, 0);
+            Grid.SetRowSpan (drugsGrid, 1);
+            anamneseGrid.Children.Add (drugsGrid);
+
+            UIElement drugsLabel = BuildListItemCell ("Andre Rusmidler", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (drugsLabel, 1);
+            drugsGrid.Children.Add (drugsLabel);
+
+            #region Use of Drugs
+            Grid useOfDrugsGrid = new Grid ();
+            useOfDrugsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            useOfDrugsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (useOfDrugsGrid, 0);
+            Grid.SetColumn (useOfDrugsGrid, 1);
+            drugsGrid.Children.Add (useOfDrugsGrid);
+
+            useOfDrugsGrid.Children.Add (BuildBooleanFieldCell ("Forbrug efter erkendt graviditet", "Ja", pregnancyJournalModel.Anamnese.OtherDrugs, CellLocation.TopMiddle, 0, 0));
+            useOfDrugsGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.OtherDrugs, CellLocation.TopLeft, 0, 1));
+            #endregion
+
+            drugsGrid.Children.Add (BuildTextFieldCell ("Uddybes", pregnancyJournalModel.Anamnese.OtherDrugsComment, CellLocation.TopMiddle, 0, 2));
+            #endregion
+
+            #region Diet
+            Grid dietGrid = new Grid ();
+            dietGrid.RowDefinitions.Add (BuildRow (1));
+            dietGrid.ColumnDefinitions.Add (BuildColumn (1));
+            dietGrid.ColumnDefinitions.Add (BuildColumn (4));
+
+            Grid.SetRow (dietGrid, 17);
+            Grid.SetColumn (dietGrid, 0);
+            Grid.SetRowSpan (dietGrid, 1);
+            anamneseGrid.Children.Add (dietGrid);
+
+            UIElement dietLabel = BuildListItemCell ("Kost og motion", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (dietLabel, 1);
+            dietGrid.Children.Add (dietLabel);
+
+            dietGrid.Children.Add (BuildTextFieldCell ("Evt. Bemærkninger", pregnancyJournalModel.Anamnese.DietAndActivity, CellLocation.TopMiddle, 0, 1));
+            #endregion
             #endregion
 
             journalDisplayGrid.Children.Add (scroll);
@@ -1944,7 +2185,12 @@ namespace NOP.MMA.GUI.Tabs
         /// <summary>
         /// Build a cell containing a header <see cref="Label"/> and a content <see cref="TextBox"/>
         /// </summary>
-        /// <param name="_headerText">The text to apply to the header <see cref="Label"/></param>
+        /// <param name="_headerText">The text to apply to the header <see cref="Label"/>
+        /// <br/>
+        /// If <see langword="null"/>: The <paramref name="_headerText"/> <see cref="UIElement"/> will not be displayd
+        /// <br/>
+        /// If <see cref="String.Empty"/>: The header <see cref="UIElement"/> is not displayed but it's space is reserved
+        /// </param>
         /// <param name="_content">The content of the <see cref="TextBox"/></param>
         /// <param name="_cellLoc">Where on the <see cref="Grid"/> the cell is located. (<i><strong>Note:</strong> This is used to define where the <see cref="Border"/> is applied to the <see cref="UIElement"/></i>)</param>
         /// <param name="_row">Which row on the <see cref="Grid"/> the cell should be placed in</param>
@@ -1966,24 +2212,31 @@ namespace NOP.MMA.GUI.Tabs
 
             cellBorder.Child = cellContainer;
 
-            Label cellHeader = new Label ()
+            if ( _headerText != null )
             {
-                Content = _headerText,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Top,
-                FontWeight = FontWeights.Bold
-            };
+                Label cellHeader = new Label ()
+                {
+                    Content = _headerText,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    FontWeight = FontWeights.Bold,
+                    Visibility = ( ( _headerText != string.Empty ? ( Visibility.Visible ) : ( Visibility.Hidden ) ) )
+                };
+
+                cellContainer.Children.Add (cellHeader);
+            }
+
 
             TextBox cellContent = new TextBox ()
             {
                 Text = _content,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Bottom,
-                Margin = new Thickness (10, 0, 0, 0),
+                VerticalAlignment = ( ( _headerText != null ) ? ( VerticalAlignment.Bottom ) : ( VerticalAlignment.Stretch ) ),
+                Margin = new Thickness (( ( _headerText != null ) ? ( 10 ) : ( 0 ) ), 0, 0, 0),
+                MaxLines = ( ( _headerText != null ) ? ( 1 ) : ( int.MaxValue ) ),
                 IsReadOnly = _readOnly
             };
 
-            cellContainer.Children.Add (cellHeader);
             cellContainer.Children.Add (cellContent);
 
             return cellBorder;
@@ -2096,11 +2349,11 @@ namespace NOP.MMA.GUI.Tabs
         }
 
         /// <summary>
-        /// Set the view model to be used based on <paramref name="_type"/> to <paramref name="_journal"/>
+        /// Set the view model to be used based on the <see cref="Type"/> of <paramref name="_journal"/>
         /// </summary>
         /// <param name="_type"></param>
         /// <param name="_journal"></param>
-        private void SetJournalModel ( JournalType _type, IJournal _journal )
+        private void SetJournalModel ( IJournal _journal )
         {
             if ( _journal is IPregnancyJournal _pJournal )
             {
@@ -2174,12 +2427,12 @@ namespace NOP.MMA.GUI.Tabs
                 {
                     case JournalType.PregnancyJournal:
                         PregnancyJournalRepo.Link.InsertData (journal);
-                        SetJournalModel (JournalType.PregnancyJournal, journal);
+                        SetJournalModel (journal);
                         BuildPregnancyJournalDisplay ();
                         break;
                     case JournalType.TravelerJournal:
                         TravelerJournalRepo.Link.InsertData (journal);
-                        SetJournalModel (JournalType.TravelerJournal, journal);
+                        SetJournalModel (journal);
                         BuildTravelerJournalDisplay ();
                         break;
                     default:
@@ -2218,7 +2471,7 @@ namespace NOP.MMA.GUI.Tabs
 
                 if ( journal != null )
                 {
-                    SetJournalModel (JournalType.PregnancyJournal, journal);
+                    SetJournalModel (journal);
 
                     BuildPregnancyJournalDisplay ();
                     return;
