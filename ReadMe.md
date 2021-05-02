@@ -241,3 +241,31 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
     - Removed `PregnancyJournalTab` and `PregnancyJOurnalPanel` because they were obselete
     - Moved click events out of `PatientDataTa`b and into `TabItem`, as it makes more sense to have them inherited
+- **[v](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v)**
+  - Implemented `TravelerJournal` Display Area
+    - Added Patient Data Area
+    - Added Patient Core Data Area
+    - Added Varius helper methods for implementing visual grids
+    - Resctricted minimum window size to 1000
+    - Added documentaiton to `ITravelerJournal`, `TravelerJournal` and `TravelerJournalViewModel`
+    - Added `BuildListItemCell` method
+    - Added quick add for stamps in `Window.cs`
+    - Added test code in `Window.cs`
+    - Implemented the ability to create a new journal in the Journal Display area
+    - Made the Pregnancy Journal Tab open as default when openening a `PatientDataTab`
+  - Implemented `PregnancyJournal` Display Area
+    - Added PatientData Area
+    - Added CivilStatus Area
+    - Added Language Area
+    - Added Former Pregnancies and Abortions Area
+    - Added Test Code to `Window.cs`
+  - Revision
+    - Fixed a crash when trying to access address of a patient
+    - Fixed broken scrollbar in `PatientIndexTab` when the search results overflow the container
+    - Fixed an issue where the `mensStream` wouldn't build correctly in `TravelerJournal`
+    - Fixed an issue where the collection streams wouldn't build correctly if empty, in `TravelerJournal`
+    - Fixed an issue where the program crashed when trying to access `UltraSoundScan` data
+    - Fixed an issue where journal ID's where wrongly assigned and resulted in stored journals being overwritten
+    - Fixed an issue where former abortion wouldn't be saved and coulnd't be loaded back in correctly when saving and building a `PregnancyJournal`
+    - Corrected a spelling mistake in `IInvestigation` interface and `Investigation` class
+    - Fixed wrong row count in `PregnancyJournal` display area
