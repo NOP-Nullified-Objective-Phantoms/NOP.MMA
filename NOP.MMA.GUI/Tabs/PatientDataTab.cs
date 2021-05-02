@@ -556,7 +556,7 @@ namespace NOP.MMA.GUI.Tabs
             display.RowDefinitions.Add (BuildRow (5, 200));
             display.RowDefinitions.Add (BuildRow (4, 160));
             display.RowDefinitions.Add (BuildRow (5, 200));
-            display.RowDefinitions.Add (BuildRow (5, 200));
+            display.RowDefinitions.Add (BuildRow (21, 840));
             display.RowDefinitions.Add (BuildRow (3, 120));
             display.RowDefinitions.Add (BuildRow (12, 240));
             #endregion
@@ -650,7 +650,7 @@ namespace NOP.MMA.GUI.Tabs
             civilStatusGrid.RowDefinitions.Add (BuildRow (1));
             civilStatusGrid.ColumnDefinitions.Add (BuildColumn (1));
             civilStatusGrid.ColumnDefinitions.Add (BuildColumn (2));
-            civilStatusGrid.ColumnDefinitions.Add (BuildColumn (2));
+            civilStatusGrid.ColumnDefinitions.Add (BuildColumn (3));
 
             Grid.SetRow (civilStatusGrid, 0);
             Grid.SetColumn (civilStatusGrid, 0);
@@ -854,7 +854,321 @@ namespace NOP.MMA.GUI.Tabs
                     abortionsGrid.Children.Add (BuildListItemCell (pregnancyJournalModel.Abortions.History[ row ].UnplannedAbortionGA, CellLocation.TopMiddle, row + 1, 2));
                 }
             }
+            #endregion
+
+            #region Anamnese
+            Grid anamneseGrid = new Grid ();
+            #region Rows = 21
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            anamneseGrid.RowDefinitions.Add (BuildRow (1, 40));
+            #endregion
+
+            Border ananmneseAreaBorder = new Border ()
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness (1, 1, 1, 1),
+                Margin = new Thickness (10, 10, 10, 0)
+            };
+            Grid.SetRow (ananmneseAreaBorder, 5);
+
+            ananmneseAreaBorder.Child = anamneseGrid;
+            display.Children.Add (ananmneseAreaBorder);
+
+            #region Termin
+            Grid terminsGrid = new Grid ();
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (1));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (2));
+            terminsGrid.ColumnDefinitions.Add (BuildColumn (4));
+            Grid.SetRow (terminsGrid, 0);
+            Grid.SetColumn (terminsGrid, 0);
+            Grid.SetRowSpan (terminsGrid, 1);
+            Grid.SetColumnSpan (terminsGrid, 1);
+            anamneseGrid.Children.Add (terminsGrid);
+
+            terminsGrid.Children.Add (BuildListItemCell ("Terminsberegning", CellLocation.TopLeft, 0, 0, true, true, 14));
+            terminsGrid.Children.Add (BuildTextFieldCell ("Sidste Mens. 1. dag", pregnancyJournalModel.Anamnese.TermInfo.MenstrualInfo.LastMentruationalDay.ToShortDateString (), CellLocation.TopLeft, 0, 1));
+            terminsGrid.Children.Add (BuildTextFieldCell ("Cycklus", pregnancyJournalModel.Anamnese.TermInfo.MenstrualInfo.MenstruationalCycle, CellLocation.TopLeft, 0, 2));
+            terminsGrid.Children.Add (BuildTextFieldCell ("Termin", pregnancyJournalModel.Anamnese.TermInfo.ExpectedBirthDate.ToShortDateString (), CellLocation.TopLeft, 0, 3));
+            terminsGrid.Children.Add (BuildTextFieldCell ("Evt. Bemærkninger", pregnancyJournalModel.Anamnese.TermInfo.Comment, CellLocation.TopMiddle, 0, 4));
+            #endregion
+
+            #region Fertility
+            Grid fertilityGrid = new Grid ();
+            fertilityGrid.ColumnDefinitions.Add (BuildColumn (1));
+            fertilityGrid.ColumnDefinitions.Add (BuildColumn (5));
+            fertilityGrid.ColumnDefinitions.Add (BuildColumn (5));
+            Grid.SetRow (fertilityGrid, 1);
+            Grid.SetColumn (fertilityGrid, 0);
+            Grid.SetRowSpan (fertilityGrid, 1);
+            Grid.SetColumnSpan (fertilityGrid, 1);
+            anamneseGrid.Children.Add (fertilityGrid);
+
+            fertilityGrid.Children.Add (BuildListItemCell ("Fetilitesbehandling", CellLocation.TopLeft, 0, 0, true, true, 14));
+
+            Grid fertilityStateGrid = new Grid ();
+            fertilityStateGrid.ColumnDefinitions.Add (BuildColumn (1));
+            fertilityStateGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetColumn (fertilityStateGrid, 1);
+            fertilityGrid.Children.Add (fertilityStateGrid);
+
+            fertilityStateGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Ja", pregnancyJournalModel.Anamnese.FertilityInfo.RecievedFertilityTreatment, CellLocation.TopMiddle, 0, 0));
+            fertilityStateGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.FertilityInfo.RecievedFertilityTreatment, CellLocation.TopLeft, 0, 1));
+
+            fertilityGrid.Children.Add (BuildTextFieldCell ("Evt. Bemærkninger", pregnancyJournalModel.Anamnese.FertilityInfo.Comment, CellLocation.TopMiddle, 0, 2));
+            #endregion
+
+            #region Prenatal
+            Grid prenatalGrid = new Grid ();
+            prenatalGrid.RowDefinitions.Add (BuildRow (1));
+            prenatalGrid.RowDefinitions.Add (BuildRow (1));
+            prenatalGrid.RowDefinitions.Add (BuildRow (1));
+            prenatalGrid.ColumnDefinitions.Add (BuildColumn (1));
+            prenatalGrid.ColumnDefinitions.Add (BuildColumn (2));
+            prenatalGrid.ColumnDefinitions.Add (BuildColumn (2));
+
+            Grid.SetRow (prenatalGrid, 2);
+            Grid.SetColumn (prenatalGrid, 0);
+            Grid.SetRowSpan (prenatalGrid, 3);
+            anamneseGrid.Children.Add (prenatalGrid);
+
+            UIElement prenatalLabel = BuildListItemCell ("Prænatal Risikovurdering", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (prenatalLabel, 3);
+            prenatalGrid.Children.Add (prenatalLabel);
+
+            UIElement familyHistory = BuildTextFieldCell ("Familiehistorie, herunder arvelige sygdomme", pregnancyJournalModel.Anamnese.RiskAssessment.FamiliyHistory, CellLocation.TopMiddle, 0, 1);
+            Grid.SetColumnSpan (familyHistory, 2);
+            prenatalGrid.Children.Add (familyHistory);
+
+            #region Test Values
+            Grid prenatalTestGrid = new Grid ();
+            prenatalTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+            prenatalTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (prenatalTestGrid, 1);
+            Grid.SetColumn (prenatalTestGrid, 1);
+            Grid.SetColumnSpan (prenatalTestGrid, 2);
+            prenatalGrid.Children.Add (prenatalTestGrid);
+
+            #region Double Test
+            Grid doubleTestGrid = new Grid ();
+            doubleTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+            doubleTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (doubleTestGrid, 0);
+            Grid.SetColumn (doubleTestGrid, 0);
+            prenatalTestGrid.Children.Add (doubleTestGrid);
+
+            doubleTestGrid.Children.Add (BuildBooleanFieldCell ("Doubletest taget (uge 8+0 - 13+6)", "Ja", pregnancyJournalModel.Anamnese.RiskAssessment.DoubleTestTaken, CellLocation.TopMiddle, 0, 0));
+            doubleTestGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.RiskAssessment.DoubleTestTaken, CellLocation.TopLeft, 0, 1));
+            #endregion
+
+            #region Triple Test
+            Grid tripleTestGrid = new Grid ();
+            tripleTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+            tripleTestGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (tripleTestGrid, 0);
+            Grid.SetColumn (tripleTestGrid, 1);
+            prenatalTestGrid.Children.Add (tripleTestGrid);
+
+            tripleTestGrid.Children.Add (BuildBooleanFieldCell ("Tripletest taget (uge 14+0 - 20+6)", "Ja", pregnancyJournalModel.Anamnese.RiskAssessment.TripleTestTaken, CellLocation.TopMiddle, 0, 0));
+            tripleTestGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.RiskAssessment.TripleTestTaken, CellLocation.TopMiddle, 0, 1));
+            #endregion
+            #endregion
+
+            #region Scans
+            Grid scanGrid = new Grid ();
+            scanGrid.ColumnDefinitions.Add (BuildColumn (1));
+            scanGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (scanGrid, 2);
+            Grid.SetColumn (scanGrid, 1);
+            Grid.SetColumnSpan (scanGrid, 2);
+            prenatalGrid.Children.Add (scanGrid);
+
+            #region Nuchalfold Scan
+            Grid nuchalfoldScanGrid = new Grid ();
+            nuchalfoldScanGrid.ColumnDefinitions.Add (BuildColumn (1));
+            nuchalfoldScanGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (nuchalfoldScanGrid, 0);
+            Grid.SetColumn (nuchalfoldScanGrid, 0);
+            scanGrid.Children.Add (nuchalfoldScanGrid);
+
+            nuchalfoldScanGrid.Children.Add (BuildBooleanFieldCell ("Ønskes nakkefoldsscanning (Uge 11+0 - 13+6)", "Ja", pregnancyJournalModel.Anamnese.RiskAssessment.RequestedNuchalFoldScan, CellLocation.TopMiddle, 0, 0));
+            nuchalfoldScanGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.RiskAssessment.RequestedNuchalFoldScan, CellLocation.TopLeft, 0, 1));
+            #endregion
+
+            #region Malformation Scan
+            Grid malformationScanGrid = new Grid ();
+            malformationScanGrid.ColumnDefinitions.Add (BuildColumn (1));
+            malformationScanGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (malformationScanGrid, 0);
+            Grid.SetColumn (malformationScanGrid, 1);
+            scanGrid.Children.Add (malformationScanGrid);
+
+            malformationScanGrid.Children.Add (BuildBooleanFieldCell ("Ønskes Misdannelsesscanning (Uge 18+0 - 20+0)", "Ja", pregnancyJournalModel.Anamnese.RiskAssessment.RequestedMalformationScan, CellLocation.TopMiddle, 0, 0));
+            malformationScanGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.RiskAssessment.RequestedMalformationScan, CellLocation.TopMiddle, 0, 1));
+            #endregion
+            #endregion
+            #endregion
+
+            #region WorkEnvironment
+            Grid environmentGrid = new Grid ();
+            environmentGrid.RowDefinitions.Add (BuildRow (1));
+            environmentGrid.RowDefinitions.Add (BuildRow (1));
+            environmentGrid.RowDefinitions.Add (BuildRow (1));
+            environmentGrid.ColumnDefinitions.Add (BuildColumn (1));
+            environmentGrid.ColumnDefinitions.Add (BuildColumn (2));
+            environmentGrid.ColumnDefinitions.Add (BuildColumn (2));
+
+            Grid.SetRow (environmentGrid, 5);
+            Grid.SetColumn (environmentGrid, 0);
+            Grid.SetRowSpan (environmentGrid, 3);
+            anamneseGrid.Children.Add (environmentGrid);
+
+            UIElement environmentLabel = BuildListItemCell ("Arbejdsmiljøpåvirkning", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (environmentLabel, 3);
+            environmentGrid.Children.Add (environmentLabel);
+
+            #region Row 1
+            Grid environmentRow1Grid = new Grid ();
+            environmentRow1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            environmentRow1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            environmentRow1Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (environmentRow1Grid, 0);
+            Grid.SetColumn (environmentRow1Grid, 1);
+            Grid.SetColumnSpan (environmentRow1Grid, 2);
+            environmentGrid.Children.Add (environmentRow1Grid);
+
+            environmentRow1Grid.Children.Add (BuildTextFieldCell ("Den gravides arbejde", pregnancyJournalModel.Anamnese.WorkEnvironment.WorkPosition, CellLocation.TopLeft, 0, 0));
+            environmentRow1Grid.Children.Add (BuildTextFieldCell ("Timer pr. uge", pregnancyJournalModel.Anamnese.WorkEnvironment.WorkHoursPrWeek.ToString (), CellLocation.TopLeft, 0, 1));
+            environmentRow1Grid.Children.Add (BuildTextFieldCell ("Barnefars arbejde", pregnancyJournalModel.Anamnese.WorkEnvironment.FathersWorkPosition, CellLocation.TopMiddle, 0, 2));
+            #endregion
+
+            #region Row 2
+            Grid environmentRow2Grid = new Grid ();
+            environmentRow2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            environmentRow2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (environmentRow2Grid, 1);
+            Grid.SetColumn (environmentRow2Grid, 1);
+            Grid.SetColumnSpan (environmentRow2Grid, 2);
+            environmentGrid.Children.Add (environmentRow2Grid);
+
+            #region Work Environment Values
+            Grid workEnvironmentValuesGrid = new Grid ();
+            workEnvironmentValuesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            workEnvironmentValuesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            workEnvironmentValuesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            workEnvironmentValuesGrid.ColumnDefinitions.Add (BuildColumn (1));
+            environmentRow2Grid.Children.Add (workEnvironmentValuesGrid);
+
+            workEnvironmentValuesGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Ergonomisk", ( pregnancyJournalModel.Anamnese.WorkEnvironment.WorkEnvironments[ 0 ] == WorkEnvironment.Ergonomic ), CellLocation.TopMiddle, 0, 0));
+            workEnvironmentValuesGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Biologisk", ( pregnancyJournalModel.Anamnese.WorkEnvironment.WorkEnvironments[ 0 ] == WorkEnvironment.Biological ), CellLocation.TopMiddle, 0, 1));
+            workEnvironmentValuesGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Kemisk", ( pregnancyJournalModel.Anamnese.WorkEnvironment.WorkEnvironments[ 0 ] == WorkEnvironment.Chemical ), CellLocation.TopMiddle, 0, 2));
+            workEnvironmentValuesGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Andet", ( pregnancyJournalModel.Anamnese.WorkEnvironment.WorkEnvironments[ 0 ] == WorkEnvironment.Other ), CellLocation.TopLeft, 0, 3));
             #endregion 
+
+            environmentRow2Grid.Children.Add (BuildTextFieldCell ("Art og periode", pregnancyJournalModel.Anamnese.WorkEnvironment.NatureAndPeriod, CellLocation.TopMiddle, 0, 1));
+            #endregion
+
+            #region Row 3
+            Grid environmentRow3Grid = new Grid ();
+            environmentRow3Grid.ColumnDefinitions.Add (BuildColumn (1));
+            environmentRow3Grid.ColumnDefinitions.Add (BuildColumn (1));
+            environmentRow3Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (environmentRow3Grid, 2);
+            Grid.SetColumn (environmentRow3Grid, 1);
+            Grid.SetColumnSpan (environmentRow3Grid, 2);
+            environmentGrid.Children.Add (environmentRow3Grid);
+
+            #region Clinic
+            Grid clinicGrid = new Grid ();
+            clinicGrid.ColumnDefinitions.Add (BuildColumn (1));
+            clinicGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetColumn (clinicGrid, 0);
+            environmentRow3Grid.Children.Add (clinicGrid);
+
+            clinicGrid.Children.Add (BuildBooleanFieldCell ("Henvist til arbejdsmedicinsk klinik", "Ja", pregnancyJournalModel.Anamnese.WorkEnvironment.ReferedToOMClinic, CellLocation.TopMiddle, 0, 0));
+            clinicGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.WorkEnvironment.ReferedToOMClinic, CellLocation.TopLeft, 0, 1));
+            #endregion
+
+            #region Partial Leave
+            Grid partialLeaveGrid = new Grid ();
+            partialLeaveGrid.ColumnDefinitions.Add (BuildColumn (1));
+            partialLeaveGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetColumn (partialLeaveGrid, 1);
+            environmentRow3Grid.Children.Add (partialLeaveGrid);
+
+            partialLeaveGrid.Children.Add (BuildBooleanFieldCell ("Devlis Fraværsmelding", "Ja", pregnancyJournalModel.Anamnese.WorkEnvironment.PartialLeaveNotification, CellLocation.TopMiddle, 0, 0));
+            partialLeaveGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.WorkEnvironment.PartialLeaveNotification, CellLocation.TopLeft, 0, 1));
+            #endregion
+
+            #region Leave
+            Grid leaveGrid = new Grid ();
+            leaveGrid.ColumnDefinitions.Add (BuildColumn (1));
+            leaveGrid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetColumn (leaveGrid, 2);
+            environmentRow3Grid.Children.Add (leaveGrid);
+
+            leaveGrid.Children.Add (BuildBooleanFieldCell ("Fraværsmelding", "Ja", pregnancyJournalModel.Anamnese.WorkEnvironment.LeaveNotification, CellLocation.TopMiddle, 0, 0));
+            leaveGrid.Children.Add (BuildBooleanFieldCell (string.Empty, "Nej", !pregnancyJournalModel.Anamnese.WorkEnvironment.LeaveNotification, CellLocation.TopMiddle, 0, 1));
+            #endregion
+            #endregion
+            #endregion
+
+            #region Allergy
+            Grid allergyGrid = new Grid ();
+            allergyGrid.RowDefinitions.Add (BuildRow (1));
+            allergyGrid.RowDefinitions.Add (BuildRow (1));
+            allergyGrid.ColumnDefinitions.Add (BuildColumn (1));
+            allergyGrid.ColumnDefinitions.Add (BuildColumn (4));
+
+            Grid.SetRow (allergyGrid, 8);
+            Grid.SetColumn (allergyGrid, 0);
+            Grid.SetRowSpan (allergyGrid, 2);
+            anamneseGrid.Children.Add (allergyGrid);
+
+            UIElement allergyLabel = BuildListItemCell ("Allergi", CellLocation.TopLeft, 0, 0, true, true, 14);
+            Grid.SetRowSpan (allergyLabel, 2);
+            allergyGrid.Children.Add (allergyLabel);
+
+            #region Row 1
+            allergyGrid.Children.Add (BuildTextFieldCell ("Den gravide er allergisk over for", pregnancyJournalModel.Anamnese.Allergies.Allergies, CellLocation.TopMiddle, 0, 1));
+            #endregion
+
+            #region Row 2
+            Grid allergyRow2Grid = new Grid ();
+            allergyRow2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            allergyRow2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            allergyRow2Grid.ColumnDefinitions.Add (BuildColumn (1));
+            Grid.SetRow (allergyRow2Grid, 2);
+            Grid.SetColumn (allergyRow2Grid, 1);
+            allergyGrid.Children.Add (allergyRow2Grid);
+
+            allergyRow2Grid.Children.Add (BuildBooleanFieldCell ("Barnets disponeret for allergisk sygdom", "Ingen", ( pregnancyJournalModel.Anamnese.Allergies.ChildAllergyRisk == ChildDisposedAllergy.None ), CellLocation.TopMiddle, 0, 0));
+            allergyRow2Grid.Children.Add (BuildBooleanFieldCell (string.Empty, "Enkelt (Forældre/søskende)", ( pregnancyJournalModel.Anamnese.Allergies.ChildAllergyRisk == ChildDisposedAllergy.OneParentOrSibling ), CellLocation.TopMiddle, 0, 1));
+            allergyRow2Grid.Children.Add (BuildBooleanFieldCell (string.Empty, "Dobbelt", ( pregnancyJournalModel.Anamnese.Allergies.ChildAllergyRisk == ChildDisposedAllergy.Double ), CellLocation.TopMiddle, 0, 2));
+            #endregion
+            #endregion
+            #endregion
+
             journalDisplayGrid.Children.Add (scroll);
         }
 
