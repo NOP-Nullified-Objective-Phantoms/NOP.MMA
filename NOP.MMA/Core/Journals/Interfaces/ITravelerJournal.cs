@@ -24,13 +24,16 @@ namespace NOP.MMA.Core.Journals
         /// If <see langword="null"/> the Anti-D Immunoglobulin is not given
         /// </summary>
         JournalData AntiDImmunoglobulinGiven { get; set; }
+        /// <summary>
+        /// <see langword="Null"/> if <see langword="false"/>; Otherwise, if <see langword="true"/>, not <see langword="null"/>
+        /// </summary>
         JournalData UrineCulture { get; set; }
         IReadOnlyList<JournalStamp> JournalStamps { get; }
         IReadOnlyList<JournalComment> JournalComments { get; }
         IReadOnlyList<UltrasoundResult> UltraSoundScans { get; }
         bool AddJournalStamp ( JournalStamp _stamp );
         bool RemoveJournalStamp ( DateTime _stampDate );
-        bool AddJournalSComment ( JournalComment _comment );
+        bool AddJournalComment ( JournalComment _comment );
         bool RemoveJournalComment ( DateTime _commentDate );
         bool AddUltraSoundScan ( UltrasoundResult _scan );
         bool RemoveUltrasoundScan ( DateTime _scanDate );

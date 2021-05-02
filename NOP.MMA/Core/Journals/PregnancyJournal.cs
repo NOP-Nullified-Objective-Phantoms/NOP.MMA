@@ -44,7 +44,7 @@ namespace NOP.MMA.Core.Journals
 
                 if ( int.TryParse (coreJournalData[ 0 ].Replace ("JournalID", string.Empty), out int _id) && int.TryParse (coreJournalData[ 2 ], out int _journalDest) )
                 {
-                    if (int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) )
+                    if ( int.TryParse (coreJournalData[ 1 ].Replace ("PatientID", string.Empty), out int _patientID) )
                     {
                         ID = _id;
                     }
@@ -108,7 +108,7 @@ namespace NOP.MMA.Core.Journals
 
                         if ( aEntryDataStream != string.Empty )
                         {
-                            if ( aEntryData.Length == 3 && int.TryParse (data[ 9 ], out int _year) )
+                            if ( aEntryData.Length == 3 && int.TryParse (aEntryData[ 2 ], out int _year) )
                             {
                                 AbortionHistoryEntry aEntry = new AbortionHistoryEntry ()
                                 {
@@ -330,7 +330,7 @@ namespace NOP.MMA.Core.Journals
                         string[] gonDataStream = investigationStream[ 3 ].Split (",");
                         if ( DateTime.TryParse (gonDataStream[ 0 ], out DateTime _gonDate) && int.TryParse (gonDataStream[ 1 ], out int _gonResult) )
                         {
-                            Investegations.Gonore = new Screening (_gonDate, ( ScreeningInfo ) _gonResult);
+                            Investegations.Gonorrhea = new Screening (_gonDate, ( ScreeningInfo ) _gonResult);
                         }
                         else
                         {
@@ -450,12 +450,12 @@ namespace NOP.MMA.Core.Journals
             }
             #endregion
 
-            #region Pregancy History record build [Line 2]
+            #region Abortion History record build [Line 2]
             string abortionsString = string.Empty;
 
             for ( int i = 0; i < Abortions.History.Count; i++ )
             {
-                pregnanciesString += $"{( ( Abortions.History[ i ].PlannedAbortionGA != null ) ? ( Abortions.History[ i ].PlannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( Abortions.History[ i ].UnplannedAbortionGA != null ) ? ( Abortions.History[ i ].UnplannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{Abortions.History[ i ].Year}";
+                abortionsString += $"{( ( Abortions.History[ i ].PlannedAbortionGA != null ) ? ( Abortions.History[ i ].PlannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( Abortions.History[ i ].UnplannedAbortionGA != null ) ? ( Abortions.History[ i ].UnplannedAbortionGA.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{Abortions.History[ i ].Year}";
 
                 if ( i != Abortions.History.Count - 1 )
                 {
@@ -508,7 +508,7 @@ namespace NOP.MMA.Core.Journals
             investigationString += $"{Investegations.Clamydia.Date.ToString ()},{( int ) Investegations.Clamydia.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.DVataminReadingDate.ToString ()}{OBJECTSEPERATOR}";
             investigationString += $"{( ( Investegations.DVataminReadingResult != null ) ? ( Investegations.DVataminReadingResult.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )}{OBJECTSEPERATOR}";
-            investigationString += $"{Investegations.Gonore.Date.ToString ()},{( int ) Investegations.Gonore.Result}{OBJECTSEPERATOR}";
+            investigationString += $"{Investegations.Gonorrhea.Date.ToString ()},{( int ) Investegations.Gonorrhea.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.Hemoglobinopathy.Date.ToString ()},{( int ) Investegations.Hemoglobinopathy.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.HepB.Date.ToString ()},{( int ) Investegations.HepB.Result}{OBJECTSEPERATOR}";
             investigationString += $"{Investegations.HIV.Date.ToString ()},{( int ) Investegations.HIV.Result}{OBJECTSEPERATOR}";

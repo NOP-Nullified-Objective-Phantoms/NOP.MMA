@@ -228,3 +228,44 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
    - Revision
      - Fixed comma crash when building a `Patient` from storage
      - Fixed wrong path when setting storage path in `PregnancyJournalRepo` and `TravelerJournalRepo`
+- **[0.8.2](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.8.2)**
+  - Implemented Patient Overview Tab
+    - Added `PationIndexTab` class
+    - Added Template code for Patient Overview Tab
+    - Legacy Code (_XAML `PatientIndexTab` Template_)
+    - `NavTabPanel` can now create `PatientIndexTab` and `PatientDataTab`
+  - Revision
+    - Refactored and cleaned up the code of` NavTabPanel`
+    - Moved common properties and methods from `PatientDataTap` into `TabItem`
+    - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
+    - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
+    - Removed `PregnancyJournalTab` and `PregnancyJOurnalPanel` because they were obselete
+    - Moved click events out of `PatientDataTa`b and into `TabItem`, as it makes more sense to have them inherited
+- **[0.9.12](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.9.12)**
+  - Implemented `TravelerJournal` Display Area
+    - Added Patient Data Area
+    - Added Patient Core Data Area
+    - Added Varius helper methods for implementing visual grids
+    - Resctricted minimum window size to 1000
+    - Added documentaiton to `ITravelerJournal`, `TravelerJournal` and `TravelerJournalViewModel`
+    - Added `BuildListItemCell` method
+    - Added quick add for stamps in `Window.cs`
+    - Added test code in `Window.cs`
+    - Implemented the ability to create a new journal in the Journal Display area
+    - Made the Pregnancy Journal Tab open as default when openening a `PatientDataTab`
+  - Implemented `PregnancyJournal` Display Area
+    - Added PatientData Area
+    - Added CivilStatus Area
+    - Added Language Area
+    - Added Former Pregnancies and Abortions Area
+    - Added Test Code to `Window.cs`
+  - Revision
+    - Fixed a crash when trying to access address of a patient
+    - Fixed broken scrollbar in `PatientIndexTab` when the search results overflow the container
+    - Fixed an issue where the `mensStream` wouldn't build correctly in `TravelerJournal`
+    - Fixed an issue where the collection streams wouldn't build correctly if empty, in `TravelerJournal`
+    - Fixed an issue where the program crashed when trying to access `UltraSoundScan` data
+    - Fixed an issue where journal ID's where wrongly assigned and resulted in stored journals being overwritten
+    - Fixed an issue where former abortion wouldn't be saved and coulnd't be loaded back in correctly when saving and building a `PregnancyJournal`
+    - Corrected a spelling mistake in `IInvestigation` interface and `Investigation` class
+    - Fixed wrong row count in `PregnancyJournal` display area

@@ -42,7 +42,13 @@ namespace NOP.MMA.Core.Journals
         public bool BloodTypeDetermined { get; set; }
         public bool AntibodyByRhesusNegative { get; set; }
         public bool IrregularAntibody { get; set; }
+        /// <summary>
+        /// If <see langword="null"/> the Anti-D Immunoglobulin is not given
+        /// </summary>
         public JournalData AntiDImmunoglobulinGiven { get; set; }
+        /// <summary>
+        /// <see langword="Null"/> if <see langword="false"/>; Otherwise, if <see langword="true"/>, not <see langword="null"/>
+        /// </summary>
         public JournalData UrineCulture { get; set; }
         private readonly List<JournalStamp> journalStamps;
         public IReadOnlyList<JournalStamp> JournalStamps
@@ -78,7 +84,7 @@ namespace NOP.MMA.Core.Journals
         public string AdditonalContext { get; set; }
         public BirthplaceInformation BirthplaceInfo { get; set; }
 
-        public bool AddJournalSComment ( JournalComment _comment )
+        public bool AddJournalComment ( JournalComment _comment )
         {
             journalComments.Add (_comment);
 
@@ -130,9 +136,9 @@ namespace NOP.MMA.Core.Journals
 
                 #region MenstrualInfo [Line 1]
                 string[] mensStream = data[ 1 ].Split (",");
-                if ( mensStream.Length == 3 && DateTime.TryParse (mensStream[ 0 ], out DateTime _date) && bool.TryParse (data[ 2 ], out bool _isCalculationSafe) )
+                if ( mensStream.Length == 3 && DateTime.TryParse (mensStream[ 1 ], out DateTime _date) && bool.TryParse (mensStream[ 0 ], out bool _isCalculationSafe) )
                 {
-                    MenstrualInfo = new MenstrualCycleInfo (_date, mensStream[ 1 ].Replace (COMMAIDENTIFIER, ","), _isCalculationSafe);
+                    MenstrualInfo = new MenstrualCycleInfo (_date, mensStream[ 2 ].Replace (COMMAIDENTIFIER, ","), _isCalculationSafe);
                 }
                 else
                 {
@@ -219,7 +225,7 @@ namespace NOP.MMA.Core.Journals
                 #region UrinCulture [Line 8]
                 string[] urinCultureStream = data[ 8 ].Split (",");
 
-                if ( urinCultureStream.Length == 2 && DateTime.TryParse (urinCultureStream[ 0 ], out DateTime _urinCulturedate) )
+                if ( urinCultureStream.Length == 3 && DateTime.TryParse (urinCultureStream[ 0 ], out DateTime _urinCulturedate) )
                 {
                     UrineCulture = new JournalData (_urinCulturedate, urinCultureStream[ 1 ].Replace (COMMAIDENTIFIER, ","), urinCultureStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                 }
@@ -231,85 +237,96 @@ namespace NOP.MMA.Core.Journals
 
                 #region journalStamps [Line 9]
                 string[] stampsStream = data[ 9 ].Split (COLITEMSEPERATOR);
-                foreach ( string stampData in stampsStream )
+                if ( stampsStream != null && !string.IsNullOrWhiteSpace (stampsStream[ 0 ]) )
                 {
-                    string[] stampDataStream = stampData.Split (",");
-                    if ( stampDataStream.Length == 12 && DateTime.TryParse (stampDataStream[ 1 ], out DateTime _stampDate) && bool.TryParse (stampDataStream[ 2 ], out bool _edema) && bool.TryParse (stampDataStream[ 4 ], out bool _fetusActivity) && double.TryParse (stampDataStream[ 10 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _uterusSizeInCM) && double.TryParse (stampDataStream[ 11 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _weight) )
+                    foreach ( string stampData in stampsStream )
                     {
-                        JournalStamp stamp = new JournalStamp ()
+                        string[] stampDataStream = stampData.Split (",");
+                        if ( stampDataStream.Length == 12 && DateTime.TryParse (stampDataStream[ 1 ], out DateTime _stampDate) && bool.TryParse (stampDataStream[ 2 ], out bool _edema) && bool.TryParse (stampDataStream[ 4 ], out bool _fetusActivity) && double.TryParse (stampDataStream[ 10 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _uterusSizeInCM) && double.TryParse (stampDataStream[ 11 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _weight) )
                         {
-                            BloodPressure = stampDataStream[ 0 ].Replace (COMMAIDENTIFIER, ","),
-                            Date = _stampDate,
-                            Edema = _edema,
-                            ExaminationLocation = stampDataStream[ 3 ].Replace (COMMAIDENTIFIER, ","),
-                            FetusActivity = _fetusActivity,
-                            FetusGender = stampDataStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
-                            FosterRepresentation = stampDataStream[ 6 ].Replace (COMMAIDENTIFIER, ","),
-                            GestationAge = stampDataStream[ 7 ].Replace (COMMAIDENTIFIER, ","),
-                            Initials = stampDataStream[ 8 ].Replace (COMMAIDENTIFIER, ","),
-                            UrinSample = stampDataStream[ 9 ].Replace (COMMAIDENTIFIER, ","),
-                            UterusSizeInCM = _uterusSizeInCM,
-                            Weight = _weight
-                        };
+                            JournalStamp stamp = new JournalStamp ()
+                            {
+                                BloodPressure = stampDataStream[ 0 ].Replace (COMMAIDENTIFIER, ","),
+                                Date = _stampDate,
+                                Edema = _edema,
+                                ExaminationLocation = stampDataStream[ 3 ].Replace (COMMAIDENTIFIER, ","),
+                                FetusActivity = _fetusActivity,
+                                FetusGender = stampDataStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
+                                FosterRepresentation = stampDataStream[ 6 ].Replace (COMMAIDENTIFIER, ","),
+                                GestationAge = stampDataStream[ 7 ].Replace (COMMAIDENTIFIER, ","),
+                                Initials = stampDataStream[ 8 ].Replace (COMMAIDENTIFIER, ","),
+                                UrinSample = stampDataStream[ 9 ].Replace (COMMAIDENTIFIER, ","),
+                                UterusSizeInCM = _uterusSizeInCM,
+                                Weight = _weight
+                            };
 
-                        AddJournalStamp (stamp);
-                    }
-                    else
-                    {
-                        throw new Exception ($"One or more fields couldn't be retrived from: { ( stampData ?? "Null" )}");
+                            AddJournalStamp (stamp);
+                        }
+                        else
+                        {
+                            throw new Exception ($"One or more fields couldn't be retrived from: { ( stampData ?? "Null" )}");
+                        }
                     }
                 }
                 #endregion
 
                 #region JournalComments [Line 10]
                 string[] commentsStream = data[ 10 ].Split (COLITEMSEPERATOR);
-                foreach ( string commentData in commentsStream )
-                {
-                    string[] commentDataStream = commentData.Split (",");
-                    if ( commentDataStream.Length == 2 && DateTime.TryParse (commentDataStream[ 1 ], out DateTime _commentDate) )
-                    {
-                        JournalComment comment = new JournalComment ()
-                        {
-                            Comment = commentDataStream[ 0 ].Replace (COMMAIDENTIFIER, ","),
-                            Date = _commentDate
-                        };
 
-                        AddJournalSComment (comment);
-                    }
-                    else
+                if ( commentsStream != null && !string.IsNullOrWhiteSpace (commentsStream[ 0 ]) )
+                {
+                    foreach ( string commentData in commentsStream )
                     {
-                        throw new Exception ($"One or more fields couldn't be retrived from: { ( commentData ?? "Null" )}");
+                        string[] commentDataStream = commentData.Split (",");
+                        if ( commentDataStream.Length == 2 && DateTime.TryParse (commentDataStream[ 1 ], out DateTime _commentDate) )
+                        {
+                            JournalComment comment = new JournalComment ()
+                            {
+                                Comment = commentDataStream[ 0 ].Replace (COMMAIDENTIFIER, ","),
+                                Date = _commentDate
+                            };
+
+                            AddJournalComment (comment);
+                        }
+                        else
+                        {
+                            throw new Exception ($"One or more fields couldn't be retrived from: { ( commentData ?? "Null" )}");
+                        }
                     }
                 }
                 #endregion
 
                 #region UltraSoundScans [Line 11]
                 string[] ultraStream = data[ 11 ].Split (COLITEMSEPERATOR);
-                foreach ( string ultraData in ultraStream )
+
+                if ( ultraStream != null && !string.IsNullOrWhiteSpace (ultraStream[ 0 ]) )
                 {
-                    string[] ultraDataStream = ultraData.Split (",");
-                    if ( ultraDataStream.Length == 9 && double.TryParse (ultraDataStream[ 0 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _amnioticFluidAmount) && DateTime.TryParse (ultraDataStream[ 1 ], out DateTime _ultraResultDate) && double.TryParse (ultraDataStream[ 7 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _usWeight) && double.TryParse (ultraDataStream[ 8 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _weightDifference) )
+                    foreach ( string ultraData in ultraStream )
                     {
-                        UltrasoundResult ultraSoundScan = new UltrasoundResult ()
+                        string[] ultraDataStream = ultraData.Split (",");
+                        if ( ultraDataStream.Length == 9 && double.TryParse (ultraDataStream[ 0 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _amnioticFluidAmount) && DateTime.TryParse (ultraDataStream[ 1 ], out DateTime _ultraResultDate) && double.TryParse (ultraDataStream[ 7 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _usWeight) && double.TryParse (ultraDataStream[ 8 ], NumberStyles.AllowDecimalPoint, new CultureInfo ("en-US"), out double _weightDifference) )
                         {
-                            AmnioticFluidAmount = _amnioticFluidAmount,
-                            Date = _ultraResultDate,
-                            ExaminationLocation = ultraDataStream[ 2 ].Replace (COMMAIDENTIFIER, ","),
-                            Flow = ultraDataStream[ 3 ].Replace (COMMAIDENTIFIER, ","),
-                            FosterRepresentation = ultraDataStream[ 4 ].Replace (COMMAIDENTIFIER, ","),
-                            GestationAge = ultraDataStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
-                            Initials = ultraDataStream[ 6 ].Replace (COMMAIDENTIFIER, ","),
-                            USWeight = _usWeight,
-                            WeightDifference = _weightDifference
-                        };
+                            UltrasoundResult ultraSoundScan = new UltrasoundResult ()
+                            {
+                                AmnioticFluidAmount = _amnioticFluidAmount,
+                                Date = _ultraResultDate,
+                                ExaminationLocation = ultraDataStream[ 2 ].Replace (COMMAIDENTIFIER, ","),
+                                Flow = ultraDataStream[ 3 ].Replace (COMMAIDENTIFIER, ","),
+                                FosterRepresentation = ultraDataStream[ 4 ].Replace (COMMAIDENTIFIER, ","),
+                                GestationAge = ultraDataStream[ 5 ].Replace (COMMAIDENTIFIER, ","),
+                                Initials = ultraDataStream[ 6 ].Replace (COMMAIDENTIFIER, ","),
+                                USWeight = _usWeight,
+                                WeightDifference = _weightDifference
+                            };
 
-                        AddUltraSoundScan (ultraSoundScan);
-                    }
-                    else
-                    {
-                        throw new Exception ($"One or more fields couldn't be retrived from: { ( ultraData ?? "Null" )}");
-                    }
+                            AddUltraSoundScan (ultraSoundScan);
+                        }
+                        else
+                        {
+                            throw new Exception ($"One or more fields couldn't be retrived from: { ( ultraData ?? "Null" )}");
+                        }
 
+                    }
                 }
                 #endregion
 
@@ -519,11 +536,11 @@ namespace NOP.MMA.Core.Journals
 
             #region UltraSoundScans [Line 11]
             string ultraData = string.Empty;
-            for ( int i = 0; i < journalComments.Count; i++ )
+            for ( int i = 0; i < UltraSoundScans.Count; i++ )
             {
                 ultraData += $"{ultraSoundScans[ i ].AmnioticFluidAmount.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].Date.ToString ()},{( ( ultraSoundScans[ i ].ExaminationLocation != null ) ? ( ultraSoundScans[ i ].ExaminationLocation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].Flow != null ) ? ( ultraSoundScans[ i ].Flow.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].FosterRepresentation != null ) ? ( ultraSoundScans[ i ].FosterRepresentation.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].GestationAge != null ) ? ( ultraSoundScans[ i ].GestationAge.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{( ( ultraSoundScans[ i ].Initials != null ) ? ( ultraSoundScans[ i ].Initials.Replace (",", COMMAIDENTIFIER) ) : ( string.Empty ) )},{ultraSoundScans[ i ].USWeight.ToString (new CultureInfo ("en-US"))},{ultraSoundScans[ i ].WeightDifference.ToString (new CultureInfo ("en-US"))}";
 
-                if ( i != journalComments.Count - 1 )
+                if ( i != UltraSoundScans.Count - 1 )
                 {
                     ultraData += COLITEMSEPERATOR;
                 }

@@ -57,7 +57,23 @@ namespace NOP.MMA.Core.Journals
 
         public IPatient PatientData { get; set; }
         public JournalDest JournalDestination { get; set; }
-        public int ID { get; protected set; }
+        private int id;
+        public int ID
+        {
+            get
+            {
+                return id;
+            }
+            protected set
+            {
+                id = value;
+
+                if ( id >= journalCounter )
+                {
+                    journalCounter = id;
+                }
+            }
+        }
 
         public abstract string SaveEntity ();
 
