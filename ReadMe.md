@@ -241,7 +241,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Fixed an issue where existing tabs wouldn't be highlithing or opened when a tab was closed
     - Removed `PregnancyJournalTab` and `PregnancyJOurnalPanel` because they were obselete
     - Moved click events out of `PatientDataTa`b and into `TabItem`, as it makes more sense to have them inherited
-- **[v](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v)**
+- **[0.9.12](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.9.12)**
   - Implemented `TravelerJournal` Display Area
     - Added Patient Data Area
     - Added Patient Core Data Area
