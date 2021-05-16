@@ -270,3 +270,7 @@ The core structure is as follows: [_Firm_].[_Project_].[_Folder_]. \
     - Fixed an issue where former abortion wouldn't be saved and coulnd't be loaded back in correctly when saving and building a `PregnancyJournal`
     - Corrected a spelling mistake in `IInvestigation` interface and `Investigation` class
     - Fixed wrong row count in `PregnancyJournal` display area
+- **[0.9.14 - Hotfix 1](https://github.com/NOP-Nullified-Objective-Phantoms/NOP.MMA/releases/tag/v0.9.14)**
+  - Rivision
+    - Fixed Placenta, Amniotic Fluid and OGT tests not being set correctly
+    - Fixed Nuchal Fold Scan only displayed as a time stamp and not a date stamp
