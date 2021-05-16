@@ -25,6 +25,7 @@
 - Pregnancy Journal - _Will only be filled out once, when the journal is created_
 - Traveling Journal - _Will be updated regularly_
 - UI - _An agreement has been formed to have the UI be somehting that is regulated as we go, becaue there's no specifications regarding the layout of the UI._
+- The last feature (_Updating Journals from the UI_) was scrapped because the feature wasn't necessary for the purpose of the program. (_Clients Wish_)
 
 ## The program
 **Goal**
