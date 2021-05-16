@@ -2211,7 +2211,7 @@ namespace NOP.MMA.GUI.Tabs
             Grid.SetRow (testAreaGrid, 0);
 
             testAreaGrid.Children.Add (BuildTextFieldCell ("Doubletest Dato", travelerJournalModel.DoubleTest.ToShortDateString (), CellLocation.TopLeft, 0, 0));
-            testAreaGrid.Children.Add (BuildTextFieldCell ("Nakkefoldsscanning Dato", travelerJournalModel.NuchalFoldScan.ToShortTimeString (), CellLocation.TopLeft, 0, 1));
+            testAreaGrid.Children.Add (BuildTextFieldCell ("Nakkefoldsscanning Dato", travelerJournalModel.NuchalFoldScan.ToShortDateString (), CellLocation.TopLeft, 0, 1));
             testAreaGrid.Children.Add (BuildTextFieldCell ("Tripletest Dato", travelerJournalModel.TripleTest.ToShortDateString (), CellLocation.TopMiddle, 0, 2)); ;
             #endregion
 

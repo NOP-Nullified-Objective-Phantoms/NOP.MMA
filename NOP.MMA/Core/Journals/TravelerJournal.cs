@@ -360,7 +360,7 @@ namespace NOP.MMA.Core.Journals
                 string[] placentaTestStream = data[ 14 ].Split (",");
                 if ( placentaTestStream.Length == 3 && DateTime.TryParse (placentaTestStream[ 0 ], out DateTime _placentaTestSDate) )
                 {
-                    OddsForDS = new JournalData (_placentaTestSDate, placentaTestStream[ 1 ].Replace (COMMAIDENTIFIER, ","), placentaTestStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                    PlacentaTest = new JournalData (_placentaTestSDate, placentaTestStream[ 1 ].Replace (COMMAIDENTIFIER, ","), placentaTestStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                 }
                 else
                 {
@@ -372,7 +372,7 @@ namespace NOP.MMA.Core.Journals
                 string[] amnioticFluidTestStream = data[ 15 ].Split (",");
                 if ( amnioticFluidTestStream.Length == 3 && DateTime.TryParse (amnioticFluidTestStream[ 0 ], out DateTime _amnioticFluidTestSDate) )
                 {
-                    OddsForDS = new JournalData (_amnioticFluidTestSDate, amnioticFluidTestStream[ 1 ].Replace (COMMAIDENTIFIER, ","), amnioticFluidTestStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                    AmnioticFluidTest = new JournalData (_amnioticFluidTestSDate, amnioticFluidTestStream[ 1 ].Replace (COMMAIDENTIFIER, ","), amnioticFluidTestStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                 }
                 else
                 {
@@ -385,10 +385,14 @@ namespace NOP.MMA.Core.Journals
                 if ( oralGTTStream.Length == 3 )
                 {
                     #region Glycosuria [Line 0]
+                    JournalData glycosuria;
+                    JournalData week18_20;
+                    JournalData week28_30;
+
                     string[] glycosuriaStream = oralGTTStream[ 0 ].Split (",");
                     if ( glycosuriaStream.Length == 3 && DateTime.TryParse (glycosuriaStream[ 0 ], out DateTime _glycosuriaStreamDate) )
                     {
-                        OddsForDS = new JournalData (_glycosuriaStreamDate, glycosuriaStream[ 1 ].Replace (COMMAIDENTIFIER, ","), glycosuriaStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                        glycosuria = new JournalData (_glycosuriaStreamDate, glycosuriaStream[ 1 ].Replace (COMMAIDENTIFIER, ","), glycosuriaStream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                     }
                     else
                     {
@@ -400,7 +404,7 @@ namespace NOP.MMA.Core.Journals
                     string[] week18_20Stream = oralGTTStream[ 1 ].Split (",");
                     if ( week18_20Stream.Length == 3 && DateTime.TryParse (week18_20Stream[ 0 ], out DateTime _week18_20StreamDate) )
                     {
-                        OddsForDS = new JournalData (_week18_20StreamDate, week18_20Stream[ 1 ].Replace (COMMAIDENTIFIER, ","), week18_20Stream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                        week18_20 = new JournalData (_week18_20StreamDate, week18_20Stream[ 1 ].Replace (COMMAIDENTIFIER, ","), week18_20Stream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                     }
                     else
                     {
@@ -412,13 +416,15 @@ namespace NOP.MMA.Core.Journals
                     string[] week28_30Stream = oralGTTStream[ 2 ].Split (",");
                     if ( week28_30Stream.Length == 3 && DateTime.TryParse (week28_30Stream[ 0 ], out DateTime _Week28_30Date) )
                     {
-                        OddsForDS = new JournalData (_Week28_30Date, week28_30Stream[ 1 ].Replace (COMMAIDENTIFIER, ","), week28_30Stream[ 2 ].Replace (COMMAIDENTIFIER, ","));
+                        week28_30 = new JournalData (_Week28_30Date, week28_30Stream[ 1 ].Replace (COMMAIDENTIFIER, ","), week28_30Stream[ 2 ].Replace (COMMAIDENTIFIER, ","));
                     }
                     else
                     {
                         throw new Exception ($"One or more fields couldn't be retrived from: { ( oralGTTStream[ 2 ] ?? "Null" )}");
                     }
                     #endregion
+
+                    OralGlukoseToleranceTest = new OGTTScreening (glycosuria, week18_20, week28_30);
                 }
                 else
                 {

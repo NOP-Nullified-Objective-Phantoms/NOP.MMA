@@ -15,7 +15,7 @@ namespace NOP.MMA.Core.Journals
         /// <param name="_week18_20"></param>
         /// <param name="_week28_30"></param>
         /// <param name="_glycosuria"></param>
-        public OGTTScreening (JournalData _week18_20, JournalData _week28_30, JournalData _glycosuria )
+        public OGTTScreening ( JournalData _week18_20, JournalData _week28_30, JournalData _glycosuria )
         {
             Week18_20 = _week18_20;
             Week28_30 = _week28_30;

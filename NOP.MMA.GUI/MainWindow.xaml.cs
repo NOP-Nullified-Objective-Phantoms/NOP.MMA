@@ -89,12 +89,12 @@ namespace NOP.MMA.GUI
             //    WeightDifference = 0.00
             //};
 
-            //ITravelerJournal journal = TravelerJournalRepo.Link.GetDataByIdentifier (1);
-            //journal.AddJournalStamp (stamp);
-            //journal.AddJournalComment (comment);
-            //journal.AddUltraSoundScan (result);
+            //ITravelerJournal tJournal = TravelerJournalRepo.Link.GetDataByIdentifier (12);
+            //tJournal.AddJournalStamp (stamp);
+            //tJournal.AddJournalComment (comment);
+            //tJournal.AddUltraSoundScan (result);
 
-            //TravelerJournalRepo.Link.UpdateData (journal);
+            //TravelerJournalRepo.Link.UpdateData (tJournal);
 
             //PregnancyHistoryEntry entry = new PregnancyHistoryEntry ()
             //{
@@ -117,13 +117,13 @@ namespace NOP.MMA.GUI
             //    Year = 1992
             //};
 
-            //IPregnancyJournal journal = PregnancyJournalRepo.Link.GetDataByIdentifier (1);
-            //journal.Pregnancies.AddHistory (entry);
-            //journal.Pregnancies.AddHistory (entry);
-            //journal.Abortions.AddHistory (aEntry);
-            //journal.Abortions.AddHistory (aEntry);
+            //IPregnancyJournal pJournal = PregnancyJournalRepo.Link.GetDataByIdentifier (10);
+            //pJournal.Pregnancies.AddHistory (entry);
+            //pJournal.Pregnancies.AddHistory (entry);
+            //pJournal.Abortions.AddHistory (aEntry);
+            //pJournal.Abortions.AddHistory (aEntry);
 
-            //PregnancyJournalRepo.Link.UpdateData (journal);
+            //PregnancyJournalRepo.Link.UpdateData (pJournal);
 
             //IPatient patient = PatientRepo.Link.GetDataByIdentifier (1);    //  Getting test dummy from data storage
             //panel.CreatePatientDataTab (patient.Name, patient); //  Creates a new tab for the dummy
