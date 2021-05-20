@@ -12,11 +12,11 @@
 - **Journals**
   - create journal - _The ability to raise new journals_
   - Save Journal - _The ability to save journals in the form of persistant data_
-  - Update Journal - _The ability to update the data of exsisting journals_
+  - ~~Update Journal - _The ability to update the data of exsisting journals_~~
   - Delete Journal - _The ability to delete existing journals_
   - Search for Journal - _The ability to search for a specific Journal based on a patients Social Security Number (SSN)_
   - Populate a Journal - _The ability to populate a Journal based on a Patients Social Security Number (SSN)_
-  - To PDF - _If possible, within the given timeframe, the client would like to have a feature for printing a journal to PDF_
+  - ~~To PDF - _If possible, within the given timeframe, the client would like to have a feature for printing a journal to PDF_~~
 - **Patients**
   - Search for Patient - _The ability to look up a patient based on their Social Security Number (SSN)_
   - Readonly - _Can only be accessed, not created, updated, deleted or in any other way manipulated_
